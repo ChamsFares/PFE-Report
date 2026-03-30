@@ -1,0 +1,407 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global/global}
+    \entry{Tunisie_Telecom}{misc}{}{}
+      \list{organization}{1}{%
+        {Tunisie Telecom}%
+      }
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.tunisietelecom.tn/}}
+      \field{title}{Tunisie Telecom Official Website}
+    \endentry
+    \entry{Dubai_Holding_site}{misc}{}{}
+      \list{organization}{1}{%
+        {Dubai Holding}%
+      }
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.dubaiholding.com/en}}
+      \field{title}{Dubai Holding Official Website}
+    \endentry
+    \entry{IBM_mainframe}{misc}{}{}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://en.wikipedia.org/wiki/IBM_mainframe}}
+      \field{title}{IBM mainframe}
+    \endentry
+    \entry{IEEE_Evolution_of_Client/Server}{misc}{}{}
+      \list{organization}{1}{%
+        {IEEE}%
+      }
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://ieeexplore.ieee.org/document/494834}}
+      \field{title}{IEEE — Evolution of Client-Server Computing}
+    \endentry
+    \entry{CERN_Data_Centre_Historical_Documentation}{misc}{}{}
+      \list{organization}{1}{%
+        {CERN}%
+      }
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://cds.cern.ch/?ln=en}}
+      \field{title}{CERN Data Centre Historical Documentation}
+    \endentry
+    \entry{VMware_ESX}{misc}{}{}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://en.wikipedia.org/wiki/VMware_ESX}}
+      \field{title}{VMware ESX}
+    \endentry
+    \entry{AWS_History_of_CC}{misc}{}{}
+      \list{organization}{1}{%
+        {AWS}%
+      }
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://aws.amazon.com/about-aws/our-origins/}}
+      \field{title}{AWS History of Cloud Computing}
+    \endentry
+    \entry{NVIDIA_AI_INFRA_PAPAER}{misc}{}{}
+      \list{organization}{1}{%
+        {NVIDIA}%
+      }
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.nvidia.com/en-us/lp/ai/inference-whitepaper/}}
+      \field{title}{AI Infrastructure Whitepaper}
+    \endentry
+    \entry{IEEE_definitions}{misc}{}{}
+      \list{organization}{1}{%
+        {IEEE}%
+      }
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://uptimeinstitute.com/tier-certification}}
+      \field{title}{IEEE definitions}
+    \endentry
+    \entry{Uptime_Institute_Tier_Standard}{misc}{}{}
+      \list{organization}{1}{%
+        {Uptime Institute}%
+      }
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://uptimeinstitute.com/tiers}}
+      \field{title}{Uptime Institute Tier Standard}
+    \endentry
+    \entry{Cisco_DC_design}{misc}{}{}
+      \list{organization}{1}{%
+        {Cisco}%
+      }
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.cisco.com/c/en/us/solutions/design-zone/data-center-design-guides/data-center-design-guides-all.html}}
+      \field{title}{Cisco DC design documentation}
+    \endentry
+    \entry{Networking_as_the_Third_Pillar}{misc}{}{}
+      \list{organization}{1}{%
+        {Cisco}%
+      }
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.techtarget.com/searchnetworking/feature/Pillars-to-enhance-networks-for-agentic-AI-infrastructure}}
+      \field{title}{Cisco Networking as the Third Pillar}
+    \endentry
+    \entry{Campus_Network_Design_Guide}{misc}{}{}
+      \list{organization}{1}{%
+        {Cisco}%
+      }
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-campus-lan-wlan-design-guide.html}}
+      \field{title}{Campus Network Design Guide}
+    \endentry
+    \entry{SDN_New_Norm}{misc}{}{}
+      \list{organization}{1}{%
+        {Open Networking Foundation}%
+      }
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://opennetworking.org/wp-content/uploads/2011/09/wp-sdn-newnorm.pdf}}
+      \field{title}{SDN: The New Norm}
+    \endentry
+    \entry{OpenFlow_Paper}{misc}{}{}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{http://ccr.sigcomm.org/online/files/p69-v38n2n-mckeown.pdf}}
+      \field{title}{OpenFlow: Enabling Innovation in Campus Networks}
+    \endentry
+    \entry{SDN_Architecture}{misc}{}{}
+      \list{organization}{1}{%
+        {Open Networking Foundation}%
+      }
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://opennetworking.org/wp-content/uploads/2013/02/TR_SDN_ARCH_1.0_06062014.pdf}}
+      \field{title}{SDN Architecture}
+    \endentry
+    \entry{Evolution_Beyond_OpenFlow}{misc}{}{}
+      \list{organization}{1}{%
+        {Cisco}%
+      }
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.cisco.com/c/dam/global/en_ca/assets/ciscoconnect/2013/assets/docs/evolving-dc-past-present-future-dhanson.pdf}}
+      \field{title}{Evolution Beyond OpenFlow}
+    \endentry
+    \entry{ACI_Architecture_White_Paper}{misc}{}{}
+      \list{organization}{1}{%
+        {Cisco}%
+      }
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.cisco.com/c/en/us/solutions/data-center-virtualization/application-centric-infrastructure/white-paper-listing.html}}
+      \field{title}{ACI Architecture White Paper}
+    \endentry
+    \entry{IP_Fabric_for_Media_Design_Guide}{misc}{}{}
+      \list{organization}{1}{%
+        {Cisco}%
+      }
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.cisco.com/c/en/us/td/docs/dcn/whitepapers/cisco-ipfm-design-guide.html}}
+      \field{title}{IP Fabric for Media Design Guide}
+    \endentry
+    \entry{IETFRFC7938}{misc}{}{}
+      \list{organization}{1}{%
+        {IETF}%
+      }
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://datatracker.ietf.org/doc/html/rfc7938}}
+      \field{title}{IETF RFC 7938}
+    \endentry
+    \entry{ISO/IEC_7498-1:1994}{misc}{}{}
+      \list{organization}{1}{%
+        {ISO/IEC}%
+      }
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.iso.org/standard/20269.html}}
+      \field{title}{ISO/IEC 7498-1:1994}
+    \endentry
+    \entry{IETFRFC1122}{misc}{}{}
+      \list{organization}{1}{%
+        {IETF}%
+      }
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://datatracker.ietf.org/doc/html/rfc1122}}
+      \field{title}{IETF RFC 1122}
+    \endentry
+    \entry{Data_Center_TCP/IP_Networking_Guide}{misc}{}{}
+      \list{organization}{1}{%
+        {Cisco}%
+      }
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13769-5.html}}
+      \field{title}{Data Center TCP/IP Networking Guide}
+    \endentry
+    \entry{SDN_Architecture_and_Plane_Separation}{misc}{}{}
+      \list{organization}{1}{%
+        {ONF (Open Networking Foundation)}%
+      }
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://opennetworking.org/wp-content/uploads/2013/02/TR_SDN_ARCH_1.0_06062014.pdf}}
+      \field{title}{SDN Architecture and Plane Separation}
+    \endentry
+    \entry{ASIC_Based_Forwarding_Architecture}{misc}{}{}
+      \list{organization}{1}{%
+        {Cisco}%
+      }
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://community.cisco.com/t5/networking-knowledge-base/understanding-cisco-express-forwarding-cef-architecture/ta-p/5276856}}
+      \field{title}{ASIC-Based Forwarding Architecture}
+    \endentry
+    \entry{IETFRFC4271}{misc}{}{}
+      \list{organization}{1}{%
+        {IETF}%
+      }
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://datatracker.ietf.org/doc/html/rfc4271}}
+      \field{title}{IETF RFC 4271}
+    \endentry
+    \entry{NDFC_Product_Documentation}{misc}{}{}
+      \list{organization}{1}{%
+        {Cisco}%
+      }
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.cisco.com/c/en/us/td/docs/dcn/ndfc/1213/roadmap/cisco-ndfc-documentation-roadmap-1213.html}}
+      \field{title}{NDFC Product Documentation}
+    \endentry
+    \entry{A_Study_of_Non-Blocking_Switching_Networks}{misc}{}{}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://ia801901.us.archive.org/8/items/bstj32-2-406/bstj32-2-406_text.pdf}}
+      \field{title}{A Study of Non-Blocking Switching Networks}
+    \endentry
+    \entry{Introducing_Data_Center_Fabric}{misc}{}{}
+      \list{organization}{1}{%
+        {Facebook}%
+      }
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://engineering.fb.com/2014/11/14/production-engineering/introducing-data-center-fabric-the-next-generation-facebook-data-center-network/}}
+      \field{title}{Introducing Data Center Fabric}
+    \endentry
+    \entry{Cisco_Massively_Scalable_Data_Center_Network_Fabric_Design_and_Operation_White_Paper}{misc}{}{}
+      \list{organization}{1}{%
+        {Cisco}%
+      }
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.cisco.com/c/en/us/products/collateral/switches/nexus-9000-series-switches/white-paper-c11-743245.html}}
+      \field{title}{Cisco Massively Scalable Data Center Network Fabric Design and Operation White Paper}
+    \endentry
+    \entry{Oversubscription_in_Networking}{misc}{}{}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.noction.com/blog/oversubscription-in-networking}}
+      \field{title}{Oversubscription in Networking}
+    \endentry
+    \entry{Non_Blocking_Data_Center_Fabric_Design}{misc}{}{}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.arista.com/assets/data/pdf/SwitchingArchitecture_wp.pdf}}
+      \field{title}{Non-Blocking Data Center Fabric Design}
+    \endentry
+    \entry{IETFRFC2992}{misc}{}{}
+      \list{organization}{1}{%
+        {IETF}%
+      }
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://datatracker.ietf.org/doc/html/rfc2992}}
+      \field{title}{IETF RFC 2992}
+    \endentry
+    \entry{Understand_and_Manage_ECMP_Scale_in_Cisco_ACI_White_Paper}{misc}{}{}
+      \list{organization}{1}{%
+        {Cisco}%
+      }
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/manage-ecmp-scale-aci-wp.html}}
+      \field{title}{Understand and Manage ECMP Scale in Cisco ACI White Paper White Paper}
+    \endentry
+    \entry{Hashing_Algorithms_for_LAG_and_ECMP}{misc}{}{}
+      \list{organization}{1}{%
+        {Juniper Networks}%
+      }
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.juniper.net/documentation/us/en/software/junos/interfaces-ethernet-switches/topics/topic-map/hashing-algoriths-lag-bundle-ecmp.html}}
+      \field{title}{Hashing Algorithms for LAG and ECMP | Junos OS Documentation}
+    \endentry
+    \entry{Facebook_Data_Center_Network_Architecture}{misc}{}{}
+      \list{organization}{1}{%
+        {Facebook}%
+      }
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://nathanfarrington.com/papers/facebook-oic13.pdf}}
+      \field{title}{Facebook’s Data Center Network Architecture}
+    \endentry
+    \entry{IETFRFC8365}{misc}{}{}
+      \list{organization}{1}{%
+        {IETF}%
+      }
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://datatracker.ietf.org/doc/html/rfc8365}}
+      \field{title}{IETF RFC 8365}
+    \endentry
+    \entry{VXLAN_Network_with_MP-BGP_EVPN_Control_Plane_Design_Guide}{misc}{}{}
+      \list{organization}{1}{%
+        {Cisco}%
+      }
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.cisco.com/c/en/us/products/collateral/switches/nexus-9000-series-switches/guide-c07-734107.html}}
+      \field{title}{VXLAN Network with MP-BGP EVPN Control Plane Design Guide}
+    \endentry
+    \entry{IETFRFC7365}{misc}{}{}
+      \list{organization}{1}{%
+        {IETF}%
+      }
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://datatracker.ietf.org/doc/html/rfc7365}}
+      \field{title}{IETF RFC 7365}
+    \endentry
+    \entry{Cisco_Nexus_9000_VXLAN_BGP_EVPN_Data_Center_Fabrics_Fundamental_Design_and_Implementation_Guide}{misc}{}{}
+      \list{organization}{1}{%
+        {Cisco}%
+      }
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.cisco.com/c/en/us/td/docs/dcn/whitepapers/cisco-vxlan-bgp-evpn-design-and-implementation-guide.html}}
+      \field{title}{Cisco Nexus 9000 VXLAN BGP EVPN Data Center Fabrics Fundamental Design and Implementation Guide}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

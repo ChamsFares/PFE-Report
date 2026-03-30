@@ -1,0 +1,79 @@
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage[a4paper,
+            left=25mm,
+            right=20mm,
+            top=15mm,       % This is what you want - 15mm from top
+            bottom=25mm,
+            headheight=15pt,
+            headsep=15pt
+           ]{geometry}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{caption}
+\usepackage{tocloft}
+\usepackage{url}
+\geometry{top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm}
+\usepackage{titlesec}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\geometry{margin=1.5cm}
+\usepackage[autostyle]{csquotes}
+\usepackage[backend=biber, style=ieee]{biblatex}
+\addbibresource{Netnography.bib}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+% Display fixed text on inside corners (Left Odd, Right Even)
+\fancyhead[LO,RE]{\textit{\nouppercase{\leftmark}}}   % Chapter on all left headers
+
+% Line thickness
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+% Enhanced figure and table captions
+\captionsetup{font=small,labelfont=bf,format=hang,margin=10pt}
+% Logo definitions
+\newcommand{\logoISTIC}{\includegraphics[height=2.5cm]{Images/logo_ISTIC.png}}
+\newcommand{\logoMinistereISTIC}{\includegraphics[height=3.4cm]{Images/logo_ministere_ISTIC_text.png}}
+\newcommand{\logoCarthage}{\includegraphics[height=2.5cm]{Images/logo_carthage_universit.png}}
+\newcommand{\logoTELECOM}{\includegraphics[height=2.2cm]{Images/logo_telecom.png}}
+\newcommand{\Telecom}{\includegraphics[height=7.5cm]{Images/telecom.jpg}}
+\newcommand{\OrgTelecom}{\includegraphics[height=9.5cm]{Images/organchartTelecom.png}}
+\newcommand{\PratnerGrid}{\includegraphics[height=4.5cm]{Images/pranter_grid.png}}
+\newcommand{\ComputingEvolutionEra}{\includegraphics[height=3.1cm]{Images/ComputingEvolutionEra.png}}
+\newcommand{\Architecturethreetier}{\includegraphics[width=0.8\textwidth,height=8.1cm]{Images/architec_3tier.png}}
+\newcommand{\SDNarchitecture}{\includegraphics[width=0.8\textwidth,height=6.1cm]{Images/SDN_architecture.png}}
+\newcommand{\NFVtimeline}{\includegraphics[height=5.1cm]{Images/NFV_timeline.png}}
+\newcommand{\PLanessplit}{\includegraphics[width=0.8\textwidth,height=6.5cm]{Images/Planesdiagram.png}}
+\newcommand{\SpineLeafDiagram}{\includegraphics[width=0.8\textwidth,height=5.1cm]{Images/Spine-Leafdiag.png}}
+\newcommand{\underoverlay}{\includegraphics[width=0.8\textwidth,height=5.1cm]{Images/Diagunderlayoverlay.png}}
+\newcommand{\overlayunderlay}{\includegraphics[width=0.8\textwidth,height=5.1cm]{Images/Diagoverlayunderlaysplit.png}}
+\newcommand{\TCPvsOSI}{\includegraphics[width=0.8\textwidth,height=6.1cm]{Images/TCPvsIOS.png}}
+
+% No dots for chapters (common in theses/reports)
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}   % add dots
+\renewcommand{\cftsubsecleader}{\cftdotfill{\cftdotsep}}     % just in case
+\renewcommand{\contentsname}{Table of Contents}
+% Dots for sections and subsections (grey, spaced nicely)
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}   % add dots
+\renewcommand{\cftsubsecleader}{\cftdotfill{\cftdotsep}}
+
+% Make dots grey (adjust 0.6 = medium grey; 0.4 = lighter)
+\renewcommand{\cftdot}{\textcolor{gray!60}{\textperiodcentered}}  % grey dots
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries\raggedright}
+  {\thesection\enspace}
+  {0pt}
+  {}
+\titlespacing*{\section}{0pt}{20pt}{10pt}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\raggedright}
+  {\thesubsection\enspace}
+  {0pt}
+  {}
+\titlespacing*{\subsection}{0pt}{15pt}{8pt}
+\titlespacing*{\subsubsection}{0pt}{15pt}{8pt}

@@ -1,0 +1,52 @@
+{
+  "name": "LaTeX - ISTIC PFE Environment",
+  "image": "ghcr.io/jmuchovej/devcontainers/latex:2024",
+  "remoteUser": "vscode",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "james-yu.latex-workshop",
+        "aaron-bond.better-comments",
+        "vscodevim.vim",
+        "shardulm94.trailing-spaces",
+        "stkb.rewrap"
+      ],
+      "settings": {
+        "files.eol": "\n",
+        "editor.formatOnSave": true,
+        "files.associations": {
+          "*.tex": "latex"
+        },
+        "latex-workshop.latex.autoClean.run": "onBuilt",
+        "latex-workshop.latex.clean.subfolder.enabled": true,
+        "latex-workshop.latex.autoBuild.run": "onFileChange",
+        "latex-workshop.view.pdf.viewer": "tab",
+        "latex-workshop.latex.recipes": [
+          {
+            "name": "latexmk",
+            "tools": [
+              "latexmk"
+            ]
+          }
+        ],
+        "latex-workshop.latex.tools": [
+          {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+              "-synctex=1",
+              "-interaction=nonstopmode",
+              "-file-line-error",
+              "-pdf",
+              "-outdir=%OUTDIR%",
+              "%DOC%"
+            ]
+          }
+        ],
+        "latex-workshop.linting.chktex.enabled": true,
+        "latex-workshop.latexindent.enabled": true
+      }
+    }
+  },
+  "postCreateCommand": "sudo apt-get update && sudo env PATH=$PATH tlmgr update --self && sudo env PATH=$PATH tlmgr install xcolor geometry fancyhdr caption tocloft titlesec csquotes biblatex biblatex-ieee biber tipa ec cm-super ieeeconf tabularx environ latexindent booktabs enumitem"
+}
