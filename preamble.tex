@@ -18,12 +18,16 @@
 \geometry{top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm}
 \usepackage{titlesec}
 \usepackage{tabularx}
+\usepackage{array}
 \usepackage{booktabs}
 \geometry{margin=1.5cm}
 \usepackage[autostyle]{csquotes}
 \usepackage[backend=biber, style=ieee]{biblatex}
 \addbibresource{Netnography.bib}
 \pagestyle{fancy}
+\raggedbottom
+\hbadness=10000
+\vbadness=10000
 \fancyhf{}
 \fancyhead[LE,RO]{\thepage}
 % Display fixed text on inside corners (Left Odd, Right Even)
@@ -46,12 +50,13 @@
 \newcommand{\Architecturethreetier}{\includegraphics[width=0.8\textwidth,height=8.1cm]{Images/architec_3tier.png}}
 \newcommand{\SDNarchitecture}{\includegraphics[width=0.8\textwidth,height=6.1cm]{Images/SDN_architecture.png}}
 \newcommand{\NFVtimeline}{\includegraphics[height=5.1cm]{Images/NFV_timeline.png}}
-\newcommand{\PLanessplit}{\includegraphics[width=0.8\textwidth,height=6.5cm]{Images/Planesdiagram.png}}
-\newcommand{\SpineLeafDiagram}{\includegraphics[width=0.8\textwidth,height=5.1cm]{Images/Spine-Leafdiag.png}}
-\newcommand{\underoverlay}{\includegraphics[width=0.8\textwidth,height=5.1cm]{Images/Diagunderlayoverlay.png}}
-\newcommand{\overlayunderlay}{\includegraphics[width=0.8\textwidth,height=5.1cm]{Images/Diagoverlayunderlaysplit.png}}
+\newcommand{\PLanessplit}{\includegraphics[width=0.8\textwidth,height=7.5cm]{Images/Planesdiagram.png}}
+\newcommand{\SpineLeafDiagram}{\includegraphics[width=0.8\textwidth,height=6.5cm]{Images/Spine-Leafdiag.png}}
+\newcommand{\underoverlay}{\includegraphics[width=0.8\textwidth,height=6.1cm]{Images/Diagunderlayoverlay.png}}
+\newcommand{\overlayunderlay}{\includegraphics[width=0.8\textwidth,height=6.1cm]{Images/Diagoverlayunderlaysplit.png}}
 \newcommand{\TCPvsOSI}{\includegraphics[width=0.8\textwidth,height=6.1cm]{Images/TCPvsIOS.png}}
-
+\newcommand{\networkautomation}{\includegraphics[width=1.0\textwidth,height=5.1cm]{Images/NetworkAutomationTimeline.png}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
 % No dots for chapters (common in theses/reports)
 \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}   % add dots
 \renewcommand{\cftsubsecleader}{\cftdotfill{\cftdotsep}}     % just in case
