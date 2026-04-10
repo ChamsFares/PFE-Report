@@ -69,20 +69,22 @@
 \textbf{add also of the text of the partners their  images and logos}
 \subsection{Solutions and Services Offered by Tunisie Telecom}
 \hspace{1.5em}TT\cite{Tunisie_Telecom} stands as the primary telecommunications service provider in Tunisia. It offers a comprehensive range of telephony, Internet, and television services to its diverse clientele.
-\begin{table}[htbp]
-\centering
-\begin{tabular}{|l|p{10cm}|}
-\hline
-\textbf{Service Category} & \textbf{Description} \\ \hline
-Fixed Telephony & Provision of landline services to both residential and professional customers across Tunisia. \\ \hline
-Mobile Telephony & Mobile services under the "Tunisie Telecom Mobile" brand, encompassing voice calls, SMS, and data services. \\ \hline
-Internet Services & High-speed broadband connectivity via ADSL, Wi-Fi, and fiber optics, as well as Voice over IP (VoIP) solutions. \\ \hline
-Television Services & A diverse suite of television offerings, including IPTV, Direct-to-Home (DTH), Video on Demand (VOD), and online streaming. \\ \hline
-Enterprise Solutions & Specialized telecommunications for businesses, featuring call center services, private network management, video conferencing, and high-bandwidth connectivity. \\ \hline
-Financial Services & Financial offerings such as money transfers and mobile or electronic payment systems. \\ \hline
-\end{tabular}
-\caption{Portfolio of Solutions and Services provided by Tunisie Telecom}
-\label{tab:tt_services}
+\begin{table}[!htbp]
+    \centering
+    \small 
+    \renewcommand{\arraystretch}{1.3} 
+    \begin{tabularx}{\textwidth}{|p{3.5cm}|X|}
+        \hline
+        \textbf{Service Category} & \textbf{Description} \\ \hline
+        Fixed Telephony & Provision of landline services to both residential and professional customers across Tunisia. \\ \hline
+        Mobile Telephony & Mobile services under the "Tunisie Telecom Mobile" brand, encompassing voice calls, SMS, and data services. \\ \hline
+        Internet Services & High-speed broadband connectivity via ADSL, Wi-Fi, and fiber optics, as well as Voice over IP (VoIP) solutions. \\ \hline
+        Television Services & A diverse suite of television offerings, including IPTV, Direct-to-Home (DTH), Video on Demand (VOD), and online streaming. \\ \hline
+        Enterprise Solutions & Specialized telecommunications for businesses, featuring call center services, private network management, video conferencing, and high-bandwidth connectivity. \\ \hline
+        Financial Services & Financial offerings such as money transfers and mobile or electronic payment systems. \\ \hline
+    \end{tabularx}
+    \caption{Portfolio of Solutions and Services provided by Tunisie Telecom}
+    \label{tab:tt_services}
 \end{table}
 \section{Presentation of the Project}
 \hspace{1.5em}As Tunisie Telecom continues to expand its digital infrastructure to meet growing national demand, the underlying network architecture of its data centers has become a critical point of re-evaluation. This section presents the technical context that motivated this project, beginning with a broad examination of modern data center networking challenges before narrowing to the specific constraints faced by the operator.
@@ -103,11 +105,11 @@ Financial Services & Financial offerings such as money transfers and mobile or e
 \subsection{Proposed Solution}
 \hspace{1.5em}Where traditional architectures have reached their limits, modern networking standards offer a fundamentally different approach. The solution proposed in this project is the design and deployment of a BGP EVPN-VXLAN IP Fabric spanning multiple sites — an architecture that does not merely patch the weaknesses of the existing model but replaces its core assumptions entirely. It is based on four tightly integrated building blocks:
 \begin{itemize}
-    \item BGP EVPN-VXLAN IP Fabric: VXLAN allows the logical network to be decoupled from the physical infrastructure by encapsulating the L2 frames within the UDP packets, thereby removing the geographic extension of the L2 networks and providing seamless VM mobility. BGP EVPN preform as the control plane, distributing MAC and IP reachability proactively across all fabric nodes — suppressing broadcast traffic, scaling to tens of thousands of endpoints, and delivering the multi-tenancy granularity that Tunisie Telecom's diverse client base demands through a 24-bit VNI space of over 16 million logical segments.
-    \item Spine-Leaf Topology: Replacing the three-tier hierarchy with a flat two-hop architecture where every Leaf connects to every Spine. This also supports Equal Cost Multi-Path forwarding on all links simultaneously, eliminates bandwidth waste caused by STP, and provides predictable low latency — a non-negotiable requirement for AI-driven distributed workloads at the heart of Tunisie Telecom's infrastructure vision.
+    \item BGP EVPN-VXLAN IP Fabric: VXLAN allows the logical network to be decoupled from the physical infrastructure by encapsulating the L2 frames within the UDP packets, thereby removing the geographic extension of the L2 networks and providing seamless VM mobility. BGP EVPN preform as the control plane, distributing MAC and IP reachability proactively across all fabric nodes suppressing broadcast traffic, scaling to tens of thousands of endpoints, and delivering the multi-tenancy granularity that Tunisie Telecom's diverse client base demands through a 24-bit VNI space of over 16 million logical segments.
+    \item Spine-Leaf Topology: Replacing the three-tier hierarchy with a flat two-hop architecture where every Leaf connects to every Spine. This also supports Equal Cost Multi-Path forwarding on all links simultaneously, eliminates bandwidth waste caused by STP, and provides predictable low latency a non-negotiable requirement for AI-driven distributed workloads at the heart of Tunisie Telecom's infrastructure vision.
     \item Cisco Nexus 9000: The hardware underpinning of the fabric, providing native line-rate BGP EVPN VXLAN forwarding in silicon, ensuring that encapsulation and processing do not introduce latency or performance degradation of a kind that would undermine our latency objectives.
-    \item Cisco NDFC (Nexus Dashboard Fabric Controller): The centralized automation and orchestration solution for the entire underlay and overlay fabric from a single management plane, directly eliminating manual configuration effort, configuration drift, and policy enforcement inconsistencies.
+    \item Cisco NDFC: The centralized automation and orchestration solution for the entire underlay and overlay fabric from a single management plane, directly eliminating manual configuration effort, configuration drift, and policy enforcement inconsistencies.
 \end{itemize}
 \hspace{1.5em}The implementation of this solution is based on a structured and iterative methodology, as described in the methodology section below.
 \section{Conclusion}
-\hspace{1.5em}This chapter sets the scene for the project, starting off with a brief overview of the company, Tunisie Telecom, and their service provision to over six million subscribers, followed by a discussion of the technological reasons for architectural change. Whilst the three-tier architecture has served its purpose in the past, it is now seriously flawed in its ability to meet current needs such as geographical distribution, VM mobility, L2 extension, and scalability in a world of artificial intelligence. This project goals are to overcome these limitations and negate the complexity of configuration by implementing a BGP EVPN-VXLAN IP Fabric solution using Cisco Nexus 9000 switches and NDFC, simulating the environment in EVE-NG. The theoretical basis for this architecture is described in the following chapter.
+\hspace{1.5em}This chapter sets the scene for the project, starting off with a brief overview of the company, Tunisie Telecom, and their service provision to over six million subscribers, followed by a discussion of the technological reasons for architectural change. Whilst the three-tier architecture has served its purpose in the past, it is now seriously flawed in its ability to meet current needs such as geographical distribution, VM mobility, $L2$ extension, and scalability in a world of artificial intelligence. This project goals are to overcome these limitations and negate the complexity of configuration by implementing a BGP EVPN-VXLAN IP Fabric solution using Cisco Nexus 9000 switches and NDFC, simulating the environment in EVE-NG. The theoretical basis for this architecture is described in the following chapter.

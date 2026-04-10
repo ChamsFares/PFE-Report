@@ -3,21 +3,16 @@
 \hspace{1.5em}The chapter starts with a description of the evolution of data centers from simple server rooms to the backbone of the digital economy, with a focus on how network architectures have evolved to accommodate the growing demand for these solutions. It also introduces the theoretical framework for network layering and operational planes, which are necessary for understanding the protocols used in this project. The chapter then delves into the details of the Spine-Leaf, IP Fabric, and the important abstraction of underlays and overlays. The key protocols used in this project, which are also the core protocols used in this chapter, are VXLAN for the data plane, BGP for the underlay, and BGP EVPN for the overlay control plane. Finally, the chapter includes a comparative analysis of other technologies used in the field, which validates the use of the protocols in this project.
 \section{The Data Center}
 \subsection{Evolution, Definition and Role}
-\hspace{1.5em}The idea of a data center can be traced back to the early 1960s when organizations started centralizing their computer resources in a specific room where mainframe computer systems were located\cite{IBM_mainframe}. This is origin of the  idea of a data center came about. A data center is a centralized computer  environment that is designed to house computer systems that are usually expensive and sensitive. In this era, a data center is considered a single computer that is used by an entire organization. This is because users access this computer using terminals and not individual computers.\\
-\hspace{1.5em}The development of the client/server model in the 1980s changed everything\cite{IEEE_Evolution_of_Client/Server}. In this era, every computer had its own role. A server is used for specific purposes such as storing files, printing documents, and running database management systems. A client is used for interacting with users. In this era, data centers became larger in size because organizations were using multiple servers to support their computer systems. This is when the need for structured cabling became apparent.\\
-\hspace{1.5em}The explosion of Internet services in the 1990s accompanied  in a new era for DCs in terms of scale and criticality\cite{CERN_Data_Centre_Historical_Documentation}. Organizations started to host Internet-facing services, which required availability. The idea of data centers as business-critical facilities, as opposed to back-office operations, really took hold in this time.\\
-\hspace{1.5em}The 2000s saw the advent of server virtualization, starting with VMware's ESX Server release in 2001\cite{VMware_ESX}. A physical server could now host multiple virtual machines, greatly improving hardware utilization and reducing physical data center space. Networking challenges also started to manifest themselves in this time, as virtual machines needed to talk across physical network partitions. The limitations of network architectures were first felt in this time.
-Cloud computing was the dominant technology paradigm of the 2010s, and cloud providers such as Amazon Web Services, Microsoft Azure, and Google Cloud Platform revolutionized the concept of a data center\cite{AWS_History_of_CC}. Infrastructure was offered as a service, where it was used on demand, metered by consumption, and located in a facility of unprecedented scale. Hyperscale data centers with hundreds of thousands of servers became a reality, and the networking infrastructure that interconnected them followed suit.\\
-\hspace{1.5em}Today, the data center is at the center of a new inflection point driven by the advent of Artificial Intelligence\cite{NVIDIA_AI_INFRA_PAPAER}. AI training workloads require massive parallelism, high-bandwidth interconnects between GPU clusters, and ultra-low latency communication between distributed compute nodes. The modern DC is formerly just a passive repository for the world's increasingly sophisticated hardware; it is a programmable infrastructure that provides compute, storage, and networking as unified software resources to applications that operate at a scale that is global in scope.\\
+\hspace{1.5em}The data center idea emerged due to centralization of the computing environment with computers kept in a room called a mainframe, thus being a single machine used by different terminals \cite{IBM_mainframe}. As per the client/server architecture that emerged in the 1980s, there were dedicated servers for file, printing, and database services, while clients handled interaction with users and contributed to larger data centers and the necessity to implement structured cabling \cite{IEEE_Evolution_of_Client_Server}. Internet-related services rendered data centers crucial for operations and necessitated high availability in the 1990s \cite{CERN_Data_Centre_Historical_Documentation}. The trend toward server virtualization such as VMware ESX in 2001 increased hardware efficiency but created networking problems due to the need to connect numerous virtual machines \cite{VMware_ESX}. Cloud computing popularized by providers like AWS, Azure, and GCP facilitated metered usage of scalable cloud infrastructures comprising up to hundreds of thousands of servers \cite{AWS_History_of_CC}. Nowadays, an emerging technology is artificial intelligence that prompts development of programmable data center infrastructures for large-scale applications that require parallel computing and low latency interconnects \cite{NVIDIA_AI_Inference_Whitepaper}\\
 \begin{figure}[!htbp]
     \centering
     \ComputingEvolutionEra
     \caption{Computing Evolution Era Timeline}
     \label{fig:ComputingEvolutionEra Timeline}
 \end{figure}
-\hspace{1.5em}DC has been formally defined as a special facility that centralizes the information technology infrastructure of an organization in a highly available and controlled environment\cite{IEEE_definitions}. Beyond the hosting of hardware devices, the contemporary data center has become the essential operational platform for the information age, supporting every service, transaction, and communication in the interconnected world.
+DC has been formally defined as a special facility that centralizes the information technology infrastructure of an organization in a highly available and controlled environment\cite{Uptime_Institute_Tier_Certification}. Beyond the hosting of hardware devices, the contemporary data center has become the essential operational platform for the information age, supporting every service, transaction, and communication in the interconnected world.
 \subsection{Tier Classification and Foundational Pillars}
-The Uptime Institute established the data center Tier Classification Standard to provide a consistent framework for evaluating infrastructure reliability and redundancy\cite{Uptime_Institute_Tier_Standard}. The standard defines four tiers, each representing a progressively higher level of fault tolerance and availability, as shown in the table
+\hspace{1.5em}The Uptime Institute established the data center Tier Classification Standard to provide a consistent framework for evaluating infrastructure reliability and redundancy\cite{Uptime_Institute_Tier_Standard}. The standard defines four tiers, each representing a progressively higher level of fault tolerance and availability, as shown in the table
 \begin{table}[!htbp]
     \centering
     \small
@@ -37,22 +32,24 @@ The Uptime Institute established the data center Tier Classification Standard to
     \caption{ Uptime Institute Data Center Tier Classification\cite{Uptime_Institute_Tier_Standard}}
     \label{tab:datacenter_tiers}
 \end{table}
+\\
 All DCs, regardless of their tier level, are constructed around three basic pillars, which interact with each other and define the overall performance of the DC\cite{Cisco_DC_design}.
 \begin{itemize}
-    \item Compute refers to the processing layer of the data center, which is the set of servers, processors, and increasingly, the set of graphics processing units that perform the workload the DC was created to perform. Modern compute infrastructure is almost universally virtualized, which means that the underlying physical infrastructure is divided into several isolated environments, which can exist independently of the underlying infrastructure.
-    \item Storage refers to the persistent memory layer of the DC, which is the set of storage devices that retains data across compute cycles, failures, and migrations. Storage architectures vary from direct storage attached to individual servers, through shared storage solutions, and up to the object storage solutions that span entire data center fabrics. The performance of the storage solution defines the rate of data that can be read and written, which makes storage a critical factor in determining the overall service quality.
-    \item Networking is the interconnect layer that binds together compute and storage into a coherent operational environment\cite{Networking_as_the_Third_Pillar}. It impacts the speed at which a compute node can access a storage system, the efficiency of intercommunication between two virtual machines, and the reliability of intercommunication between the data center and the external world. Of the three pillars, networking is the most architectural in nature; decisions made here cascade across the entire DC and constrain the effectiveness of compute and storage. It is this pillar of the DC that our project impacts.
+    \item Compute refers to the processing layer of the DC, which is the set of servers, processors, and increasingly, the set of graphics processing units that perform the workload the DC was created to perform. Modern compute infrastructure is almost universally virtualized, which means that the underlying physical infrastructure is divided into several isolated environments, which can exist independently of the underlying infrastructure.
+    \item Storage refers to the persistent memory layer of the DC, which is the set of storage devices that retains data across compute cycles, failures, and migrations. Storage architectures vary from direct storage attached to individual servers, through shared storage solutions, and up to the object storage solutions that span entire DC fabrics. The performance of the storage solution defines the rate of data that can be read and written, which makes storage a critical factor in determining the overall service quality.
+    \item Networking is the interconnect layer that binds together compute and storage into a coherent operational environment\cite{Networking_as_the_Third_Pillar}. It impacts the speed at which a compute node can access a storage system, the efficiency of intercommunication between two VMs, and the reliability of intercommunication between the data center and the external world. Of the three pillars, networking is the most architectural in nature; decisions made here cascade across the entire DC and constrain the effectiveness of compute and storage. It is this pillar of the DC that our project impacts.
 \end{itemize}
 \section{From Three-Tier to IP Fabric}
-The architectures used to network these DCs have also undergone a revolutionary change over the past two decades or so. What started as a simple hierarchical model has now evolved into the programmable and distributed fabric model due to the influence of software-defined networking and virtualization of network services and hyperscale DCs.
+\hspace{1.5em}The architectures used to network these DCs have also undergone a revolutionary change over the past two decades or so. What started as a simple hierarchical model has now evolved into the programmable and distributed fabric model due to the influence of software-defined networking and virtualization of network services and hyperscale DCs.
 \subsection{ The Three-Tier Model and Its Limits}
-For several decades, the three-tier architecture was the de facto standard for network architecture in the DC and enterprises alike\cite{Campus_Network_Design_Guide}. The three-tier architecture was based on a three-tier model consisting of Access, Distribution, and Core, which provided a structured approach for interconnecting devices to the network, with each tier having a well-defined role in the forwarding model.
+\hspace{1.5em}For several decades, the three-tier architecture was the de facto standard for network architecture in the DC and enterprises alike\cite{Campus_Network_Design_Guide}. The three-tier architecture was based on a three-tier model consisting of Access, Distribution, and Core, which provided a structured approach for interconnecting devices to the network, with each tier having a well-defined role in the forwarding model.
 \begin{figure}[!htbp]
     \centering
     \Architecturethreetier
     \caption{Three-Tier Architecture Model}
     \label{fig:three-tier-model}
 \end{figure}
+\\
 The Access layer is the essential connection of end devices such as servers, workstations, and storage devices to the network fabric. The Distribution layer is responsible of aggregating Access layer traffic and routing policy implementation. Lastly, the Core layer is in charge of high-speed connectivity between Distribution blocks and also deals with site or internet-bound traffic.
 The three-tier network model is highly popular and widely applied, although it has some structural limitations, especially as the needs of the DCs increase. The pain points of the three-tier network model include:
 \begin{itemize}
@@ -63,20 +60,20 @@ The three-tier network model is highly popular and widely applied, although it h
     \item Large Failure Domains: A failure in the Distribution or Core layer can impact the entire segment of the network.
 \end{itemize}
 \subsection{SDN: Birth and Core Concepts}
-The limitation of the three-tier model has led the networking industry to adopt a completely new paradigm, which separated the intelligence of the network from its forwarding hardware. Software-Defined Networking is a new paradigm in the field of networking, which originated as a research project in 2008 by Martin Casado and Scott Shenker of Stanford University and introduced the concept of OpenFlow as a protocol for the centralized control of network forwarding behavior.
+\hspace{1.5em}The limitation of the three-tier model has led the networking industry to adopt a completely new paradigm, which separated the intelligence of the network from its forwarding hardware. Software-Defined Networking is a new paradigm in the field of networking, which originated as a research project in 2008 by Martin Casado and Scott Shenker of Stanford University and introduced the concept of OpenFlow as a protocol for the centralized control of network forwarding behavior.
 \begin{figure}[!htbp]
     \centering
     \SDNarchitecture
     \caption{Software-Defined Networking Architecture}
     \label{fig:sdn-architecture}
 \end{figure}
-
+\\
 The SDN architecture has three distinct layers\cite{SDN_New_Norm}. The Application Layer resides at the top and communicates with the controller through Northbound APIs. The Northbound APIs are typically REST APIs. The Application Layer communicates its intent to the controller. The Application Layer does not interact with the network devices. The second layer of the SDN architecture is the Control Layer. The SDN controller accommodated in this layer. The SDN controller has a global perspective of the network topology. The third layer of the SDN architecture is the Infrastructure Layer. The network devices reside in this layer. The network devices which are forwarding devices. The network devices are programmed by the SDN controller. The network devices are programmed through Southbound APIs. The Southbound APIs are typically OpenFlow.
 This decoupling of control and data planes was a conceptual leap forward, as for the first time network behavior was programmable from a central location rather than being configured on a per-device basis \cite{OpenFlow_Paper}. It also introduced the idea of dynamic application-aware traffic management at a scale and speed that traditional distributed protocols couldn’t deliver.
 next section
 
 \subsection{Network Functions Virtualization}
-Coexisting alongside SDN, NFV was first formally defined by a group of major telecommunications operators through a white paper submitted to the ETSI standards body in 2012\cite{SDN_Architecture}. While SDN was addressing the programmability of the data plane, NFV was addressing a different issue related to the dependency of network functions on proprietary and dedicated hardware.
+\hspace{1.5em}Coexisting alongside SDN, NFV was first formally defined by a group of major telecommunications operators through a white paper submitted to the ETSI standards body in 2012\cite{SDN_Architecture}. While SDN was addressing the programmability of the data plane, NFV was addressing a different issue related to the dependency of network functions on proprietary and dedicated hardware.
 NFV was based on the idea of running firewalls, load balancers, intrusion detection systems, and WAN optimizers not on proprietary and dedicated hardware but on standard commercial-off-the-shelf servers. In other words, NFV was based on the idea of running network functions as software on top of servers. This would enable network functions to be deployed, scaled, and moved around dynamically, similar to how virtual machines are deployed, scaled, and moved around on top of physical servers. NFV and SDN are not competing technologies but are complementary to each other.
 \begin{figure}[!htbp]
     \centering
@@ -85,27 +82,28 @@ NFV was based on the idea of running firewalls, load balancers, intrusion detect
     \label{fig:nfv-timeline}
 \end{figure}
 \subsection{The Emergence of the IP Fabric}
-While SDN and NFV have shown much promise, the actual implementation of OpenFlow-based networks showed severe limitations in a production network environment \cite{Evolution_Beyond_OpenFlow}.In such a network, the controller is the only  point of failure as the network was expanding in scale. The entire network endangered if the controller was to fail. The global network view was operationally complex with thousands of devices. The concept of Proprietary SDNs was introduced by various vendors like Cisco's ACI and VMware's NSX. They introduced a controller-based SDN solution that provided abstraction of the network with distributed forwarding in the devices \cite{ACI_Architecture_White_Paper}.
+\hspace{1.5em}While SDN and NFV have shown much promise, the actual implementation of OpenFlow-based networks showed severe limitations in a production network environment \cite{Evolution_Beyond_OpenFlow}.In such a network, the controller is the only  point of failure as the network was expanding in scale. The entire network endangered if the controller was to fail. The global network view was operationally complex with thousands of devices. The concept of Proprietary SDNs was introduced by various vendors like Cisco's ACI and VMware's NSX. They introduced a controller-based SDN solution that provided abstraction of the network with distributed forwarding in the devices \cite{ACI_Architecture_White_Paper}.
 These implementations suggested the path toward the hybrid model, which was to be the hallmark of the data center networking paradigm in the future, i.e., one that offered the advantages of distributed protocol intelligence in the forwarding plane, along with the advantages offered by the central visibility and automation offered in the management plane. The IP Fabric model was the result of this development, where the flat Spine-Leaf physical topology was integrated with standards-based overlay protocols along with the central management plane \cite{IP_Fabric_for_Media_Design_Guide}. The IP Fabric model does not replace the distributed protocol model but instead leverages the advantages offered by the use of BGP for the distributed control plane along with the flexibility offered by the use of VXLAN for the overlay, thus achieving the programmability offered by SDN without the risk of single-point failure.
 The IP Fabric is the final form of the entire evolution path, from the strict hierarchy of the three-tier model through the centralized intelligence of the SDN to the design that is both distributed, scalable, and programmable\cite{IETFRFC7938}. This is the abstraction which upon the solution proposed in the project is based.
 \section{Network Layering and Operational Planes}
-Prior to discussing the protocols and topologies that form the basis of this project, it is necessary to first identify the conceptual framework through which network communication is defined and implemented. Two primary models form the basis of the framework, namely the OSI reference model and the TCP/IP model, from which the three operational planes are derived.
+\hspace{1.5em}Prior to discussing the protocols and topologies that form the basis of this project, it is necessary to first identify the conceptual framework through which network communication is defined and implemented. Two primary models form the basis of the framework, namely the OSI reference model and the TCP/IP model, from which the three operational planes are derived.
 \subsection{Layering Models}
-The OSI model, as proposed by ISO in 1984, divides the communication process into seven abstraction layers\cite{ISO/IEC_7498-1:1994}. Though it remains the normative reference for understanding the behavior of communication protocols and troubleshooting, it is not commonly implemented. The TCP/IP model, based on the ARPANET development and IETF standards, proposes a four-layer model that is actually implemented by real protocols\cite{IETFRFC1122}
+\hspace{1.5em}The OSI model, as proposed by ISO in 1984, divides the communication process into seven abstraction layers\cite{ISO_IEC_7498_1_1994}. Though it remains the normative reference for understanding the behavior of communication protocols and troubleshooting, it is not commonly implemented. The TCP/IP model, based on the ARPANET development and IETF standards, proposes a four-layer model that is actually implemented by real protocols\cite{IETFRFC1122}
 \begin{figure}[!htbp]
     \centering
     \TCPvsOSI
     \caption{OSI vs TCP/IP Layering Models}
     \label{fig:osi-vs-tcpip}
 \end{figure}
+\newpage
 In DC engineering, the TCP/IP model is the reference for operations, with every protocol used in the data center fabric mapped to one of four layers\cite{Data_Center_TCP/IP_Networking_Guide}. The OSI model is used as an analytical tool, particularly when thinking about where encapsulation boundaries occur or how an overlay protocol interacts with the underlying physical network.
 \subsection{The Three Planes and Their Role}
-Aside from protocol layering, today’s network infrastructure can be conceptually divided into three planes, each with a specific category of network function\cite{SDN_Architecture_and_Plane_Separation}.
+\hspace{1.5em}Aside from protocol layering, today’s network infrastructure can be conceptually divided into three planes, each with a specific category of network function\cite{SDN_Architecture}.
 \begin{table}[!htbp]
     \centering
-    \small % Slightly smaller font to help with the "slimmer" look
-    \renewcommand{\arraystretch}{1.3}
-    \begin{tabularx}{\textwidth}{|l|p{2.8cm}|X|l|}
+    \small 
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabularx}{\textwidth}{|l|p{3cm}|X|p{2.5cm}|}
         \hline
         \textbf{Plane} & \textbf{TCP/IP Layer} & \textbf{Role} & \textbf{Technology} \\ \hline
         Data & Network Access + Internet & Packet forwarding, encapsulation, switching at line rate & VXLAN \\ \hline
@@ -130,35 +128,37 @@ This division of the three planes is not merely theoretical but is the fundament
 \section{Spine-Leaf and IP Fabric}
 The Spine-Leaf topology is the fundamental basis upon which IP Fabrics are designed. The adoption of the Spine-Leaf topology in data center networking signifies a significant shift away from the traditional hierarchical structure of the three-tier topology, with its emphasis on vertical aggregation, to a flat, symmetric, and fully meshed topology, which is optimized for performance at scale.
 \subsection{Origins, Roles and Design Principles}
-The Spine-Leaf topology is based on a variant of a Clos topology, a multistage switching topology proposed by Charles Clos at Bell Labs in 1952 to optimize telephone circuit switching via a non-blocking interconnection topology\cite{A_Study_of_Non-Blocking_Switching_Networks}. Re-discovered by hyperscalers such as Google and Facebook in the late 2000s as a solution to the exploding east-west traffic problem created by distributed computing workloads, the Clos topology has evolved into the two-tier Spine-Leaf topology now ubiquitous in data center networks\cite{Introducing_Data_Center_Fabric}.
+\hspace{1.5em}The Spine-Leaf topology is based on a variant of a Clos topology, a multistage switching topology proposed by Charles Clos at Bell Labs in 1952 to optimize telephone circuit switching via a non-blocking interconnection topology\cite{A_Study_of_Non-Blocking_Switching_Networks}. Re-discovered by hyperscalers such as Google and Facebook in the late 2000s as a solution to the exploding east-west traffic problem created by distributed computing workloads, the Clos topology has evolved into the two-tier Spine-Leaf topology now ubiquitous in data center networks\cite{Introducing_Data_Center_Fabric}.
 \begin{figure}[!htbp]
     \centering
     \SpineLeafDiagram
     \caption{Spine-Leaf Topology}
     \label{fig:spine-leaf}
 \end{figure}
-The architecture is divided into two tiers with distinct responsibilities\cite{Cisco_Massively_Scalable_Data_Center_Network_Fabric_Design_and_Operation_White_Paper}. The first tier consists of spine nodes, which form the backbones of the fabric. They are responsible for routing between Leaf nodes. They are exclusively responsible for routing. They never connect to an end device. The second tier consists of Leaf nodes. They are access points for the fabric. A server, storage device, firewall, or gateway is only connected to a Leaf node. Importantly, no direct connections are allowed between Leaf nodes or between Spine nodes. Any two nodes can only communicate through exactly two hops: the source Leaf, the destination Leaf, and one spine node in between\cite{Cisco_Massively_Scalable_Data_Center_Network_Fabric_Design_and_Operation_White_Paper}. This ensures that latency is uniform throughout the fabric, irrespective of the communicating devices.
+\newpage
+\hspace{1.5em}The architecture is divided into two tiers with distinct responsibilities\cite{Cisco_Massively_Scalable_Data_Center_Network_Fabric_Design_and_Operation_White_Paper}. The first tier consists of spine nodes, which form the backbones of the fabric. They are responsible for routing between Leaf nodes. They are exclusively responsible for routing. They never connect to an end device. The second tier consists of Leaf nodes. They are access points for the fabric. A server, storage device, firewall, or gateway is only connected to a Leaf node. Importantly, no direct connections are allowed between Leaf nodes or between Spine nodes. Any two nodes can only communicate through exactly two hops: the source Leaf, the destination Leaf, and one spine node in between\cite{Cisco_Massively_Scalable_Data_Center_Network_Fabric_Design_and_Operation_White_Paper}. This ensures that latency is uniform throughout the fabric, irrespective of the communicating devices.
 \subsection{Oversubscription and Non-Blocking Ratios}
-Oversubscription is defined as the ratio of device bandwidth to uplink capacity\cite{Oversubscription_in_Networking}. In traditional three-tier networks, this oversubscription occurs in Access, Distribution, and Core layers.
+\hspace{1.5em}Oversubscription is defined as the ratio of device bandwidth to uplink capacity\cite{Oversubscription_in_Networking}. In traditional three-tier networks, this oversubscription occurs in Access, Distribution, and Core layers.
 
 The Spine-Leaf network design avoids this issue by allocating Leaf to Spine bandwidth in direct proportion to server access capacity\cite{Non_Blocking_Data_Center_Fabric_Design}. This provides a non-blocking network where uplink capacity matches access demand, so application performance is not constrained by network architecture but rather by actual application demand.
 \subsection{Equal-Cost Multi-Path}
-ECMP helps the full mesh Spine-Leaf topology function by using all paths at once\cite{IETFRFC2992}. This is different from the Spanning Tree Protocol, where it de-activates all paths to avoid loops in the network\cite{Understand_and_Manage_ECMP_Scale_in_Cisco_ACI_White_Paper}.
+\hspace{1.5em}ECMP helps the full mesh Spine-Leaf topology function by using all paths at once\cite{IETFRFC2992}. This is different from the Spanning Tree Protocol, where it de-activates all paths to avoid loops in the network\cite{Understand_and_Manage_ECMP_Scale_in_Cisco_ACI_White_Paper}.
 
 Since all paths between the Leafs and the Spine are now active paths, ECMP hashing of the flow based on flow identifiers such as IP and ports allows automatic load balancing and flow consistency\cite{Hashing_Algorithms_for_LAG_and_ECMP}. This allows the network to scale linearly with the number of paths provided.
 \subsection{IP Fabric and Pod Architecture}
-IP Fabric is the logical structure resulting from the combination of the physical Spine-Leaf network and a pure Layer 3 network infrastructure, in which all paths between the switches are routed point-to-point interfaces, all Layer 2 domains are confined to the server-facing ports of the Leafs, and all communication between Leafs is routed using IP\cite{IP_Fabric_for_Media_Design_Guide}. This completely removes broadcast domains from the core of the fabric and removes the instability and scalability issues associated with them, replacing them with the ability to run scalable routing protocols such as BGP.
+\hspace{1.5em}IP Fabric is the logical structure resulting from the combination of the physical Spine-Leaf network and a pure Layer 3 network infrastructure, in which all paths between the switches are routed point-to-point interfaces, all Layer 2 domains are confined to the server-facing ports of the Leafs, and all communication between Leafs is routed using IP\cite{IP_Fabric_for_Media_Design_Guide}. This completely removes broadcast domains from the core of the fabric and removes the instability and scalability issues associated with them, replacing them with the ability to run scalable routing protocols such as BGP.
 \begin{figure}[!htbp]
     \centering
     \overlayunderlay
     \caption{ IP Fabric Underlay Concept}
     \label{fig:ip-fabric-underlay}
 \end{figure}
+\\
 As fabrics expand beyond a single set of Spine and Leaf nodes, the Pod provides a scaling unit as defined in\cite{Facebook_Data_Center_Network_Architecture}. The Pod is a self-contained Spine-Leafe fabric consisting of a fixed number of Spine and Leaf nodes as an independent forwarding domain. Multiple Pods connect to one another through a Super Spine layer, enabling horizontal scaling of the fabric through the addition of multiple Pods rather than increasing switching capacity. This is particularly relevant to the multi-site nature of this project’s design intent—each data center site could be thought of as an independent Pod, connected via a DCI layer extending the IP Fabric beyond physical site boundaries\cite{IETFRFC8365}.
 \section{Underlay and Overlay}
-The IP Fabric architecture is divided into two layers: underlay and overlay. The relationship between these two layers is essential in understanding how VXLAN and BGP EVPN operate in tandem as an integral part of the solution proposed in this project.
+\hspace{1.5em}The IP Fabric architecture is divided into two layers: underlay and overlay. The relationship between these two layers is essential in understanding how VXLAN and BGP EVPN operate in tandem as an integral part of the solution proposed in this project.
 \subsection{The Underlay/The Overlay Network}
-The underlay network is defined as the physical IP infrastructure that provides basic IP reachability between all nodes in the IP fabric network\cite{VXLAN_Network_with_MP-BGP_EVPN_Control_Plane_Design_Guide}. This network includes Spine and Leaf switches connected via routed point-to-point links running a routing protocol, in this case, eBGP, to exchange IP reachability information among all VTEPs in the network. There is no knowledge in this network of tenants, virtual machines, or logical network segments; its sole aim is to ensure that any node in the network is reachable via a routed IP path from any other node in the network.
+\hspace{1.5em}The underlay network is defined as the physical IP infrastructure that provides basic IP reachability between all nodes in the IP fabric network\cite{VXLAN_Network_with_MP-BGP_EVPN_Control_Plane_Design_Guide}. This network includes Spine and Leaf switches connected via routed point-to-point links running a routing protocol, in this case, eBGP, to exchange IP reachability information among all VTEPs in the network. There is no knowledge in this network of tenants, virtual machines, or logical network segments; its sole aim is to ensure that any node in the network is reachable via a routed IP path from any other node in the network.
 The overlay network is a logical network running on top of the underlay network. It provides virtual network connectivity between network endpoints irrespective of their physical position within the network fabric\cite{IETFRFC7365}. It carries traffic within a tunnel, where the traffic is sent through the underlay network as normal IP packets. The underlay network is completely unaware of the inner packets. In this project, the VXLAN protocol is used for the encapsulation process, and the control plane is provided by the BGP EVPN.
 \begin{table}[!htbp]
 \small
@@ -177,39 +177,164 @@ Scalability Unit & Physical links and nodes & VNI and VRF count \\ \bottomrule
 \label{tab:underlay-overlay}
 \end{table}
 \subsection{Why the Separation Matters}
-The decoupling of the overlay from the underlay is the architectural choice that solves the fundamental issues identified in Chapter 1, as it allows the logical network topology to grow and expand independently of the physical topology beneath it\cite{IETFRFC8365}. A virtual machine move is possible, a new tenant segment is created, or a physical link fails, and none of these requires changes to the other topology. The underlay is the steady and constant IP transport, and the overlay is where all the complexity is handled.
+\hspace{1.5em}The decoupling of the overlay from the underlay is the architectural choice that solves the fundamental issues identified in Chapter 1, as it allows the logical network topology to grow and expand independently of the physical topology beneath it\cite{IETFRFC8365}. A virtual machine move is possible, a new tenant segment is created, or a physical link fails, and none of these requires changes to the other topology. The underlay is the steady and constant IP transport, and the overlay is where all the complexity is handled.
 \begin{figure}[!htbp]
     \centering
     \underoverlay
     \caption{Underlay vs Overlay Diagram}
     \label{fig:underlay-overlay-diagram}
 \end{figure}
-This is exactly what VXLAN does to extend a Layer 2 domain over any IP network despite the distance between the sites, and what BGP EVPN does to transport MAC and IP reachability without the need to flood the network, creating the complete data and control plane of the solution presented in this project\cite{Cisco_Nexus_9000_VXLAN_BGP_EVPN_Data_Center_Fabrics_Fundamental_Design_and_Implementation_Guide}.
-\section{VXLAN}
-sdjbfiuff
+\newpage
+BGP operates over TCP port 179, exchanges reachability information using path attributes, and can be hardened with mechanisms such as GTSM for directly connected peers\cite{IETFRFC4271,IETFRFC5082,Cisco_Nexus_9000_BGP_Configuration_Guide}.
+\section{VXLAN - Virtual Extensible LAN}
 \subsection{Context, Motivation and History}
-fdafaibfoefefef
+The growth of virtualized servers and cloud computing resulted in two major problems for traditional networks: the limitations of segmentation and lack of flexibility. The IEEE 802.1Q VLAN protocol has a restriction in its design, limited to 12 bits, giving a total of only 4096 IDs. This is not enough for modern cloud providers working with multiple customers.
+
+Also, Layer 2 data centers used STP, designed to avoid network loops, leaving most of their capacity unused. This made VMs dependent on their location since they had to maintain Layer 2 adjacency even while being moved around.
+
+This problem was addressed by VXLAN RFC 7348\cite{IET_RFC_7348}, originated by VMware and Cisco. In contrast to the previous solutions, VXLAN uses Layer 3 underlay and encapsulates Ethernet frames into UDP/IP datagrams. Also, VXLAN increased the number of IDs to 24 bits, thus giving over 16 million segments.
 \subsection{Encapsulation, VNI and Packet Format}
-adfbkjdaihfda
+The VXLAN tunneling protocol functions based on the concept of MAC-in-UDP encapsulation\cite{IET_RFC_7348}. In this process, whenever an Ethernet frame is produced by a virtual machine, the VTEP at the access point captures this frame and encloses it within a series of headers that enable the routing of the frame over the underlying IP infrastructure. The actual frame remains intact, and the physical network perceives only the IP headers without knowing anything about the payload inside.
+The encapsulated packet is structured from outermost to innermost as follows:
+\begin{itemize}
+    \item Outer Ethernet Header: Contains the MAC addresses of neighboring physical nodes in the hop-by-hop forwarding path. This field changes with every Layer 3 hop in the underlay, just like in a typical routed IP packet.
+    \item Outer IP Header: Contains the source and destination IP addresses for the two VTEPs involved in the tunnel. This information enables the encapsulated frame to pass through any IP network, irrespective of the geographical distance between the sites.
+    \item Outer UDP Header: Utilizes the destination port number 4789, which was allocated by IANA specifically for VXLAN. Source port is calculated using the inner frame header hash, which enables distribution of traffic in an ECMP-based underlay.
+    \item VXLAN Header: Holds the VNI, a 24-bit value that identifies which segment the inner frame is associated with and ensures that there can be 16 million segments available in isolation. The flags field is coded as “VVVV R000,” where the mandatory I flag should have a value of 1.
+    \item Inner Ethernet Frame: Represents the actual Ethernet frame created by the originator VM. This inner frame remains untouched during transit and is invisible to the underlying physical layer.
+\end{itemize}
+The total VXLAN encapsulation overhead is summarized as follows:
+\begin{table}[!htbp]
+\small % Reduces font size for a cleaner, compact look
+\centering
+\begin{tabularx}{0.6\textwidth}{@{} X c @{}} % 60% width for a "slim" profile
+\toprule
+\textbf{Header Component} & \textbf{Size (Bytes)} \\ \midrule
+Outer Ethernet Header & 14 \\ \midrule
+Outer IP Header       & 20 \\ \midrule
+Outer UDP Header      & 8  \\ \midrule
+VXLAN Header          & 8  \\ \midrule
+\textbf{Total Overhead} & \textbf{50} \\ \bottomrule
+\end{tabularx}
+\end{table}
+Within a default MTU of 1500 bytes, this results in only 1450 bytes available for the payload. Jumbo frames capable of handling an MTU of at least 1550 bytes should be supported within all VXLAN implementations.
 \subsection{The VTEP}
-sdvbaidufbdjef
+The VTEP is the networking component that is responsible for encapsulating and decapsulating all VXLAN traffic. The VTEP is the interface point where the physical underlay network meets the virtual overlay network, with one end of the VTEP communicating with end devices using the standard Ethernet protocol, and the other communicating with remote VTEPs using VXLAN traffic encapsulation on the IP underlay. All VTEPs have their own unique IP address in the underlay network, which functions as the source/destination IP addresses in VXLAN tunnels.
+There are two types of VTEPs. Software VTEP exists within the hypervisor's virtual switch, which includes such switches as VMware’s vSwitch and Open vSwitch; this type of VTEP runs purely in software on general-purpose server hardware. Hardware VTEP, on the other hand, exists directly in the ASICs of the physical network switch, which can be, for example, a Top-of-Rack switch in the Spine-Leaf topology, where encapsulation and decapsulation occur at line speed without any software support. In this particular implementation, hardware VTEPs are implemented using the Cisco Nexus 9000 Leaf switches, where each leaf keeps a VTEP IP address on the underlay and encapsulates traffic coming from the attached servers using VXLAN tunnels to remote Leaf VTEPs.
+Each VTEP keeps a forwarding table which correlates inner MAC addresses with the outer IP address of the remote VTEPs where these addresses reside. If a VTEP receives a frame with encapsulation, the VTEP will remove the outer frame, identify the VNI number, and forward the inner frame to the relevant local segment. This is how scalability and efficiency of the overlay network depend on the method of populating the forwarding table, namely flooding or using a control plane protocol.
+
 \subsection{Flood and Learn, Multicast and BUM Traffic}
-bjkdbsajifbieuhfos
+VXLAN used a “flood and learn” technique for data plane learning in its early stages. As far as BUM traffic is concerned, where the destination VTEP is not known, frames need to be replicated across all VNIs involved. This can be done by using multicast replication that involves complex underlay multicast routing techniques such as PIM/IGMP, or using head-end (ingress) replication wherein the frames from each source VTEP are sent out individually as unicast traffic to all the other peers. However, the process places considerable load on the originating VTEP.
+
+Forwarding tables in VTEPs are created by mapping the outer source IP addresses to the inner source MAC addresses of packets received. Although flooding becomes less frequent with the creation of the forwarding table, the continuous learning process that creates the database poses a constant background workload for extensive or dynamic systems.
+
+These limitations include the multicast issue, replication problem, and the instability of the table. These factors make flood-and-learn an inappropriate method for production. The reasons above lead us to move from flood-and-learn to BGP EVPN. This is because EVPN allows the distribution of MAC/IP reachability via a control plane.
 \subsection{Lexicon}
-dajkfiadhfi
-\section{BGP}
+\begin{table}[!htbp]
+\small
+\centering
+\begin{tabularx}{\textwidth}{@{}l X@{}}
+\toprule
+\textbf{Term} & \textbf{Definition} \\ \midrule
+VXLAN & Virtual Extensible LAN — an encapsulation protocol that tunnels Layer 2 Ethernet frames inside UDP packets to extend logical Layer 2 domains across a Layer 3 IP underlay  \\ \midrule
+VNI & VXLAN Network Identifier — a 24-bit field carried in the VXLAN header that identifies the logical network segment, providing up to 16 million segments  \\ \midrule
+VTEP & VXLAN Tunnel Endpoint — the hardware or software element responsible for encapsulating and decapsulating Ethernet frames  \\ \midrule
+MAC-in-UDP & The encapsulation technique where an original Ethernet frame is carried as the payload of a UDP packet routable across an IP network \\ \midrule
+BUM Traffic & Broadcast, Unknown Unicast, and Multicast traffic that must be replicated across all members of a Layer 2 segment \\ \midrule
+Flood and Learn & A data-plane mechanism where unknown destinations trigger flooding to learn source MAC-to-VTEP mappings from incoming traffic  \\ \midrule
+Head-end Rep. & A BUM handling mechanism where the originating VTEP sends unicast copies to every remote VTEP, eliminating multicast dependency \\ \midrule
+Underlay & The physical IP routing infrastructure responsible for providing routable IP connectivity between all VTEPs  \\ \midrule
+Overlay & The logical virtual network built on top of the underlay, providing the appearance of direct Layer 2 connectivity  \\ \midrule
+MTU & Maximum Transmission Unit — VXLAN adds 50 bytes of overhead, requiring at least 1550 bytes to avoid fragmentation \\ \bottomrule
+\end{tabularx}
+\end{table}
+
+\section{BGP - Border Gateway Protocol}
 \subsection{History, Evolution and DC Adoption}
+BGP history did not begin with the problems associated with building and maintaining DCNs, but rather with one of the most basic problems facing any interconnection of independent computer networks: inter-domain routing. By the end of the 1980s, when the Internet had begun its explosive growth, the routing algorithms being implemented in enterprises and ISP networks (OSPF, RIP, etc., which succeeded each other) turned out to be incapable of providing such large-scale network functionality due to their fundamental architectural limitation – namely, the need to maintain full topological information about their operating space. To address this problem, BGP-1 was created in 1989 as specified in RFC 1105, establishing a path vector-based approach which became the cornerstone for further BGP development\cite{IETFRFC1105}. Three other versions of this protocol came next: BGP-2 in RFC 1163, BGP-3 in RFC 1267, and the latest version, BGP-4 in RFC 1771, later revised in RFC 4271 in 2006\cite{IETFRFC4271}.
+\begin{figure}[!htbp]
+    \centering
+    \caption{}
+    \label{fig:example_image} 
+\end{figure}
+Up until recently, the use of BGP has been confined to the borders of autonomous systems, where the protocol was used by carriers to exchange routes between their ASNs; BGP was transparent to the networks that were connected by it. However, this approach changed, and the reason is in the inability of conventional IGP protocols to operate successfully in hyperscale networks. With Spine-Leaf fabric growing beyond a few hundred nodes, the OSPF link-state database required from each router a complete knowledge of the whole network; in addition, convergence was very slow when links kept changing frequently. Similarly, IS-IS experienced scalability problems. The networking community has officially responded to the situation through the release of RFC 7938, published in 2015, stating explicitly that BGP can be used as the routing protocol in very large data centers' fabrics\cite{Cisco_IGP_Scalability_Limitations_DC_Fabrics,IETFRFC7938}. The idea was rather simple: thanks to its path vector design and powerful policies, BGP proved itself to be an efficient tool capable of scaling to the Internet's level of complexity, unlike IGPs. In the current design, eBGP is being run over each Spine-Leaf connection in the capacity of underlay routing protocol, exchanging VTEP reachability among all nodes.
 \subsection{Core Mechanics}
+BGP is implemented using path-vector routing protocols, which are a far cry from OSPF/IS-IS's link-state routing protocols. Instead of creating a map of the network's entire topology like IGPs do, a BGP speaker creates only one best path towards each destination, while remembering the order of the autonomous systems along the way. The AS-PATH attribute thus acts both as a routing metric, and as a loop prevention tool: if a router receives information about routes containing its own ASN in the AS-PATH, it knows that it cannot use those routes to avoid forwarding loops.
+In addition to being manually set up for each peer, BGP also differs from most other protocols due to the fact that it does not discover its neighbors automatically. Each neighbor's address and ASN are defined manually, after which BGP uses TCP connections on port 179 to communicate with neighbors. TCP guarantees reliable, ordered packet delivery, and therefore BGP does not have to include any acknowledgments or retransmissions within itself. Establishing a BGP session can be modeled as a Finite State Machine with six states Idle, Connect, Active, OpenSent, OpenConfirm, and Established\cite{IETFRFC4271}.
+Four different types of BGP message exist for use in communication, each having its own function in managing BGP session and exchanging routing information:
+\begin{itemize}
+    \item OPEN: The first message sent following TCP session establishment. Contains BGP version number, AS Number, Hold Time, and BGP Identifier values together with optional capability parameters, such as address families used for implementing MP-BGP capabilities like EVPN.
+    \item UPDATE: The most important BGP message used to advertise routes and withdraw advertised routes from peers. Includes BGP path attributes that define properties of the advertised routes and the Network Layer Reachability Information field that defines destination prefixes. In cases where EVPN is implemented, update message contains MAC/IP bindings in MP_REACH_NLRI attribute.
+    \item KEEPALIVE: indicates that the session between peers remains active. Is sent at a one-third of the established Hold Time - usually every 60 seconds for every 180 seconds Hold Time period.
+    \item NOTIFICATION: Sent whenever an error is detected, followed by BGP session tear down process. Contains the error code and subcode value that determine the nature of the error.
+\end{itemize}
+Following the first complete table transfer, BGP works in an incremental way such that updates are made whenever there are any changes, thus ensuring that the protocol is highly bandwidth efficient\cite{IETFRFC4271}. The four BGP parameters that are essential for comprehending its workings in the context of a data center fabric include AS-PATH (the list of autonomous systems crossed); NEXT-HOP (identifies the next hop address); LOCAL-PREF (shows path preference within the AS); and MED (identifies preferred entries into other autonomous systems).
+
 \subsection{iBGP vs eBGP}
+
+The operation of BGP depends largely on whether the mode of interaction between the peers is an internal one or an external one, and this difference has very important outcome for the deployment of BGP within the context of a fabric. 
+If the BGP session is in two routers located in the same autonomous system and, therefore, the same ASN, then this would be considered an internal BGP session, which is also known as iBGP. If the two routers in question do not belong to the same autonomous system, the BGP connection will be considered an external one, or eBGP.
+In the case of eBGP, the AS-PATH attribute is generated by adding the local AS to the path attribute of the route advertised to the peer. The TTL value for eBGP messages is set to 1 by default, making it mandatory that eBGP peers be connected via the link layer without the use of any TTL security extension\cite{IETFRFC5082}. In iBGP, the AS-PATH prepend feature is not required as all routers belong to the same AS, and the path attribute is useless for preventing routing loops within the network. Rather than employing this attribute to prevent routing loops, iBGP uses the split-horizon rule that prohibits any route learned from an iBGP peer from being advertised to another iBGP peer. As a result, the full mesh rule applies for iBGP, making it necessary that each iBGP router maintain a session with each and every router in the domain, because there is no guarantee that a router will receive a route from its peer. This results in a total of N(N-1)/2 sessions in a domain containing N routers.
+The second important difference in behavior pertains to the NEXT-HOP treatment. In eBGP sessions, a device updates the NEXT-HOP attribute to use its own address in route advertisement in order to make sure that the receiving device has access to the next-hop. In contrast, the NEXT-HOP address in iBGP remains as it is, which is the address of the eBGP neighbor from which the route was advertised. All iBGP speakers need to be able to reach all possible NEXT-HOPS addresses either via IGP or via underlay routing protocol in case of pure IP Fabric\cite{IETFRFC4271}.
+In this particular Spine-Leaf design of the project, eBGP is used on all physical links connecting Leafs and Spines, each of which is equipped with a different ASN. Thus, no iBGP full-mesh issues arise since each inter-device connection is an eBGP session utilizing natural loop prevention via AS-PATH. The EVPN address family works via iBGP connections between Leafs with Spines acting as Route Reflectors
+
 \subsection{Path Selection}
+
+\begin{itemize}
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\end{itemize}
+
 \subsection{Address Families}
+Route reflectors reduce the full-mesh requirement of iBGP by allowing a designated router to reflect routes between client peers, which significantly improves scalability in larger BGP domains\cite{IETFRFC4456,Cisco_Nexus_9000_BGP_Configuration_Guide}.
+
 \subsection{Route Reflectors}
+Confederations provide another scaling method by subdividing a large autonomous system into smaller member autonomous systems while presenting a single AS to external peers\cite{IETFRFC5065,IETFRFC4271}.
+
 \subsection{Confederations}
+This is exactly what VXLAN does to extend a Layer 2 domain over any IP network despite the distance between the sites, and what BGP EVPN does to transport MAC and IP reachability without the need to flood the network, creating the complete data and control plane of the solution presented in this project\cite{Cisco_Nexus_9000_VXLAN_BGP_EVPN_Data_Center_Fabrics_Fundamental_Design_and_Implementation_Guide}.
+
 \subsection{Lexicon}
+\begin{table}[!htbp]
+\small
+\centering
+\begin{tabularx}{\textwidth}{@{}l X@{}}
+\toprule
+\textbf{Term} & \textbf{Definition} \\ \midrule
+BGP & Border Gateway Protocol — the standard path-vector routing protocol operating over TCP port 179 \\ \midrule
+AS & Autonomous System — a collection of IP networks under a single administrative entity  \\ \midrule
+ASN & Autonomous System Number — the unique identifier used in AS-PATH to track routing boundaries \\ \midrule
+Path Vector & The BGP routing model where advertisements carry a sequence of traversed ASes for loop detection \\ \midrule
+iBGP / eBGP & Internal vs. External BGP — distinguishes sessions within an AS from those across different ASs  \\ \midrule
+Split-Horizon & The iBGP rule prohibiting a router from re-advertising routes learned from one iBGP peer to another \\ \midrule
+NEXT-HOP & BGP attribute identifying the next-hop IP; preserved in iBGP and updated in eBGP sessions \\ \midrule
+LOCAL-PREF & Intra-AS path preference used to influence outbound traffic; higher values are preferred \\ \midrule
+AS-PATH & The recorded sequence of ASes a route has traversed; used for loop prevention and path selection \\ \midrule
+MED & Multi-Exit Discriminator — attribute used to suggest preferred entry points to neighboring ASs \\ \midrule
+MP-BGP & Multiprotocol BGP — RFC 4760 extension enabling BGP to carry various address families (AFI/SAFI) \\ \midrule
+NLRI & Network Layer Reachability Information — the destination prefix info carried in BGP updates \\ \midrule
+Route Reflector & A BGP speaker that bypasses iBGP split-horizon to eliminate full-mesh requirements \\ \midrule
+RR Client & A router that peers with an RR rather than maintaining a full-mesh iBGP environment \\ \midrule
+Confederation & A scalability mechanism subdividing a large AS into smaller sub-ASes [6] \\ \midrule
+WEIGHT & A locally significant Cisco attribute used as the highest-priority path selection criterion  \\ \bottomrule
+\end{tabularx}
+\end{table}
+
 \section{BGP - EVPN}
 \subsection{Context, History and Definition}
+This is exactly what VXLAN does to extend a Layer 2 domain over any IP network despite the distance between the sites, and what BGP EVPN does to transport MAC and IP reachability without the need to flood the network, creating the complete data and control plane of the solution presented in this project\cite{Cisco_Nexus_9000_VXLAN_BGP_EVPN_Data_Center_Fabrics_Fundamental_Design_and_Implementation_Guide}.
+
 \subsection{From VPLS to EVPN}
 \subsection{EVPN Route Types}
+This is exactly what VXLAN does to extend a Layer 2 domain over any IP network despite the distance between the sites, and what BGP EVPN does to transport MAC and IP reachability without the need to flood the network, creating the complete data and control plane of the solution presented in this project\cite{Cisco_Nexus_9000_VXLAN_BGP_EVPN_Data_Center_Fabrics_Fundamental_Design_and_Implementation_Guide}.
+
 \subsection{How EVPN Drives VXLAN}
 \subsection{ARP Suppression}
 \subsection{MAC Mobility}
