@@ -9,4 +9,6 @@ main.pdf
 *.synctex*
 *.toc
 *.bbl
-*.blg
+*.blggit rm --cached main.pdf main.aux main.log main.toc
+git add .gitignore
+git commit -m "Ignore LaTeX build artifacts"
