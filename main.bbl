@@ -511,7 +511,6 @@
       \field{howpublished}{\url{https://www.cisco.com/c/en/us/td/docs/dcn/whitepapers/cisco-vxlan-bgp-evpn-design-and-implementation-guide.html}}
       \field{title}{Cisco Nexus 9000 VXLAN BGP EVPN Data Center Fabrics Fundamental Design and Implementation Guide}
     \endentry
-<<<<<<< HEAD
     \entry{IBM_Virtualization}{misc}{}{}
       \list{organization}{1}{%
         {IBM}%
@@ -521,64 +520,6 @@
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://www.ibm.com/think/topics/virtualization}}
       \field{title}{What Is Virtualization?}
-=======
-    \entry{Cisco_Catalyst_Programmability_and_Automation}{misc}{}{}
-      \list{organization}{1}{%
-        {Cisco}%
-      }
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://www.cisco.com/c/en/us/products/collateral/switches/catalyst-9300-series-switches/catalyst-programmability-automation-wp.html}}
-      \field{title}{Catalyst Programmability and Automation}
-    \endentry
-    \entry{IETFRFC3411}{misc}{}{}
-      \list{organization}{1}{%
-        {IETF}%
-      }
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://datatracker.ietf.org/doc/html/rfc3411}}
-      \field{title}{IETF RFC 3411}
-    \endentry
-    \entry{IETFRFC4741}{misc}{}{}
-      \list{organization}{1}{%
-        {IETF}%
-      }
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://datatracker.ietf.org/doc/html/rfc4741}}
-      \field{title}{IETF RFC 4741}
-    \endentry
-    \entry{Ansible_Networking_Documentation}{misc}{}{}
-      \list{organization}{1}{%
-        {Ansible}%
-      }
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://docs.ansible.com/projects/ansible/latest/network/index.html}}
-      \field{title}{Ansible Networking Documentation}
-    \endentry
-    \entry{intent-Based_Networking}{misc}{}{}
-      \list{organization}{1}{%
-        {Cisco}%
-      }
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://www.cisco.com/c/en/us/solutions/collateral/internet-of-things/nb-09-intent-based-iot-wp-cte-en.html}}
-      \field{title}{Intent-Based Networking}
-    \endentry
-    \entry{AIOps_and_Machine_Learning}{misc}{}{}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://www.researchgate.net/publication/384344908_Automating_Troubleshooting_Network_Issues_with_AIOps_and_Machine_Learning}}
-      \field{title}{Automating Troubleshooting Network Issues with AIOps and Machine Learning}
->>>>>>> 38b21becf2ab1b105982d84a2aab84c1cab3456a
     \endentry
   \enddatalist
 \endrefsection

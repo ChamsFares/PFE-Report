@@ -174,7 +174,6 @@ BGP exchanges reachability information using path attributes, and can be hardene
     \caption{Underlay vs Overlay Diagram}
     \label{fig:underlay-overlay-diagram}
 \end{figure}
-<<<<<<< HEAD
 \newpage
 \section{VXLAN - Virtual Extensible LAN}
 \subsection{Context, Motivation and History}
@@ -398,61 +397,11 @@ BFD & Bidirectional Forwarding Detection; a low-overhead, sub-second protocol us
 A solution to this problem has been proposed in a completely unrelated field. Initially described in RFC 7432 (2015), EVPN is a control-plane mechanism for MPLS-based L2VPNs. EVPN replaced the traditional VLAN service VPLS and enabled distribution of MAC reachability via BGP rather than data-plane flooding \cite{IETFRFC7365}. In EVPN, both MAC and IP reachability information are contained in a single BGP address family. Its extension to VXLAN was detailed in RFC 8365 (2018).
 
 EVPN can be regarded as an additional BGP address family (AFI 25 / SAFI 70) operating in ordinary MP-BGP sessions. There are various route types, each carrying a particular class of overlay reachability information. On discovering a new endpoint, the originating VTEP builds an appropriate EVPN route and distributes it to other BGP speakers. Upon receipt of such routes, remote VTEPs build forwarding entries proactively.
-=======
-This is exactly what VXLAN does to extend a Layer 2 domain over any IP network despite the distance between the sites, and what BGP EVPN does to transport MAC and IP reachability without the need to flood the network, creating the complete data and control plane of the solution presented in this project\cite{Cisco_Nexus_9000_VXLAN_BGP_EVPN_Data_Center_Fabrics_Fundamental_Design_and_Implementation_Guide}.
-\section{VXLAN}
-This is exactly what VXLAN does to extend a Layer 2 domain over any IP network despite the distance between the sites, and what BGP EVPN does to transport MAC and IP reachability without the need to flood the network, creating the complete data and control plane of the solution presented in this project\cite{Cisco_Nexus_9000_VXLAN_BGP_EVPN_Data_Center_Fabrics_Fundamental_Design_and_Implementation_Guide}.
-\subsection{Context, Motivation and History}
-This is exactly what VXLAN does to extend a Layer 2 domain over any IP network despite the distance between the sites, and what BGP EVPN does to transport MAC and IP reachability without the need to flood the network, creating the complete data and control plane of the solution presented in this project\cite{Cisco_Nexus_9000_VXLAN_BGP_EVPN_Data_Center_Fabrics_Fundamental_Design_and_Implementation_Guide}.
-
-\subsection{Encapsulation, VNI and Packet Format}
-This is exactly what VXLAN does to extend a Layer 2 domain over any IP network despite the distance between the sites, and what BGP EVPN does to transport MAC and IP reachability without the need to flood the network, creating the complete data and control plane of the solution presented in this project\cite{Cisco_Nexus_9000_VXLAN_BGP_EVPN_Data_Center_Fabrics_Fundamental_Design_and_Implementation_Guide}.
-
-\subsection{The VTEP}
-This is exactly what VXLAN does to extend a Layer 2 domain over any IP network despite the distance between the sites, and what BGP EVPN does to transport MAC and IP reachability without the need to flood the network, creating the complete data and control plane of the solution presented in this project\cite{Cisco_Nexus_9000_VXLAN_BGP_EVPN_Data_Center_Fabrics_Fundamental_Design_and_Implementation_Guide}.
-
-\subsection{Flood and Learn, Multicast and BUM Traffic}
-This is exactly what VXLAN does to extend a Layer 2 domain over any IP network despite the distance between the sites, and what BGP EVPN does to transport MAC and IP reachability without the need to flood the network, creating the complete data and control plane of the solution presented in this project\cite{Cisco_Nexus_9000_VXLAN_BGP_EVPN_Data_Center_Fabrics_Fundamental_Design_and_Implementation_Guide}.
-
-\subsection{Lexicon}
-This is exactly what VXLAN does to extend a Layer 2 domain over any IP network despite the distance between the sites, and what BGP EVPN does to transport MAC and IP reachability without the need to flood the network, creating the complete data and control plane of the solution presented in this project\cite{Cisco_Nexus_9000_VXLAN_BGP_EVPN_Data_Center_Fabrics_Fundamental_Design_and_Implementation_Guide}.
-
-\section{BGP}
-\subsection{History, Evolution and DC Adoption}
-This is exactly what VXLAN does to extend a Layer 2 domain over any IP network despite the distance between the sites, and what BGP EVPN does to transport MAC and IP reachability without the need to flood the network, creating the complete data and control plane of the solution presented in this project\cite{Cisco_Nexus_9000_VXLAN_BGP_EVPN_Data_Center_Fabrics_Fundamental_Design_and_Implementation_Guide}.
-
-\subsection{Core Mechanics}
-This is exactly what VXLAN does to extend a Layer 2 domain over any IP network despite the distance between the sites, and what BGP EVPN does to transport MAC and IP reachability without the need to flood the network, creating the complete data and control plane of the solution presented in this project\cite{Cisco_Nexus_9000_VXLAN_BGP_EVPN_Data_Center_Fabrics_Fundamental_Design_and_Implementation_Guide}.
-
-\subsection{iBGP vs eBGP}
-This is exactly what VXLAN does to extend a Layer 2 domain over any IP network despite the distance between the sites, and what BGP EVPN does to transport MAC and IP reachability without the need to flood the network, creating the complete data and control plane of the solution presented in this project\cite{Cisco_Nexus_9000_VXLAN_BGP_EVPN_Data_Center_Fabrics_Fundamental_Design_and_Implementation_Guide}.
-
-\subsection{Path Selection}
-This is exactly what VXLAN does to extend a Layer 2 domain over any IP network despite the distance between the sites, and what BGP EVPN does to transport MAC and IP reachability without the need to flood the network, creating the complete data and control plane of the solution presented in this project\cite{Cisco_Nexus_9000_VXLAN_BGP_EVPN_Data_Center_Fabrics_Fundamental_Design_and_Implementation_Guide}.
-
-\subsection{Address Families}
-This is exactly what VXLAN does to extend a Layer 2 domain over any IP network despite the distance between the sites, and what BGP EVPN does to transport MAC and IP reachability without the need to flood the network, creating the complete data and control plane of the solution presented in this project\cite{Cisco_Nexus_9000_VXLAN_BGP_EVPN_Data_Center_Fabrics_Fundamental_Design_and_Implementation_Guide}.
-
-\subsection{Route Reflectors}
-This is exactly what VXLAN does to extend a Layer 2 domain over any IP network despite the distance between the sites, and what BGP EVPN does to transport MAC and IP reachability without the need to flood the network, creating the complete data and control plane of the solution presented in this project\cite{Cisco_Nexus_9000_VXLAN_BGP_EVPN_Data_Center_Fabrics_Fundamental_Design_and_Implementation_Guide}.
-
-\subsection{Confederations}
-This is exactly what VXLAN does to extend a Layer 2 domain over any IP network despite the distance between the sites, and what BGP EVPN does to transport MAC and IP reachability without the need to flood the network, creating the complete data and control plane of the solution presented in this project\cite{Cisco_Nexus_9000_VXLAN_BGP_EVPN_Data_Center_Fabrics_Fundamental_Design_and_Implementation_Guide}.
-
-\subsection{Lexicon}
-This is exactly what VXLAN does to extend a Layer 2 domain over any IP network despite the distance between the sites, and what BGP EVPN does to transport MAC and IP reachability without the need to flood the network, creating the complete data and control plane of the solution presented in this project\cite{Cisco_Nexus_9000_VXLAN_BGP_EVPN_Data_Center_Fabrics_Fundamental_Design_and_Implementation_Guide}.
-
-\section{BGP - EVPN}
-\subsection{Context, History and Definition}
-This is exactly what VXLAN does to extend a Layer 2 domain over any IP network despite the distance between the sites, and what BGP EVPN does to transport MAC and IP reachability without the need to flood the network, creating the complete data and control plane of the solution presented in this project\cite{Cisco_Nexus_9000_VXLAN_BGP_EVPN_Data_Center_Fabrics_Fundamental_Design_and_Implementation_Guide}.
-
->>>>>>> 38b21becf2ab1b105982d84a2aab84c1cab3456a
 \subsection{From VPLS to EVPN}
 \hspace{1.5em}The BGP EVPN protocol is a development of VPLS, which was the leading Layer 2 virtual private network technology. The VPLS network architecture was a mesh of pseudowires with data-plane-based learning, whereby every PE would learn all the MAC addresses in an inefficient manner. Broadcasting increased proportionally with the square of the number of PEs, multihoming support was unstandardized and proprietary, and there was no mechanism in VPLS to distribute IP reachability information\cite{IETFRFC8365}.
 
 BGP EVPN addressed all these issues through the adoption of proactive MAC learning based on BGP, thus utilizing its scaling and policy mechanisms. Ethernet Segment was developed as a standardized solution for multihoming, and a single address family for MAC/IP binding was introduced, which made flooding obsolete and allowed for concurrent routing and bridging.
 \subsection{EVPN Route Types}
-<<<<<<< HEAD
 \hspace{1.5em}There are five different route types defined by BGP EVPN, where each route type is a representation of different information about overlay reachability encapsulated in BGP NLRI\cite{IETFRFC7365}. In total, all the route types are required for VTEP to properly switch traffic within the fabric network based on different pieces of information, such as endpoint identity, segmentation, BUM traffic, multihoming, and inter-VRF routing. All the route types are advertised using BGP UPDATE messages.
 \begin{enumerate}
 \item \textbf{Type 1 - Ethernet Auto-Discovery Route:}
@@ -544,10 +493,6 @@ DF Election & Carries the algorithm ID and preference for Designated Forwarder s
 \caption{Extended Community Types per Route Type}
 \label{tab:extended-communities}
 \end{table}
-=======
-This is exactly what VXLAN does to extend a Layer 2 domain over any IP network despite the distance between the sites, and what BGP EVPN does to transport MAC and IP reachability without the need to flood the network, creating the complete data and control plane of the solution presented in this project\cite{Cisco_Nexus_9000_VXLAN_BGP_EVPN_Data_Center_Fabrics_Fundamental_Design_and_Implementation_Guide}.
-
->>>>>>> 38b21becf2ab1b105982d84a2aab84c1cab3456a
 \subsection{How EVPN Drives VXLAN}
 \hspace{1.5em}The connection between BGP EVPN and VXLAN is that of a control plane to a data plane, respectively, whereby EVPN cannot send data while VXLAN cannot distribute reachability information. Both function independently of each other, but for the system to operate effectively, they must complement each other in the two respective planes. It is essential to comprehend the link between a BGP EVPN message and a VXLAN forwarding decision. This will help explain why this particular setup addresses the shortcomings associated with the flood-and-learn VXLAN method.
 \begin{figure}[!htbp]
