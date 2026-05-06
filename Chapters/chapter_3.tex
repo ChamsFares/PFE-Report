@@ -161,7 +161,13 @@ Cisco NDFC is based on DCNM (Data Center Network Manager), a legacy Java applica
     \item CI/CD pipeline support The emulated topology can be deployed, tested, and torn down automatically without manual intervention.
 \end{itemize}
 \subsection{Emulation Platform Selection}
+The verification process of the architecture needs a laboratory that will simulate Cisco NX-OS, Cisco IOS-XE, Cisco ASAv and FortiGate at once. There were four simulation frameworks analyzed for this purpose.
+table
+EVE-NG is selected for use as the emulator. The web-based interface of EVE-NG enables management of all nodes using only a browser, while avoiding any installation of a client locally; EVE-NG supports images that include all kinds of devices required for this network lab. furthermore, the resource usage fits perfectly well into the ESXi-based host environment found in Tunisie Telecom’s IT infrastructure. Cisco CML was tested as an alternative and then rejected, as Cisco CML is already being utilized by the engineers of Tunisie Telecom, and specifically EVE-NG was chosen here by our professional supervisor.
 \subsection{Software Environment}
+The entire set of software tools that have been used for creating, deploying, and validating the architecture are listed in Table below. Network devices are implemented as virtual appliances within the EVE-NG environment using the VMware ESXi infrastructure provided by Tunisie Telecom.
+table
+The choice of the VMware ESXi hypervisor for our solution was driven by the fact that it forms part of the current virtualization infrastructure deployed at Tunisie Telecom. Oracle VirtualBox was also an option, but it is not supported by EVE-NG.
 \section{Overall Architecture Overview}
 \subsection{Design Principles}
 \subsection{Component Roles}

@@ -28,14 +28,7 @@ table
 \hspace{1.5em}The same logic applies to the choice of the Border Leaf devices that remain Huawei CE12800 appliances as they are already present on-site. They are used in the current environment as security and regulatory barriers and are deployed along the site perimeters. The use of such appliances makes a lot of sense since they are able to function as natural Border Gateways for DCI connections thanks to BGP EVPN support.
 
 \hspace{1.5em}Regarding firewalls, there will be two dedicated devices used to ensure the highest level of network security. Thus, Cisco ASAv represents the managed solution responsible for East-West traffic control while being connected directly to the Spine layer. In its turn, FortiGate represents an edge (North-South) unmanaged firewall used for ingress/egress filtering for external communications.
-\subsection{Emulation Platform Selection}
-The verification process of the architecture needs a laboratory that will simulate Cisco NX-OS, Huawei CE-OS, Cisco IOS-XE, Cisco ASAv and FortiGate at once. There were four simulation frameworks analyzed for this purpose.
-table
-EVE-NG is selected for use as the emulator. The web-based interface of EVE-NG enables management of all nodes using only a browser, while avoiding any installation of a client locally; EVE-NG supports multi-vendor images that include all kinds of devices required for this network lab, among them the Huawei CE12800 switch; furthermore, the resource usage fits perfectly well into the ESXi-based host environment found in Tunisie Telecom’s IT infrastructure. Cisco CML was tested as an alternative and then rejected, as Cisco CML is already being utilized by the engineers of Tunisie Telecom, and specifically EVE-NG was chosen here by our professional supervisor.
-\subsection{Software Environment}
-The entire set of software tools that have been used for creating, deploying, and validating the architecture are listed in Table below. Network devices are implemented as virtual appliances within the EVE-NG environment using the VMware ESXi infrastructure provided by Tunisie Telecom.
-table
-The choice of the VMware ESXi hypervisor for our solution was driven by the fact that it forms part of the current virtualization infrastructure deployed at Tunisie Telecom. Oracle VirtualBox was also an option, but it is not supported by EVE-NG.
+
 \section{Underlay Design}
 The underlay provides reachability through the IP protocol to all VTEP loopbacks. Physical links are routed point-to-point /31 interfaces. An IGP in OSPF Area 0 is used as IGP.
 \begin{table}[!htbp]
