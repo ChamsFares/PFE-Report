@@ -11,4 +11,4 @@ main.pdf
 *.bbl
 *.blggit rm --cached main.pdf main.aux main.log main.toc
 git add .gitignore
-git commit -m "Ignore LaTeX build artifacts"
+git commit -m "Ignore LaTeX build artifacts"main.pdf
