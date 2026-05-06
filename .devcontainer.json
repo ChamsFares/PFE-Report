@@ -48,5 +48,5 @@
       }
     }
   },
-  "postCreateCommand": "sudo apt-get update && sudo env PATH=$PATH tlmgr update --self && sudo env PATH=$PATH tlmgr install xcolor geometry fancyhdr caption tocloft titlesec csquotes biblatex biblatex-ieee biber tipa ec cm-super ieeeconf tabularx environ latexindent booktabs enumitem"
+  "postCreateCommand": "sudo apt-get update && sudo env PATH=$PATH tlmgr update --self && sudo env PATH=$PATH tlmgr install xcolor geometry fancyhdr caption tocloft titlesec csquotes biblatex biblatex-ieee biber tipa ec cm-super ieeeconf tabularx environ latexindent booktabs enumitem tabularray ninecolors"
 }

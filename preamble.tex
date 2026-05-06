@@ -18,8 +18,11 @@
 \geometry{top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm}
 \usepackage{titlesec}
 \usepackage{tabularx}
+\usepackage[table]{xcolor}
 \usepackage{array}
 \usepackage{booktabs}
+\usepackage{tabularray}
+\UseTblrLibrary{booktabs}
 \geometry{margin=1.5cm}
 \usepackage[autostyle]{csquotes}
 \usepackage[backend=biber, style=ieee]{biblatex}
@@ -44,18 +47,37 @@
 \newcommand{\logoCarthage}{\includegraphics[height=2.5cm]{Images/logo_carthage_universit.png}}
 \newcommand{\logoTELECOM}{\includegraphics[height=2.2cm]{Images/logo_telecom.png}}
 \newcommand{\Telecom}{\includegraphics[height=7.5cm]{Images/telecom.jpg}}
-\newcommand{\OrgTelecom}{\includegraphics[height=9.5cm]{Images/organchartTelecom.png}}
-\newcommand{\PratnerGrid}{\includegraphics[height=4.5cm]{Images/pranter_grid.png}}
-\newcommand{\ComputingEvolutionEra}{\includegraphics[height=3.1cm]{Images/ComputingEvolutionEra.png}}
+\newcommand{\OrgTelecom}{\includegraphics[width=\textwidth,height=9.5cm]{Images/organchartTelecom.png}}
+\newcommand{\PratnerGrid}{\includegraphics[width=\textwidth,height=4.5cm]{Images/pranter_grid.png}}
+\newcommand{\agiletimeline}{\includegraphics[width=\textwidth,height=6.85cm]{Images/agiletimeline.png}}
+\newcommand{\ComputingEvolutionEra}{\includegraphics[width=\textwidth,height=3.1cm]{Images/ComputingEvolutionEra.png}}
 \newcommand{\Architecturethreetier}{\includegraphics[width=0.8\textwidth,height=8.1cm]{Images/architec_3tier.png}}
-\newcommand{\SDNarchitecture}{\includegraphics[width=0.8\textwidth,height=6.1cm]{Images/SDN_architecture.png}}
+\newcommand{\SDNarchitecture}{\includegraphics[width=0.8\textwidth,height=6.5cm]{Images/SDN_architecture.png}}
 \newcommand{\NFVtimeline}{\includegraphics[height=5.1cm]{Images/NFV_timeline.png}}
-\newcommand{\PLanessplit}{\includegraphics[width=0.8\textwidth,height=7cm]{Images/Planesdiagram.png}}
-\newcommand{\SpineLeafDiagram}{\includegraphics[width=0.8\textwidth,height=5cm]{Images/Spine-Leafdiag.png}}
-\newcommand{\underoverlay}{\includegraphics[width=0.8\textwidth,height=6.1cm]{Images/Diagunderlayoverlay.png}}
-\newcommand{\overlayunderlay}{\includegraphics[width=0.8\textwidth,height=6.1cm]{Images/Diagoverlayunderlaysplit.png}}
-\newcommand{\TCPvsOSI}{\includegraphics[width=0.8\textwidth,height=6.1cm]{Images/TCPvsIOS.png}}
-\newcommand{\networkautomation}{\includegraphics[width=1.0\textwidth,height=4.1cm]{Images/NetworkAutomationTimeline.png}}
+\newcommand{\SpineLeafDiagram}{\includegraphics[width=0.9\textwidth,height=8.3cm]{Images/Spine-Leafdiag.png}}
+\newcommand{\underoverlay}{\includegraphics[width=\textwidth,height=8.5cm]{Images/Diagunderlayoverlay.png}}
+\newcommand{\overlayunderlay}{\includegraphics[width=\textwidth,height=9cm]{Images/Diagoverlayunderlaysplit.png}}
+\newcommand{\TCPvsOSI}{\includegraphics[width=\textwidth,height=5.5cm]{Images/TCPvsIOS.png}}
+\newcommand{\networkautomation}{\includegraphics[width=1.0\textwidth,height=2.5cm]{Images/NetworkAutomationTimeline.png}}
+\newcommand{\BGPhistory}{\includegraphics[width=1.0\textwidth,height=2.5cm]{Images/Bgphstory.png}}
+\newcommand{\BGPMFS}{\includegraphics[width=1.0\textwidth,height=6.5cm]{Images/BGP-MFS.png}}
+\newcommand{\VTEPtraffic}{\includegraphics[width=1.0\textwidth,height=9.1cm]{Images/VTEPtraffic.png}}
+\newcommand{\VXLANDiagram}{\includegraphics[width=1.0\textwidth,height=4.1cm]{Images/VXLANDiagram.png}}
+\newcommand{\BumTraffic}{\includegraphics[width=1.0\textwidth,height=10cm]{Images/BumTraffic.png}}
+\newcommand{\typeone}{\includegraphics[width=\textwidth,height=2cm]{Images/Type1Evpn.png}}
+\newcommand{\typetwo}{\includegraphics[width=\textwidth,height=3.5cm]{Images/Type2Evpn.png}}
+\newcommand{\typethree}{\includegraphics[width=\textwidth,height=2cm]{Images/Type3Evpn.png}}
+\newcommand{\typefour}{\includegraphics[width=\textwidth,height=2cm]{Images/Type4Evpn.png}}
+\newcommand{\typefive}{\includegraphics[width=\textwidth,height=3.3cm]{Images/Type5Evpn.png}}
+\newcommand{\EvpnDrivesVXLan}{\includegraphics[width=1.0\textwidth,height=7.5cm]{Images/EvpnDrivesVXLan.png}}
+\newcommand{\ebgpibgp}{\includegraphics[width=\textwidth,height=9.5cm]{Images/ebgp-ibgp.png}}
+\newcommand{\MACmobility}{\includegraphics[width=\textwidth,height=7.5cm]{Images/MACmobility.png}}
+\newcommand{\LVNILVNI}{\includegraphics[width=\textwidth,height=6cm]{Images/L2VNIL3VNI.png}}
+\newcommand{\AnycastGateway}{\includegraphics[width=\textwidth,height=7cm]{Images/AnycastGateway.png}}
+\newcommand{\automationtools}{\includegraphics[width=\textwidth,height=5cm]{Images/Tools_logo.png}}
+\newcommand{\NDFCArchitecture}{\includegraphics[width=\textwidth,height=10cm]{Images/NDFCArchitecture.png}}
+\newcommand{\AnsibleArchitecture}{\includegraphics[width=\textwidth,height=8.5cm]{Images/AnsibleAutomationArchitectureg.png}}
+
 \newcolumntype{Y}{>{\raggedright\arraybackslash}X}
 % No dots for chapters (common in theses/reports)
 \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}   % add dots

@@ -8,7 +8,7 @@
     \centering
     \ComputingEvolutionEra
     \caption{Computing Evolution Era Timeline}
-    \label{fig:ComputingEvolutionEra Timeline}
+    \label{fig:ComputingEvolutionEraTimeline}
 \end{figure}
 DC has been formally defined as a special facility that centralizes the information technology infrastructure of an organization in a highly available and controlled environment\cite{Uptime_Institute_Tier_Certification}. Beyond the hosting of hardware devices, the contemporary data center has become the essential operational platform for the information age, supporting every service, transaction, and communication in the interconnected world.
 \subsection{Tier Classification and Foundational Pillars}
@@ -69,8 +69,7 @@ The three-tier network model is highly popular and widely applied, although it h
 \end{figure}
 \\
 The SDN architecture has three distinct layers\cite{SDN_New_Norm}. The Application Layer resides at the top and communicates with the controller through Northbound APIs. The Northbound APIs are typically REST APIs. The Application Layer communicates its intent to the controller. The Application Layer does not interact with the network devices. The second layer of the SDN architecture is the Control Layer. The SDN controller accommodated in this layer. The SDN controller has a global perspective of the network topology. The third layer of the SDN architecture is the Infrastructure Layer. The network devices reside in this layer. The network devices which are forwarding devices. The network devices are programmed by the SDN controller. The network devices are programmed through Southbound APIs. The Southbound APIs are typically OpenFlow.
-This decoupling of control and data planes was a conceptual leap forward, as for the first time network behavior was programmable from a central location rather than being configured on a per-device basis \cite{OpenFlow_Paper}. It also introduced the idea of dynamic application-aware traffic management at a scale and speed that traditional distributed protocols couldn’t deliver.
-next section
+This decoupling of control and data planes was a conceptual leap forward, as for the first time network behavior was programmable from a central location rather than being configured on a per-device basis \cite{OpenFlow_Paper}. It also introduced the idea of dynamic application-aware traffic management at a scale and speed that traditional distributed protocols could not deliver.
 
 \subsection{Network Functions Virtualization}
 \hspace{1.5em}Coexisting alongside SDN, NFV was first formally defined by a group of major telecommunications operators through a white paper submitted to the ETSI standards body in 2012\cite{SDN_Architecture}. While SDN was addressing the programmability of the data plane, NFV was addressing a different issue related to the dependency of network functions on proprietary and dedicated hardware.
@@ -82,13 +81,10 @@ NFV was based on the idea of running firewalls, load balancers, intrusion detect
     \label{fig:nfv-timeline}
 \end{figure}
 \subsection{The Emergence of the IP Fabric}
-\hspace{1.5em}While SDN and NFV have shown much promise, the actual implementation of OpenFlow-based networks showed severe limitations in a production network environment \cite{Evolution_Beyond_OpenFlow}.In such a network, the controller is the only  point of failure as the network was expanding in scale. The entire network endangered if the controller was to fail. The global network view was operationally complex with thousands of devices. The concept of Proprietary SDNs was introduced by various vendors like Cisco's ACI and VMware's NSX. They introduced a controller-based SDN solution that provided abstraction of the network with distributed forwarding in the devices \cite{ACI_Architecture_White_Paper}.
-These implementations suggested the path toward the hybrid model, which was to be the hallmark of the data center networking paradigm in the future, i.e., one that offered the advantages of distributed protocol intelligence in the forwarding plane, along with the advantages offered by the central visibility and automation offered in the management plane. The IP Fabric model was the result of this development, where the flat Spine-Leaf physical topology was integrated with standards-based overlay protocols along with the central management plane \cite{IP_Fabric_for_Media_Design_Guide}. The IP Fabric model does not replace the distributed protocol model but instead leverages the advantages offered by the use of BGP for the distributed control plane along with the flexibility offered by the use of VXLAN for the overlay, thus achieving the programmability offered by SDN without the risk of single-point failure.
-The IP Fabric is the final form of the entire evolution path, from the strict hierarchy of the three-tier model through the centralized intelligence of the SDN to the design that is both distributed, scalable, and programmable\cite{IETFRFC7938}. This is the abstraction which upon the solution proposed in the project is based.
+\hspace{1.5em}The open network architectures based on OpenFlow had significant flaws in real-life implementations; the controller could become a central point of failure, and the configuration and management of thousands of devices was difficult \cite{Evolution_Beyond_OpenFlow}. Proprietary SDN solutions have mitigated some of these limitations by using distributed forwarders that operate through a controller-based abstraction of the forwarding path \cite{ACI_Architecture_White_Paper}. It was clear that future developments would move toward a hybrid approach, combining the distributed intelligence of forwarding protocols with a centralized management plane. In this context, the concept of IP Fabric emerged; it combined a flat Spine-Leaf architecture, standard overlay protocols, and a centralized management plane \cite{IP_Fabric_for_Media_Design_Guide}. The IP Fabric approach does not eliminate distributed protocols; rather, it uses BGP for distributed control and VXLAN for the overlay, providing SDN-like programmability without a single point of failure. It can be considered the latest stage in the evolution of switching architectures, from hierarchical three-tier design to a fully distributed and scalable solution \cite{IETFRFC7938}. This abstraction model serves as the basis for the solution implemented in this project.
 \section{Network Layering and Operational Planes}
-\hspace{1.5em}Prior to discussing the protocols and topologies that form the basis of this project, it is necessary to first identify the conceptual framework through which network communication is defined and implemented. Two primary models form the basis of the framework, namely the OSI reference model and the TCP/IP model, from which the three operational planes are derived.
 \subsection{Layering Models}
-\hspace{1.5em}The OSI model, as proposed by ISO in 1984, divides the communication process into seven abstraction layers\cite{ISO_IEC_7498_1_1994}. Though it remains the normative reference for understanding the behavior of communication protocols and troubleshooting, it is not commonly implemented. The TCP/IP model, based on the ARPANET development and IETF standards, proposes a four-layer model that is actually implemented by real protocols\cite{IETFRFC1122}
+\hspace{1.5em}The OSI model, as proposed by ISO in 1984, divides the communication process into seven abstraction layers\cite{ISO_IEC_7498_1_1994}. Though it remains the normative reference for understanding the behavior of communication protocols and troubleshooting, it is not commonly implemented. The TCP/IP model, based on the ARPANET development and IETF standards, proposes a four-layer model that is actually implemented by real protocols\cite{IETFRFC1122}.
 \begin{figure}[!htbp]
     \centering
     \TCPvsOSI
@@ -101,7 +97,7 @@ In DC engineering, the TCP/IP model is the reference for operations, with every 
 \hspace{1.5em}Aside from protocol layering, today’s network infrastructure can be conceptually divided into three planes, each with a specific category of network function\cite{SDN_Architecture}.
 \begin{table}[!htbp]
     \centering
-    \small 
+    \small
     \renewcommand{\arraystretch}{1.5}
     \begin{tabularx}{\textwidth}{|l|p{3cm}|X|p{2.5cm}|}
         \hline
@@ -119,12 +115,6 @@ In DC engineering, the TCP/IP model is the reference for operations, with every 
     \item \textbf{Management Plane}: This layer is situated at a higher level than the other two and is the point of interface between the network and the network operator. This is where network operators configure, monitor, and automate the network \cite{NDFC_Product_Documentation}. The Cisco NDFC is situated at this plane in this project.
 \end{itemize}
 This division of the three planes is not merely theoretical but is the fundamental principle that allows data center networks to be at the same time scalable, programmable, and fault-tolerant. The data plane and the in-flight data do not get interrupted in the event of a failure in the control plane, and similarly, the management plane operations do not impact the data plane or the routing operations.
-\begin{figure}[!htbp]
-    \centering
-    \PLanessplit
-    \caption{Three Planes Interaction Diagram}
-    \label{fig:three-planes}
-\end{figure}
 \section{Spine-Leaf and IP Fabric}
 The Spine-Leaf topology is the fundamental basis upon which IP Fabrics are designed. The adoption of the Spine-Leaf topology in data center networking signifies a significant shift away from the traditional hierarchical structure of the three-tier topology, with its emphasis on vertical aggregation, to a flat, symmetric, and fully meshed topology, which is optimized for performance at scale.
 \subsection{Origins, Roles and Design Principles}
@@ -134,9 +124,8 @@ The Spine-Leaf topology is the fundamental basis upon which IP Fabrics are desig
     \SpineLeafDiagram
     \caption{Spine-Leaf Topology}
     \label{fig:spine-leaf}
-\end{figure}
-\newpage
-\hspace{1.5em}The architecture is divided into two tiers with distinct responsibilities\cite{Cisco_Massively_Scalable_Data_Center_Network_Fabric_Design_and_Operation_White_Paper}. The first tier consists of spine nodes, which form the backbones of the fabric. They are responsible for routing between Leaf nodes. They are exclusively responsible for routing. They never connect to an end device. The second tier consists of Leaf nodes. They are access points for the fabric. A server, storage device, firewall, or gateway is only connected to a Leaf node. Importantly, no direct connections are allowed between Leaf nodes or between Spine nodes. Any two nodes can only communicate through exactly two hops: the source Leaf, the destination Leaf, and one spine node in between\cite{Cisco_Massively_Scalable_Data_Center_Network_Fabric_Design_and_Operation_White_Paper}. This ensures that latency is uniform throughout the fabric, irrespective of the communicating devices.
+\end{figure}\\
+The architecture is divided into two tiers with distinct responsibilities\cite{Cisco_Massively_Scalable_Data_Center_Network_Fabric_Design_and_Operation_White_Paper}. The first tier consists of spine nodes, which form the backbones of the fabric. They are responsible for routing between Leaf nodes. They are exclusively responsible for routing. They never connect to an end device. The second tier consists of Leaf nodes. They are access points for the fabric. A server, storage device, firewall, or gateway is only connected to a Leaf node. Importantly, no direct connections are allowed between Leaf nodes or between Spine nodes. Any two nodes can only communicate through exactly two hops: the source Leaf, the destination Leaf, and one spine node in between\cite{Cisco_Massively_Scalable_Data_Center_Network_Fabric_Design_and_Operation_White_Paper}. This ensures that latency is uniform throughout the fabric, irrespective of the communicating devices.
 \subsection{Oversubscription and Non-Blocking Ratios}
 \hspace{1.5em}Oversubscription is defined as the ratio of device bandwidth to uplink capacity\cite{Oversubscription_in_Networking}. In traditional three-tier networks, this oversubscription occurs in Access, Distribution, and Core layers.
 
@@ -158,7 +147,7 @@ As fabrics expand beyond a single set of Spine and Leaf nodes, the Pod provides 
 \section{Underlay and Overlay}
 \hspace{1.5em}The IP Fabric architecture is divided into two layers: underlay and overlay. The relationship between these two layers is essential in understanding how VXLAN and BGP EVPN operate in tandem as an integral part of the solution proposed in this project.
 \subsection{The Underlay/The Overlay Network}
-\hspace{1.5em}The underlay network is defined as the physical IP infrastructure that provides basic IP reachability between all nodes in the IP fabric network\cite{VXLAN_Network_with_MP-BGP_EVPN_Control_Plane_Design_Guide}. This network includes Spine and Leaf switches connected via routed point-to-point links running a routing protocol, in this case, eBGP, to exchange IP reachability information among all VTEPs in the network. There is no knowledge in this network of tenants, virtual machines, or logical network segments; its sole aim is to ensure that any node in the network is reachable via a routed IP path from any other node in the network.
+\hspace{1.5em}The underlay network is defined as the physical IP infrastructure that provides basic IP reachability between all nodes in the IP fabric network\cite{VXLAN_Network_with_MP-BGP_EVPN_Control_Plane_Design_Guide}. This network includes Spine and Leaf switches connected via routed point-to-point links .running a routing protocol to exchange IP reachability information among all VTEPs. There is no knowledge in this network of tenants, virtual machines, or logical network segments; its sole aim is to ensure that any node in the network is reachable via a routed IP path from any other node in the network.
 The overlay network is a logical network running on top of the underlay network. It provides virtual network connectivity between network endpoints irrespective of their physical position within the network fabric\cite{IETFRFC7365}. It carries traffic within a tunnel, where the traffic is sent through the underlay network as normal IP packets. The underlay network is completely unaware of the inner packets. In this project, the VXLAN protocol is used for the encapsulation process, and the control plane is provided by the BGP EVPN.
 \begin{table}[!htbp]
 \small
@@ -167,7 +156,7 @@ The overlay network is a logical network running on top of the underlay network.
 \toprule
 \textbf{Characteristic} & \textbf{Underlay} & \textbf{Overlay} \\ \midrule
 Layer & $L3$ — Pure IP routing & $L2/L3$ — Virtual logical network \\ \midrule
-Protocol & eBGP & VXLAN + BGP EVPN \\ \midrule
+Protocol & eBGP/iBGP & VXLAN + BGP EVPN \\ \midrule
 Awareness & Physical topology only & Tenant traffic and endpoints \\ \midrule
 Responsibility & IP reachability between VTEPs & Virtual connectivity between VMs \\ \midrule
 Failure Impact & Affects all tunnels & Affects specific tenant segments \\ \midrule
@@ -177,7 +166,8 @@ Scalability Unit & Physical links and nodes & VNI and VRF count \\ \bottomrule
 \label{tab:underlay-overlay}
 \end{table}
 \subsection{Why the Separation Matters}
-\hspace{1.5em}The decoupling of the overlay from the underlay is the architectural choice that solves the fundamental issues identified in Chapter 1, as it allows the logical network topology to grow and expand independently of the physical topology beneath it\cite{IETFRFC8365}. A virtual machine move is possible, a new tenant segment is created, or a physical link fails, and none of these requires changes to the other topology. The underlay is the steady and constant IP transport, and the overlay is where all the complexity is handled.
+\hspace{1.5em}The decoupling of the overlay from the underlay is the architectural choice that solves the fundamental issues identified in Chapter 1, as it allows the logical network topology to grow and expand independently of the physical\\ topology beneath it\cite{IETFRFC8365}. A virtual machine move is possible, a new tenant segment is created, or a physical link fails, and none of these requires changes to the other topology. The underlay is the steady and constant IP transport, and the overlay is where all the complexity is handled.\\
+BGP exchanges reachability information using path attributes, and can be hardened with mechanisms such as GTSM for directly connected peers\cite{IETFRFC4271,IETFRFC5082,Cisco_Nexus_9000_BGP_Configuration_Guide}.
 \begin{figure}[!htbp]
     \centering
     \underoverlay
@@ -185,16 +175,21 @@ Scalability Unit & Physical links and nodes & VNI and VRF count \\ \bottomrule
     \label{fig:underlay-overlay-diagram}
 \end{figure}
 \newpage
-BGP operates over TCP port 179, exchanges reachability information using path attributes, and can be hardened with mechanisms such as GTSM for directly connected peers\cite{IETFRFC4271,IETFRFC5082,Cisco_Nexus_9000_BGP_Configuration_Guide}.
 \section{VXLAN - Virtual Extensible LAN}
 \subsection{Context, Motivation and History}
-The growth of virtualized servers and cloud computing resulted in two major problems for traditional networks: the limitations of segmentation and lack of flexibility. The IEEE 802.1Q VLAN protocol has a restriction in its design, limited to 12 bits, giving a total of only 4096 IDs. This is not enough for modern cloud providers working with multiple customers.
+\hspace{1.5em}The growth of virtualized servers and cloud computing resulted in two major problems for traditional networks: the limitations of segmentation and lack of flexibility. The IEEE 802.1Q VLAN protocol has a restriction in its design, limited to 12 bits, giving a total of only 4096 IDs. This is not enough for modern cloud providers working with multiple customers.
 
 Also, Layer 2 data centers used STP, designed to avoid network loops, leaving most of their capacity unused. This made VMs dependent on their location since they had to maintain Layer 2 adjacency even while being moved around.
 
 This problem was addressed by VXLAN RFC 7348\cite{IET_RFC_7348}, originated by VMware and Cisco. In contrast to the previous solutions, VXLAN uses Layer 3 underlay and encapsulates Ethernet frames into UDP/IP datagrams. Also, VXLAN increased the number of IDs to 24 bits, thus giving over 16 million segments.
 \subsection{Encapsulation, VNI and Packet Format}
-The VXLAN tunneling protocol functions based on the concept of MAC-in-UDP encapsulation\cite{IET_RFC_7348}. In this process, whenever an Ethernet frame is produced by a virtual machine, the VTEP at the access point captures this frame and encloses it within a series of headers that enable the routing of the frame over the underlying IP infrastructure. The actual frame remains intact, and the physical network perceives only the IP headers without knowing anything about the payload inside.
+\hspace{1.5em}The VXLAN tunneling protocol functions based on the concept of MAC-in-UDP encapsulation\cite{IET_RFC_7348}. In this process, whenever an Ethernet frame is produced by a virtual machine, the VTEP at the access point captures this frame and encloses it within a series of headers that enable the routing of the frame over the underlying IP infrastructure. The actual frame remains intact, and the physical network perceives only the IP headers without knowing anything about the payload inside.
+\begin{figure}[!htbp]
+    \centering
+    \VXLANDiagram
+    \caption{VXLAN Encapsulation Diagram}
+    \label{fig:vxlan-encapsulation-diagram}
+\end{figure}
 The encapsulated packet is structured from outermost to innermost as follows:
 \begin{itemize}
     \item Outer Ethernet Header: Contains the MAC addresses of neighboring physical nodes in the hop-by-hop forwarding path. This field changes with every Layer 3 hop in the underlay, just like in a typical routed IP packet.
@@ -205,7 +200,7 @@ The encapsulated packet is structured from outermost to innermost as follows:
 \end{itemize}
 The total VXLAN encapsulation overhead is summarized as follows:
 \begin{table}[!htbp]
-\small % Reduces font size for a cleaner, compact look
+\small
 \centering
 \begin{tabularx}{0.6\textwidth}{@{} X c @{}} % 60% width for a "slim" profile
 \toprule
@@ -219,16 +214,29 @@ VXLAN Header          & 8  \\ \midrule
 \end{table}
 Within a default MTU of 1500 bytes, this results in only 1450 bytes available for the payload. Jumbo frames capable of handling an MTU of at least 1550 bytes should be supported within all VXLAN implementations.
 \subsection{The VTEP}
-The VTEP is the networking component that is responsible for encapsulating and decapsulating all VXLAN traffic. The VTEP is the interface point where the physical underlay network meets the virtual overlay network, with one end of the VTEP communicating with end devices using the standard Ethernet protocol, and the other communicating with remote VTEPs using VXLAN traffic encapsulation on the IP underlay. All VTEPs have their own unique IP address in the underlay network, which functions as the source/destination IP addresses in VXLAN tunnels.
+\hspace{1.5em}The VTEP is the networking component that is responsible for encapsulating and decapsulating all VXLAN traffic. The VTEP is the interface point where the physical underlay network meets the virtual overlay network, with one end of the VTEP communicating with end devices using the standard Ethernet protocol, and the other communicating with remote VTEPs using VXLAN traffic encapsulation on the IP underlay. All VTEPs have their own unique IP address in the underlay network, which functions as the source/destination IP addresses in VXLAN tunnels.
 There are two types of VTEPs. Software VTEP exists within the hypervisor's virtual switch, which includes such switches as VMware’s vSwitch and Open vSwitch; this type of VTEP runs purely in software on general-purpose server hardware. Hardware VTEP, on the other hand, exists directly in the ASICs of the physical network switch, which can be, for example, a Top-of-Rack switch in the Spine-Leaf topology, where encapsulation and decapsulation occur at line speed without any software support. In this particular implementation, hardware VTEPs are implemented using the Cisco Nexus 9000 Leaf switches, where each leaf keeps a VTEP IP address on the underlay and encapsulates traffic coming from the attached servers using VXLAN tunnels to remote Leaf VTEPs.
+\begin{figure}[!htbp]
+    \centering
+    \VTEPtraffic
+    \caption{VTEP traffic Diagram}
+    \label{fig:vtep-diagram}
+\end{figure}\\
 Each VTEP keeps a forwarding table which correlates inner MAC addresses with the outer IP address of the remote VTEPs where these addresses reside. If a VTEP receives a frame with encapsulation, the VTEP will remove the outer frame, identify the VNI number, and forward the inner frame to the relevant local segment. This is how scalability and efficiency of the overlay network depend on the method of populating the forwarding table, namely flooding or using a control plane protocol.
 
 \subsection{Flood and Learn, Multicast and BUM Traffic}
-VXLAN used a “flood and learn” technique for data plane learning in its early stages. As far as BUM traffic is concerned, where the destination VTEP is not known, frames need to be replicated across all VNIs involved. This can be done by using multicast replication that involves complex underlay multicast routing techniques such as PIM/IGMP, or using head-end (ingress) replication wherein the frames from each source VTEP are sent out individually as unicast traffic to all the other peers. However, the process places considerable load on the originating VTEP.
+\hspace{1.5em}VXLAN used a “flood and learn” technique for data plane learning in its early stages. As far as BUM traffic is concerned, where the destination VTEP is not known, frames need to be replicated across all VNIs involved. This can be done by using multicast replication that involves complex underlay multicast routing techniques such as PIM/IGMP, or using head-end (ingress) replication wherein the frames from each source VTEP are sent out individually as unicast traffic to all the other peers. However, the process places considerable load on the originating VTEP.
 
-Forwarding tables in VTEPs are created by mapping the outer source IP addresses to the inner source MAC addresses of packets received. Although flooding becomes less frequent with the creation of the forwarding table, the continuous learning process that creates the database poses a constant background workload for extensive or dynamic systems.
-
-These limitations include the multicast issue, replication problem, and the instability of the table. These factors make flood-and-learn an inappropriate method for production. The reasons above lead us to move from flood-and-learn to BGP EVPN. This is because EVPN allows the distribution of MAC/IP reachability via a control plane.
+\hspace{1.5em}Forwarding tables in VTEPs are created by mapping the outer source IP addresses to the inner source MAC addresses of packets received. Although flooding becomes less frequent with the creation of the forwarding table, the continuous learning process that creates the database poses a constant background workload for extensive or dynamic systems.
+\begin{figure}[!htbp]
+    \centering
+    \BumTraffic
+    \caption{BUM Traffic Handling in VXLAN Overlay}
+    \label{fig:bum-diagram}
+\end{figure}
+\hspace{1.5em}The drawbacks of the conventional flood-and-learn approach namely the bottleneck in the multicast replication process, the inefficiencies associated with the head-end replication method, and MAC table instability—make it incapable of being used in production high density environments. In flood-and-learn configuration, the dependency on the Data Plane for learning causes a lot of overhead due to BUM  traffic that needs to be flooded through the network.\\
+This limitation requires a shift towards using BGP EVPN as an improved solution. As opposed to the old configuration, the current one separates the learning process from the Data Plane through the use of the Distributed Control Plane. Using BGP for advertising reachability information, including MAC and IP addresses, enables the network to perform efficient flooding suppression and rapid convergence.
+\newpage
 \subsection{Lexicon}
 \begin{table}[!htbp]
 \small
@@ -251,20 +259,27 @@ MTU & Maximum Transmission Unit — VXLAN adds 50 bytes of overhead, requiring a
 
 \section{BGP - Border Gateway Protocol}
 \subsection{History, Evolution and DC Adoption}
-BGP history did not begin with the problems associated with building and maintaining DCNs, but rather with one of the most basic problems facing any interconnection of independent computer networks: inter-domain routing. By the end of the 1980s, when the Internet had begun its explosive growth, the routing algorithms being implemented in enterprises and ISP networks (OSPF, RIP, etc., which succeeded each other) turned out to be incapable of providing such large-scale network functionality due to their fundamental architectural limitation – namely, the need to maintain full topological information about their operating space. To address this problem, BGP-1 was created in 1989 as specified in RFC 1105, establishing a path vector-based approach which became the cornerstone for further BGP development\cite{IETFRFC1105}. Three other versions of this protocol came next: BGP-2 in RFC 1163, BGP-3 in RFC 1267, and the latest version, BGP-4 in RFC 1771, later revised in RFC 4271 in 2006\cite{IETFRFC4271}.
+\hspace{1.5em}BGP history did not begin with the problems associated with building and maintaining DCNs, but rather with one of the most basic problems facing any interconnection of independent computer networks: inter-domain routing. By the end of the 1980s, when the Internet had begun its explosive growth, the routing algorithms being implemented in enterprises and ISP networks turned out to be incapable of providing such large-scale network functionality due to their fundamental architectural limitation namely, the need to maintain full topological information about their operating space. To address this problem, BGP-1 was created in 1989 as specified in RFC 1105, establishing a path vector-based approach which became the cornerstone for further BGP development\cite{IETFRFC1105}. Three other versions of this protocol came next: BGP-2 in RFC 1163, BGP-3 in RFC 1267, and the latest version, BGP-4 in RFC 1771, later revised in RFC 4271 in 2006\cite{IETFRFC4271}.
 \begin{figure}[!htbp]
     \centering
-    \caption{}
-    \label{fig:example_image} 
-\end{figure}
-Up until recently, the use of BGP has been confined to the borders of autonomous systems, where the protocol was used by carriers to exchange routes between their ASNs; BGP was transparent to the networks that were connected by it. However, this approach changed, and the reason is in the inability of conventional IGP protocols to operate successfully in hyperscale networks. With Spine-Leaf fabric growing beyond a few hundred nodes, the OSPF link-state database required from each router a complete knowledge of the whole network; in addition, convergence was very slow when links kept changing frequently. Similarly, IS-IS experienced scalability problems. The networking community has officially responded to the situation through the release of RFC 7938, published in 2015, stating explicitly that BGP can be used as the routing protocol in very large data centers' fabrics\cite{Cisco_IGP_Scalability_Limitations_DC_Fabrics,IETFRFC7938}. The idea was rather simple: thanks to its path vector design and powerful policies, BGP proved itself to be an efficient tool capable of scaling to the Internet's level of complexity, unlike IGPs. In the current design, eBGP is being run over each Spine-Leaf connection in the capacity of underlay routing protocol, exchanging VTEP reachability among all nodes.
+    \BGPhistory
+    \caption{History of BGP Development}
+    \label{fig:bgp-history}
+\end{figure}\\
+Up until recently, the use of BGP has been confined to the borders of autonomous systems, where the protocol was used by carriers to exchange routes between their ASNs; BGP was transparent to the networks that were connected by it. However, this approach changed, and the reason is in the inability of conventional IGP protocols to operate successfully in hyperscale networks. With Spine-Leaf fabric growing beyond a few hundred nodes, the OSPF link-state database required from each router a complete knowledge of the whole network; in addition, convergence was very slow when links kept changing frequently. Similarly, IS-IS experienced scalability problems. The networking community has officially responded to the situation through the release of RFC 7938, published in 2015, stating explicitly that BGP can be used as the routing protocol in very large data centers' fabrics\cite{Cisco_IGP_Scalability_Limitations_DC_Fabrics,IETFRFC7938}. The idea was rather simple: thanks to its path vector design and powerful policies, BGP proved itself to be an efficient tool capable of scaling to the Internet's level of complexity, unlike IGPs. In modern fabric designs, BGP is frequently used as the underlay routing protocol. Depending on the design requirements, it can be implemented as eBGP (where each tier or switch has a unique ASN) or iBGP (where the entire fabric shares an ASN). Both methods allow the network to scale far beyond traditional IGP limits while providing a consistent protocol stack for both underlay and overlay
 \subsection{Core Mechanics}
-BGP is implemented using path-vector routing protocols, which are a far cry from OSPF/IS-IS's link-state routing protocols. Instead of creating a map of the network's entire topology like IGPs do, a BGP speaker creates only one best path towards each destination, while remembering the order of the autonomous systems along the way. The AS-PATH attribute thus acts both as a routing metric, and as a loop prevention tool: if a router receives information about routes containing its own ASN in the AS-PATH, it knows that it cannot use those routes to avoid forwarding loops.
+\hspace{1.5em}BGP is implemented using path-vector routing protocols, which are a far cry from OSPF/IS-IS's link-state routing protocols. Instead of creating a map of the network's entire topology like IGPs do, a BGP speaker creates only one best path towards each destination, while remembering the order of the autonomous systems along the way. The AS-PATH attribute thus acts both as a routing metric, and as a loop prevention tool: if a router receives information about routes containing its own ASN in the AS-PATH, it knows that it cannot use those routes to avoid forwarding loops.
 In addition to being manually set up for each peer, BGP also differs from most other protocols due to the fact that it does not discover its neighbors automatically. Each neighbor's address and ASN are defined manually, after which BGP uses TCP connections on port 179 to communicate with neighbors. TCP guarantees reliable, ordered packet delivery, and therefore BGP does not have to include any acknowledgments or retransmissions within itself. Establishing a BGP session can be modeled as a Finite State Machine with six states Idle, Connect, Active, OpenSent, OpenConfirm, and Established\cite{IETFRFC4271}.
+\begin{figure}[!htbp]
+    \centering
+    \BGPMFS
+    \caption{ BGP finite state machine and message types}
+    \label{fig:bgp-fsm}
+\end{figure}
 Four different types of BGP message exist for use in communication, each having its own function in managing BGP session and exchanging routing information:
 \begin{itemize}
     \item OPEN: The first message sent following TCP session establishment. Contains BGP version number, AS Number, Hold Time, and BGP Identifier values together with optional capability parameters, such as address families used for implementing MP-BGP capabilities like EVPN.
-    \item UPDATE: The most important BGP message used to advertise routes and withdraw advertised routes from peers. Includes BGP path attributes that define properties of the advertised routes and the Network Layer Reachability Information field that defines destination prefixes. In cases where EVPN is implemented, update message contains MAC/IP bindings in MP_REACH_NLRI attribute.
+    \item UPDATE: The most important BGP message used to advertise routes and withdraw advertised routes from peers. Includes BGP path attributes that define properties of the advertised routes and the Network Layer Reachability Information field that defines destination prefixes. In cases where EVPN is implemented, update message contains MAC/IP bindings in \texttt{MP\_REACH\_NLRI} attribute\@.
     \item KEEPALIVE: indicates that the session between peers remains active. Is sent at a one-third of the established Hold Time - usually every 60 seconds for every 180 seconds Hold Time period.
     \item NOTIFICATION: Sent whenever an error is detected, followed by BGP session tear down process. Contains the error code and subcode value that determine the nature of the error.
 \end{itemize}
@@ -272,35 +287,83 @@ Following the first complete table transfer, BGP works in an incremental way suc
 
 \subsection{iBGP vs eBGP}
 
-The operation of BGP depends largely on whether the mode of interaction between the peers is an internal one or an external one, and this difference has very important outcome for the deployment of BGP within the context of a fabric. 
-If the BGP session is in two routers located in the same autonomous system and, therefore, the same ASN, then this would be considered an internal BGP session, which is also known as iBGP. If the two routers in question do not belong to the same autonomous system, the BGP connection will be considered an external one, or eBGP.
-In the case of eBGP, the AS-PATH attribute is generated by adding the local AS to the path attribute of the route advertised to the peer. The TTL value for eBGP messages is set to 1 by default, making it mandatory that eBGP peers be connected via the link layer without the use of any TTL security extension\cite{IETFRFC5082}. In iBGP, the AS-PATH prepend feature is not required as all routers belong to the same AS, and the path attribute is useless for preventing routing loops within the network. Rather than employing this attribute to prevent routing loops, iBGP uses the split-horizon rule that prohibits any route learned from an iBGP peer from being advertised to another iBGP peer. As a result, the full mesh rule applies for iBGP, making it necessary that each iBGP router maintain a session with each and every router in the domain, because there is no guarantee that a router will receive a route from its peer. This results in a total of N(N-1)/2 sessions in a domain containing N routers.
-The second important difference in behavior pertains to the NEXT-HOP treatment. In eBGP sessions, a device updates the NEXT-HOP attribute to use its own address in route advertisement in order to make sure that the receiving device has access to the next-hop. In contrast, the NEXT-HOP address in iBGP remains as it is, which is the address of the eBGP neighbor from which the route was advertised. All iBGP speakers need to be able to reach all possible NEXT-HOPS addresses either via IGP or via underlay routing protocol in case of pure IP Fabric\cite{IETFRFC4271}.
-In this particular Spine-Leaf design of the project, eBGP is used on all physical links connecting Leafs and Spines, each of which is equipped with a different ASN. Thus, no iBGP full-mesh issues arise since each inter-device connection is an eBGP session utilizing natural loop prevention via AS-PATH. The EVPN address family works via iBGP connections between Leafs with Spines acting as Route Reflectors
+\hspace{1.5em}BGP behavior in terms of eBGP vs iBGP is drastically different and carries significant impact on fabric design. iBGP represents an inter-router communication within an autonomous system (same ASN) while eBGP involves routers of different ASes.
+
+In case of eBGP, the local AS gets prepended to AS\_PATH attribute, and default value of TTL is 1, thus implying physical connection of adjacent routers\cite{IETFRFC5082}. iBGP, on the other hand, does not involve any prepending since all routers belong to the same AS. As for avoiding routing loops in iBGP, a split horizon method is applied where a route cannot be sent to the router from which it was obtained by an iBGP peer, so a full mesh of iBGP connections is needed, resulting in $N(N-1)/2$ total sessions for $N$ peers.
+\begin{figure}[!htbp]
+    \centering
+    \ebgpibgp
+    \caption{ the eBGP vs iBGP behavior in a Spine‑Leaf IP Fabric}
+    \label{fig:eBGPvsiBGP}
+\end{figure}\\
+Next difference relates to NEXT\_HOP attribute. eBGP updates NEXT\_HOP to use its own IP address and make a path reachable. In iBGP, NEXT\_HOP remains unchanged and thus should be reachable via the underlying IGP \cite{IETFRFC4271}.
+In Spine-Leaf IP Fabrics, engineers must decide between an eBGP or iBGP underlay. An eBGP design assigns different ASNs to Spines and Leafs, using the AS-PATH for loop prevention. Conversely, an iBGP design uses a single ASN for the entire fabric, requiring an underlying IGP for loopback reachability and Route Reflectors on the Spines to scale the internal BGP sessions.
 
 \subsection{Path Selection}
-
+\hspace{1.5em}When a BGP speaker gets several candidates for a certain destination from its neighbors, there is no random choice, but there is a systematic, sequential selection procedure that compares all paths against a list of criteria until the best path is determined. The procedure is deliberately policy-based and not metric-based, due to the traffic-engineering nature of BGP besides routing.
+Selection procedure proceeds by evaluating criteria in the following order, moving on to the next criterion only if the previous one has resulted in a tie:
 \begin{itemize}
-\item
-\item
-\item
-\item
-\item
-\item
-\item
-\item
-\item
+\item WEIGHT: It is the most important criteria of all on Cisco routers. a local value and is never advertised to peer routers; it can be used to favor routes learned from a particular neighbor on the router.
+\item LOCAL-PREF: The key criteria of choice among other routers in an AS. Higher values are favored. Configured by the administrator to help determine the exit point of the AS traffic—never advertised to eBGP peer routers.
+\item Locally originated Routes: Routes originated within an AS through configuration and added to BGP through network statements or route redistribution are always preferred; it reflects the philosophy that locally originated routes have better reachability and reliability.
+\item Shortest AS-PATH length: A shorter number of AS in the AS\_PATH is preferred. In an environment where the eBGP is run across each fabric link in the data center, the length of AS\_PATH takes on the role of a major load balancing and topology awareness parameter---in the sense that the shortest path indicates lesser hops between Spines and Leafs.
+\item ORIGIN: i (IGP) > e (EGP) > ? (Incomplete). This may rarely be an issue these days, but ORIGIN is a formal criteria in the decision tree .
+\item MED (Multi-Exit Discriminator): A value advertised to neighboring ASes to signal its preference for certain entry to the local AS. Lower values are preferable. The comparison applies to routes received from the same neighboring AS only.
+\item eBGP Path Over iBGP Path: Paths acquired from external peers are considered more desirable than paths discovered from internal peers as the former have already been validated by crossing an AS border.
+\item IGP Metric to NEXT-HOP: Among the still equal paths, the path via the NEXT-HOP with the minimum IGP metric is chosen as preferable  if we consider a purely IP Fabric deployment, then the path going through the Spine switch with the minimum underlay routing metric is preferred.
+\item BGP Router ID: The last resort to break a tie  the path advertised by the peer with the minimum Router ID will be chosen.
 \end{itemize}
+The described algorithm offers network administrators a precise and powerful tool to control traffic flow in a multi-site environment and comes into play within the context of this project when controlling traffic flows between Site 1 and Site 2 connected via two different ISPs.
+
 
 \subsection{Address Families}
-Route reflectors reduce the full-mesh requirement of iBGP by allowing a designated router to reflect routes between client peers, which significantly improves scalability in larger BGP domains\cite{IETFRFC4456,Cisco_Nexus_9000_BGP_Configuration_Guide}.
-
+\hspace{1.5em}In the initial specifications, BGP-4 could handle IPv4 unicast routing data only due to practical considerations at that time, although it has become one of its drawbacks in today's network where the simultaneous support of various address families is required. To solve this problem, Multiprotocol BGP was introduced as described in RFC 4760. It allows sending route reachability information for any address families within a single session opened by TCP.
+Two identifiers are used to extend BGP by indicating what type of routing information will be passed via the extended UPDATE message. The Address Family Identifier represents the network layer protocol including IPv4, IPv6, and L2VPN; while the Subsequent Address Family Identifier specifies what kind of information in the family including unicast, multicast, labeled unicast, and EVPN. These values are negotiated when opening the BGP session through the capability advertisement in BGP OPEN message.
+The appropriate address families for the current project include the following:
+\begin{itemize}
+    \item IPv4 Unicast (AFI 1 / SAFI 1): The address family initially designed for BGP, which is used in this project in order to advertise underlay reachability, in particular the loopback addresses of the VTEPs of all Leaf and Spine nodes in the fabric.
+    \item IPv6 Unicast (AFI 2 / SAFI 1): Basic IPv6 prefix distribution in case dual-stack reachability is needed between nodes within the fabric or between tenant networks.
+    \item L2VPN EVPN (AFI 25 / SAFI 70): The address family responsible for the transport of BGP EVPN route types, namely MAC/IP advertisement, VTEP membership announcement, IP prefix advertisement, and Ethernet segment association. This is the address family that makes up the heart of the overlay control plane design in the current project and will be described in more detail in the next section.
+\end{itemize}
+Importance of using MP-BGP for this implementation goes far beyond being just another technical consideration. Since it is possible to run IPv4 underlay routing and EVPN overlay routing within the same BGP session based merely on address-family differences, the whole fabric becomes built upon a single consistent routing protocol and single approach to its operation. No separate control plane for the overlay network needs to be configured and managed.
 \subsection{Route Reflectors}
-Confederations provide another scaling method by subdividing a large autonomous system into smaller member autonomous systems while presenting a single AS to external peers\cite{IETFRFC5065,IETFRFC4271}.
-
+\hspace{1.5em}The need for a full-mesh in iBGP, proves to be architecturally impractical in larger scale implementations. Ten such iBGP nodes require 4950 sessions, each using network and computing resources and the administrator's effort. For example, a system with 500 iBGP peers would have more than 125,000 connections to configure. The protocol defined in RFC 4456 that addresses the problem is called Route Reflector. It is an iBGP speaker not subject to the restrictions imposed by split horizon and capable of reflecting iBGP routes back to other iBGP peers\cite{IETFRFC4456}.
+An RR establishes two categories of iBGP peers  clients and non-clients. Clients are routers directly connected to the RR who exchange routes with it. Client routers establish BGP sessions only with the RR; all iBGP sessions among themselves can be terminated. Non-clients continue to establish a full mesh with each other and with the RR.Policies implemented by the RR while reflecting routes include:
+\begin{itemize}
+    \item If a route is learned from a client, it will be advertised to all other clients and non-clients.
+    \item If a route is learned from a non-client, it will be advertised to all clients.
+\end{itemize}
+To prevent routing loops that could arise due to reflection, two more attributes are added to the reflected routes. ORIGINATOR-ID holds the Router ID of the router that originated the route; when a route carries a Router ID of a certain router in this attribute, the route is discarded. The CLUSTER-LIST carries a list of Route Reflector clusters passed along the path to the current node (similarly to the AS-PATH attribute)\cite{IETFRFC4456}.
+Route Reflectors are always deployed in redundant pairs within the same cluster to ensure production reliability. The routers perform route reflection independently, and in case of a failure of any of the two, routes will still be received from another RR.
 \subsection{Confederations}
-This is exactly what VXLAN does to extend a Layer 2 domain over any IP network despite the distance between the sites, and what BGP EVPN does to transport MAC and IP reachability without the need to flood the network, creating the complete data and control plane of the solution presented in this project\cite{Cisco_Nexus_9000_VXLAN_BGP_EVPN_Data_Center_Fabrics_Fundamental_Design_and_Implementation_Guide}.
-
+\hspace{1.5em}One of the other scaling techniques for iBGP is Confederation RFC 5065 \cite{IETFRFC5065}, where instead of a single router serving as Route Reflector, a large AS is split up into a number of smaller ASes called "sub-ASes" with each being a separate iBGP domain. Sessions between sub-ASes are configured using special configuration settings of eBGP, which preserves all internal attributes such as LOCAL-PREF, and NEXT-HOP that would otherwise not be preserved by eBGP. To other autonomous systems, the whole confederation would look like one AS with a specific AS number.
+\\
+Even though confederations seem to be a logically sound technique, the fact that it requires additional configuration steps such as appropriate numbering and proper policy setting for all those different domains makes it much more complex compared to using Route Reflector function, which has become very popular in modern DCs \cite{IETFRFC5065}. Hence, configuring Route Reflectors for the Spine switches can be completely justified, despite confederation being another viable option.
+\subsection{BFD for Fast BGP Convergence}
+\hspace{1.5em}the convergence time in the event of failure detection within the IP Fabric based on BGP can be estimated using the Hold timer feature of BGP protocol. Upon session establishment between BGP routers, the Hold timer is negotiated to define how long no KEEP ALIVE message indicates peer failure\cite{IETFRF5880}. Despite any modifications, the fastest possible detection is only measured in seconds. These seconds will mean traffic blackholing until the convergence of routing in the control plane takes place\cite{IETFRF5880}.
+\\
+BFD is defined by the IETF RFC 5880 as a lightweight and protocol-independent solution to detect failure of forwarding paths in sub-second timescale. Once BFD is set up between two directly-connected peers, detection of failure is accomplished through the exchange of control packets at the interval defined by configuration. Failure happens in case when the specified number of detection packets fails in consecutive exchanges; once this occurs, BFD marks the session as down and informs all the registered client protocols about the event, including BGP. Thus, the failure detection time becomes independent of BGP Hold Timer time and is reduced from seconds to milliseconds in practice \cite{BFDConfiguration}.
+\\
+BFD supports two operating modes that differ in how detection packets are exchanged between peers:
+\begin{table}[!htbp]
+\centering
+\small % Reduces the overall size of the table
+\begin{tabularx}{\textwidth}{lXX}
+\toprule
+\textbf{Aspect} & \textbf{Asynchronous Mode} & \textbf{Echo Mode} \\ \midrule
+\textbf{Mechanism} & Both peers send BFD control packets to each other at the negotiated interval. & One peer sends echo packets that loop back through the forwarding plane of the remote peer. \\ \midrule
+\textbf{Detection} & Both peers independently detect failure based on received control packets. & The sending peer detects failure when its own echo packets stop returning. \\ \midrule
+\textbf{CPU Load} & Both peers process incoming control packets. & Remote peer forwards echo packets without CPU involvement. \\ \midrule
+\textbf{Applicability} & Standard mode; used for all BFD sessions in this project. & Used when minimizing remote peer CPU load is a priority. \\ \bottomrule
+\end{tabularx}
+\caption{Comparison of BFD Asynchronous vs. Echo Mode}
+\label{tab:bfd-modes}
+\end{table}
+\\
+\hspace{1.5em}In the fabric topology of this project, asynchronous mode serves as the operation mode for all BFD sessions. Each eBGP connection between the Leaf and Spine routers operates a BFD session simultaneously.
+\\
+\hspace{1.5em}The connection between BFD and BGP in this case is purely additive; that is, BFD speeds up the reaction rather than replacing any BGP control-plane mechanism. Once BFD detects any failure in the forward path along a certain Spine-Leaf link, it notifies the local BGP instance to bring down the respective eBGP/iBGP connection. This triggers the withdrawal of all routes associated with such a session and redistribution of traffic using all available equal cost paths, accomplished using ECMP and completed in a fraction of a second when BFD is running, as opposed to the entire Hold Timer period\cite{IETFRF5880}.
+For the multi-site case considered in this project, BFD plays an important role at the Border Leaf level, as well. In the case of failure detection at this level, the BGP instances are notified to withdraw prefixes from the inter-site routing table belonging to the failed site.
 \subsection{Lexicon}
 \begin{table}[!htbp]
 \small
@@ -308,46 +371,350 @@ This is exactly what VXLAN does to extend a Layer 2 domain over any IP network d
 \begin{tabularx}{\textwidth}{@{}l X@{}}
 \toprule
 \textbf{Term} & \textbf{Definition} \\ \midrule
-BGP & Border Gateway Protocol — the standard path-vector routing protocol operating over TCP port 179 \\ \midrule
-AS & Autonomous System — a collection of IP networks under a single administrative entity  \\ \midrule
-ASN & Autonomous System Number — the unique identifier used in AS-PATH to track routing boundaries \\ \midrule
+BGP & Border Gateway Protocol; the standard path-vector routing protocol operating over TCP port 179 \\ \midrule
+AS & Autonomous System; a collection of IP networks under a single administrative entity  \\ \midrule
+ASN & Autonomous System Number; the unique identifier used in AS-PATH to track routing boundaries \\ \midrule
 Path Vector & The BGP routing model where advertisements carry a sequence of traversed ASes for loop detection \\ \midrule
-iBGP / eBGP & Internal vs. External BGP — distinguishes sessions within an AS from those across different ASs  \\ \midrule
+iBGP / eBGP & Internal vs External BGP; distinguishes sessions within an AS from those across different ASs  \\ \midrule
 Split-Horizon & The iBGP rule prohibiting a router from re-advertising routes learned from one iBGP peer to another \\ \midrule
 NEXT-HOP & BGP attribute identifying the next-hop IP; preserved in iBGP and updated in eBGP sessions \\ \midrule
 LOCAL-PREF & Intra-AS path preference used to influence outbound traffic; higher values are preferred \\ \midrule
 AS-PATH & The recorded sequence of ASes a route has traversed; used for loop prevention and path selection \\ \midrule
-MED & Multi-Exit Discriminator — attribute used to suggest preferred entry points to neighboring ASs \\ \midrule
-MP-BGP & Multiprotocol BGP — RFC 4760 extension enabling BGP to carry various address families (AFI/SAFI) \\ \midrule
-NLRI & Network Layer Reachability Information — the destination prefix info carried in BGP updates \\ \midrule
+MED & Multi-Exit Discriminator; attribute used to suggest preferred entry points to neighboring ASs \\ \midrule
+MP-BGP & Multiprotocol BGP; RFC 4760 extension enabling BGP to carry various address families (AFI/SAFI) \\ \midrule
+NLRI & Network Layer Reachability Information; the destination prefix info carried in BGP updates \\ \midrule
 Route Reflector & A BGP speaker that bypasses iBGP split-horizon to eliminate full-mesh requirements \\ \midrule
 RR Client & A router that peers with an RR rather than maintaining a full-mesh iBGP environment \\ \midrule
-Confederation & A scalability mechanism subdividing a large AS into smaller sub-ASes [6] \\ \midrule
-WEIGHT & A locally significant Cisco attribute used as the highest-priority path selection criterion  \\ \bottomrule
+Confederation & A scalability mechanism subdividing a large AS into smaller sub-ASes  \\ \midrule
+WEIGHT & A locally significant Cisco attribute used as the highest-priority path selection criterion  \\ \midrule
+BFD & Bidirectional Forwarding Detection; a low-overhead, sub-second protocol used to detect link failures and trigger rapid protocol reconvergence \\ \bottomrule
 \end{tabularx}
 \end{table}
-
 \section{BGP - EVPN}
 \subsection{Context, History and Definition}
-This is exactly what VXLAN does to extend a Layer 2 domain over any IP network despite the distance between the sites, and what BGP EVPN does to transport MAC and IP reachability without the need to flood the network, creating the complete data and control plane of the solution presented in this project\cite{Cisco_Nexus_9000_VXLAN_BGP_EVPN_Data_Center_Fabrics_Fundamental_Design_and_Implementation_Guide}.
+\hspace{1.5em}Whereas VXLAN successfully addressed Layer 2 scale and geographically bounded limitations, it brought about its own set of problems. In terms of the flood-and-learn paradigm, regardless of whether multicast or head-end replication was used, endpoint discovery became a task of the data plane: all unknown destinations were flooded until the forwarding table was dynamically built through reactive learning\cite{IETFRFC7365}.
 
+A solution to this problem has been proposed in a completely unrelated field. Initially described in RFC 7432 (2015), EVPN is a control-plane mechanism for MPLS-based L2VPNs. EVPN replaced the traditional VLAN service VPLS and enabled distribution of MAC reachability via BGP rather than data-plane flooding \cite{IETFRFC7365}. In EVPN, both MAC and IP reachability information are contained in a single BGP address family. Its extension to VXLAN was detailed in RFC 8365 (2018).
+
+EVPN can be regarded as an additional BGP address family (AFI 25 / SAFI 70) operating in ordinary MP-BGP sessions. There are various route types, each carrying a particular class of overlay reachability information. On discovering a new endpoint, the originating VTEP builds an appropriate EVPN route and distributes it to other BGP speakers. Upon receipt of such routes, remote VTEPs build forwarding entries proactively.
 \subsection{From VPLS to EVPN}
-\subsection{EVPN Route Types}
-This is exactly what VXLAN does to extend a Layer 2 domain over any IP network despite the distance between the sites, and what BGP EVPN does to transport MAC and IP reachability without the need to flood the network, creating the complete data and control plane of the solution presented in this project\cite{Cisco_Nexus_9000_VXLAN_BGP_EVPN_Data_Center_Fabrics_Fundamental_Design_and_Implementation_Guide}.
+\hspace{1.5em}The BGP EVPN protocol is a development of VPLS, which was the leading Layer 2 virtual private network technology. The VPLS network architecture was a mesh of pseudowires with data-plane-based learning, whereby every PE would learn all the MAC addresses in an inefficient manner. Broadcasting increased proportionally with the square of the number of PEs, multihoming support was unstandardized and proprietary, and there was no mechanism in VPLS to distribute IP reachability information\cite{IETFRFC8365}.
 
+BGP EVPN addressed all these issues through the adoption of proactive MAC learning based on BGP, thus utilizing its scaling and policy mechanisms. Ethernet Segment was developed as a standardized solution for multihoming, and a single address family for MAC/IP binding was introduced, which made flooding obsolete and allowed for concurrent routing and bridging.
+\subsection{EVPN Route Types}
+\hspace{1.5em}There are five different route types defined by BGP EVPN, where each route type is a representation of different information about overlay reachability encapsulated in BGP NLRI\cite{IETFRFC7365}. In total, all the route types are required for VTEP to properly switch traffic within the fabric network based on different pieces of information, such as endpoint identity, segmentation, BUM traffic, multihoming, and inter-VRF routing. All the route types are advertised using BGP UPDATE messages.
+\begin{enumerate}
+\item \textbf{Type 1 - Ethernet Auto-Discovery Route:}
+Used in multihomed environments to facilitate fast convergence and split-horizon filtering \cite{IETFRFC7432}. It enables "mass withdrawal," allowing a VTEP to revoke reachability for all MAC addresses on an Ethernet Segment with a single update, and prevents traffic loops in active-active deployments.
+\begin{figure}[!htbp]
+\centering
+\typeone
+\caption{Type 1 EVPN Route header format}
+\label{fig:type1-evpn}
+\end{figure}
+\newpage
+\item \textbf{Type 2 - MAC/IP Advertisement Route:}
+The primary route for host reachability within the VXLAN fabric \cite{IETFRFC7432}. It advertises locally learned MAC addresses and MAC-to-IP mappings to remote VTEPs. This allows remote peers to populate their forwarding tables and map host identifiers directly to the destination VTEP IP.
+\begin{figure}[!htbp]
+    \centering
+    \typetwo
+    \caption{Type 2 EVPN Route header format}
+    \label{fig:type2-evpn}
+\end{figure}
+
+\item \textbf{Type 3 - Inclusive Multicast Ethernet Tag Route:}
+Serves as a membership advertisement for specific VNIs \cite{IETFRFC7432}. VTEPs use Type 3 routes to discover peers within the same virtual network, automatically building the ingress replication list for Broadcast, Unknown Unicast, and Multicast (BUM) traffic without requiring manual flooding \cite{IETFRFC8365}.
+\begin{figure}[!htbp]
+    \centering
+    \typethree
+    \caption{Type 3 EVPN Route header format}
+    \label{fig:type3-evpn}
+\end{figure}
+
+\item \textbf{Type 4 - Ethernet Segment Route:}
+Exclusively used in multihomed topologies to enable Designated Forwarder (DF) election \cite{IETFRFC7432}. It allows VTEPs sharing the same Ethernet Segment to discover each other and deterministically elect a single node responsible for forwarding BUM traffic, preventing frame duplication.
+\begin{figure}[!htbp]
+    \centering
+    \typefour
+    \caption{Type 4 EVPN Route header format}
+    \label{fig:type4-evpn}
+\end{figure}
+
+\item \textbf{Type 5 - IP Prefix Route:}
+Extends EVPN capabilities by distributing network subnets and external prefixes rather than individual host addresses \cite{EVPNType5}. This enables the fabric to function as a full Layer 3 routing solution, facilitating inter-subnet connectivity and the advertisement of routes from external networks.
+\begin{figure}[!htbp]
+    \centering
+    \typefive
+    \caption{Type 5 EVPN Route header format}
+    \label{fig:type5-evpn}
+\end{figure}
+\end{enumerate}
+
+All five of the route types have fields that are common to them, as presented in the Table below, together with the fields that are specific to each of the route types.
+\begin{table}[!htbp]
+\small % Reduces font size for a cleaner profile
+\centering
+\begin{tabularx}{\textwidth}{@{}l l X c @{}}
+\toprule
+\textbf{Field} & \textbf{Size} & \textbf{Description} & \textbf{Types} \\ \midrule
+Route Distinguisher & 8 B & Scopes route to originating VTEP/VRF for global uniqueness & 1, 2, 3, 4, 5 \\ \midrule
+Ethernet Seg. ID & 10 B & Identifies multihomed segments; all-zeros if single-homed & 1, 2, 4, 5 \\ \midrule
+Ethernet Tag ID & 4 B & Identifies broadcast domain (EVI); usually 0 in VXLAN & 1, 2, 3, 5 \\ \midrule
+Orig. Router IP & 4/16 B & Underlay IP of VTEP; used for discovery and DF election & 3, 4 \\ \midrule
+L2VNI / Label & 3 B & Layer 2 VNI used for inner Ethernet frame forwarding & 1, 2 \\ \midrule
+MAC Length & 1 B & Length of MAC field; fixed at 48 for Ethernet & 2 \\ \midrule
+MAC Address & 6 B & Layer 2 address of the advertised endpoint & 2 \\ \midrule
+IP Length & 1 B & Length of IP field (0 if absent, 32 for IPv4, 128 for IPv6) & 2 \\ \midrule
+IP Address & 4/16 B & IP bound to MAC; enables remote ARP suppression & 2 \\ \midrule
+L3VNI / Label & 3 B & VNI of the Layer 3 VRF; enables symmetric IRB & 2, 5 \\ \midrule
+IP Prefix Len. & 1 B & Mask length for the advertised prefix & 5 \\ \midrule
+IP Prefix & 4/16 B & The internal or external network being advertised & 5 \\ \midrule
+Gateway IP & 4/16 B & Overlay next-hop gateway; all-zeros if local to VTEP & 5 \\ \bottomrule
+\end{tabularx}
+\caption{Common and Specific Fields in BGP EVPN Route Types}
+\label{tab:evpn-route-fields}
+\end{table}\\
+The BGP EVPN route types will have extended communities responsible for controlling the import and export policy, mobility detection, and multihoming coordination. Extended Community Type per Route Types is shown in the Table below.
+
+\begin{table}[!htbp]
+\small
+\centering
+\begin{tabularx}{\textwidth}{@{}l X c @{}}
+\toprule
+\textbf{Extended Community} & \textbf{Description} & \textbf{Route Types} \\ \midrule
+Route Target & Primary policy mechanism for route import/export and tenant isolation & 1, 2, 3, 4, 5 \\ \midrule
+MAC Mobility & Sequence number for VM migration; used to detect moves and update tables & 2 \\ \midrule
+Router MAC & MAC address of the VTEP's IRB interface; used for symmetric IRB & 2, 5 \\ \midrule
+ESI Label & Signals split-horizon filtering to prevent duplicate BUM traffic delivery & 1 \\ \midrule
+PMSI Tunnel & Specifies BUM replication (usually Ingress Replication for VXLAN) & 3 \\ \midrule
+ES-Import RT & Scopes Type 4 routes to VTEPs sharing the same Ethernet Segment & 4 \\ \midrule
+DF Election & Carries the algorithm ID and preference for Designated Forwarder selection & 4 \\ \bottomrule
+\end{tabularx}
+\caption{Extended Community Types per Route Type}
+\label{tab:extended-communities}
+\end{table}
 \subsection{How EVPN Drives VXLAN}
+\hspace{1.5em}The connection between BGP EVPN and VXLAN is that of a control plane to a data plane, respectively, whereby EVPN cannot send data while VXLAN cannot distribute reachability information. Both function independently of each other, but for the system to operate effectively, they must complement each other in the two respective planes. It is essential to comprehend the link between a BGP EVPN message and a VXLAN forwarding decision. This will help explain why this particular setup addresses the shortcomings associated with the flood-and-learn VXLAN method.
+\begin{figure}[!htbp]
+        \centering
+        \EvpnDrivesVXLan
+        \caption{How EVPN Drives VXLAN: Control Plane to Data Plane Pipeline}
+        \label{fig:EvpnDrivesVXLan}
+    \end{figure} \\
+When VM connects to the Leaf, the local VTEP learns the MAC/IP addresses of the connected VM through ARP/Gratuitous ARP. Rather than flooding, the VTEP creates a Type 2 MAC/IP Advertisement route and immediately installs it via BGP EVPN protocol on Spine Route Reflectors. The Spines advertise this route to all other Leaf VTEPs which import the relevant Route Target. All receiving VTEPs read the MAC, IP, L2VNI, L3VNI and the IP of the originator VTEP and install this information in their forwarding tables. Further communications with this endpoint will be done by utilizing this installed route without any flooding and ARP.
+\\
+In the same way, the BUM traffic is handled. On joining the particular VNI, the VTEP advertises the Type 3 Inclusive Multicast Route for that VTEP. Other VTEPs in this VNI add the underlay IP to their replication list. BUM traffic from this VTEP will be replicated to all destinations in the replication list through unicast VXLAN tunnels.
+\\
+This shows that the entire process is very easy. The BGP EVPN protocol knows about the location of each endpoint while VXLAN knows how to forward the traffic. In short, the control plane pre-populates the data plane.
 \subsection{ARP Suppression}
+\hspace{1.5em}Standard Ethernet uses broadcasting of ARP queries, which results in processing of the broadcast packet by each node connected to the local link. In the case of VXLAN fabric without a controller, such broadcasts become part of BUM traffic and cause the source VTEP to flood the query to all remote VTEPs in the respective VNI. Such a procedure consumes bandwidth and CPU cycles from the local endpoints.
+\\
+BGP EVPN solves this problem by introducing ARP suppression. As a result of exchanging MAC/IP bindings between VTEPs using Type 2 route exchanges, all the leaves have complete information regarding all the endpoints in the fabric. Therefore, when an ARP query comes to a local leaf, VTEP intercepts the message and responds as a proxy according to the data from the EVPN table.
+\\
+The above-described process means that ARP message stays within the scope of a single leaf. The result is zero BUM traffic generated and no interference of discovery messages on remote hosts.
+\begin{table}[!htbp]
+\small
+\centering
+\begin{tabularx}{\textwidth}{@{}l X X@{}}
+\toprule
+\textbf{Aspect} & \textbf{Without EVPN} & \textbf{With EVPN ARP Suppression} \\ \midrule
+ARP Request Scope & Broadcast — flooded to all VTEPs in the VNI & Intercepted locally by VTEP; never enters fabric \\ \midrule
+Replication & BUM flood via multicast or head-end & No replication; local proxy ARP response \\ \midrule
+Remote VTEP Involvement & All VTEPs receive/process the request & No remote VTEP involvement \\ \midrule
+ARP Cache Source & Populated reactively from data traffic & Populated proactively from Type 2 routes \\ \midrule
+Bandwidth Impact & Proportional to VTEPs × frequency & Zero — suppressed at the source leaf \\ \midrule
+Binding Consistency & Eventually consistent; traffic-dependent & Immediately consistent via BGP control plane \\ \midrule
+VM Migration & Entries stale until new traffic flows & Mobility sequence triggers immediate update \\ \bottomrule
+\end{tabularx}
+\caption{ARP Behavior: Without vs With EVPN Suppression}
+\label{tab:arp-suppression}
+\end{table}
 \subsection{MAC Mobility}
+\hspace{1.5em}In modern data centers where virtualization is widespread, virtual machine migration is quite common. The MAC/IP addresses of the virtual machines do not change when they migrate, but their reachability through the VTEP changes. In a fabric architecture based on VXLAN flood-and-learn technique without the use of a control plane, this process results in traffic being blackholed to a stale VTEP until forwarding entries are updated using flooding technique in the data plane \cite{IETFRFC7432}. BGP EVPN provides a solution to this issue by introducing the concept of MAC mobility within the scope of Type 2 route advertisement.
+\\
+The process is depicted in Figure \ref{fig:MACmobility}. At the initial point of time, when the host connects to leaf A, the local VTEP will learn the MAC/IP addresses of the host and then announce a Type 2 route with the MAC Mobility extended community with sequence number zero. Upon migration of the host to leaf B, the local VTEP detects the locally learned MAC and finds out that a Type 2 route announcement with that MAC address has been made by another VTEP; hence it advertises a new Type 2 route with incremented sequence number.
+\begin{figure}[!htbp]
+        \centering
+        \MACmobility
+        \caption{MAC Mobility in BGP EVPN}
+        \label{fig:MACmobility}
+\end{figure}\\
+Upon receiving both advertisements, remote VTEPs choose the route with a higher sequence number, which redirects all forwarding entries to the Leaf-B. The Leaf-A, once receiving an update with a sequence number higher than the one on the local leaf, will then withdraw its old route entry.\\
+In order to avoid any MAC flapping issue in case of rapid switching between two different VTEPs of the same MAC address, EVPN contains a duplicate MAC detection feature that will detect MACs whose sequence number increases above a configurable limit within the time window and hold them down.\cite{IETFRFC7432,VXLAN_Network_with_MP-BGP_EVPN_Control_Plane_Design_Guide}\\
+For the multihop deployment in Tunisie Telecom, MAC mobility ensures that any migration event between leafs in Site 1 and Site 2 results in an instant control plane change propagation through the two fabrics using the Border Gateway Leafs.
 \subsection{L2VNI and L3VNI}
+\hspace{1.5em}VXLAN utilizes the VXLAN Network Identifier that contains a length of 24 bits for segregating the overlay traffic into individual logical networks. In an EVPN-VXLAN network, the VXLAN Network Identifier gets divided into two categories of identifiers\cite{IETFRFC8365,VXLAN_Network_with_MP-BGP_EVPN_Control_Plane_Design_Guide}.
+\begin{table}[!htbp]
+    \centering
+    \begin{tabularx}{\textwidth}{l l X}
+        \toprule
+        \textbf{Type} & \textbf{Definition} & \textbf{Primary Function} \\
+        \midrule
+        L2VNI & Layer-2 VXLAN segment identifier & Intra-subnet bridging within a broadcast domain. \\
+        \midrule
+        L3VNI & Layer-3 VXLAN identifier & Inter-subnet routing across different L2VNIs belonging to the same tenant. \\
+        \bottomrule
+    \end{tabularx}
+    \caption{Core VNI Classifications}
+    \label{tab:vni_types}
+\end{table}
+\begin{itemize}
+    \item L2VNI: Distributed bridge domain operating like a VLAN but covering the whole IP fabric. The leaf node assigns the local VLAN ID to L2VNI. For inter-hosts within the same subnet, Layer 2 bridge lookup is done by the ingress VTEP followed by encapsulation of Ethernet frame in L2VNI and forwarding it through underlay to the remote VTEP\cite{VXLAN_Network_with_MP-BGP_EVPN_Control_Plane_Design_Guide}.
+    \item L3VNI: Part of tenant VRF but not of the particular subnet. It acts as a transit tunnel for all inter-subnet traffic belonging to that tenant. In case of cross-subnet traffic, the ingress VTEP executes routing lookup of the subnet using VRF table and then encapsulates routed packets using L3VNI. Egress VTEP will decapsulate the packet and retrieve the VRF from L3VNI followed by executing another routing lookup. Finally, the egress VTEP will bridge the packet to its destination subnet using L2VNI. Each L3VNI needs unique transit VLAN and an SVI at each leaf node where tenant VRF is present\cite{IETFRFC8365}.
+\end{itemize}
+\begin{figure}[!htbp]
+        \centering
+        \LVNILVNI
+        \caption{ L2VNI and L3VNI forwarding roles}
+        \label{fig:LVNILVNI}
+\end{figure}
+For each fabric, all VTEPs containing a specific tenant should have identical L3VNI configurations for the proper routing of subnets among the tenant’s VMs. The 24-bit VNI namespace offers more than 16 million distinct VNIs, thereby addressing the 4096 VLAN limit problem.
 \subsection{Symmetric vs Asymmetric IRB}
+\hspace{1.5em}Integrated Routing and Bridging allows for the Leaf node to carry out bridging at Layer 2 and routing at Layer 3 within one VXLAN overlay network without having a dedicated router for the process. Two types of IRB implementations can be carried out through BGP EVPN, which are fundamentally different in terms of routing decisions and scaling.\cite{IETFRFC8365,VXLAN_Network_with_MP-BGP_EVPN_Control_Plane_Design_Guide}.
+\paragraph{Asymmetric IRB}
+Under the asymmetric setup, all routes are calculated on the ingress VTEP side only. The ingress leaf runs VRF lookup to find the destination L2VNI associated with the subnet being targeted and then tunnels the traffic over the L2VNI to the egress VTEP. The egress VTEP acts purely as a bridge to the endpoint.
+\\
+A primary benefit of having only one route decision is its simplicity; however, the trade-off involved here is that each leaf node needs to configure all of the L2VNIs locally regardless of whether there are endpoints in that subnet or not. its scalability is linear, $O(N)$\cite{VXLAN_Network_with_MP-BGP_EVPN_Control_Plane_Design_Guide}.
+\paragraph{Symmetric IRB}
+For symmetric IRB, ingress and egress VTEPs route the packet. The ingress leaf routes the packet and encloses the packet using L3VNI of the tenant instead of the destination L2VNI. Ingress VTEP strips off the outer header, discovers the VRF using L3VNI, performs the second routing operation, and forwards the packet to the end-point using the local L2VNI.
+\\
+Every leaf requires only their local L2VNIs and tenant’s L3VNI for transit traffic. Traffic is routed to remote subnets through EVPN Type 5 IP Prefix routes that advertise prefix rather than MAC addresses. This leads to $O(N)$ state scalability. Router MAC extended community in Type 2 and Type 5 routes helps discover the inner destination MAC address at the egress VTEP\cite{IETFRFC8365}.
+\begin{table}[!htbp]
+    \centering
+    \begin{tabularx}{\textwidth}{l X X}
+        \toprule
+        \textbf{Aspect} & \textbf{Asymmetric IRB} & \textbf{Symmetric IRB} \\
+        \midrule
+        Ingress action & Route $\rightarrow$ encapsulate into L2VNI & Route $\rightarrow$ encapsulate into L3VNI \\
+        Egress action & Bridge only & Route $\rightarrow$ bridge \\
+        Leaf knowledge & All L2VNIs in fabric & Only local L2VNIs + L3VNI \\
+        Scalability & Poor ($O(N^2)$ state) & High ($O(N)$ state) \\
+        Recommendation & Small fabrics only & All production deployments \\
+        \bottomrule
+    \end{tabularx}
+    \caption{Comparative Analysis: Asymmetric vs. Symmetric IRB}
+    \label{tab:irb_comparison}
+\end{table}
 \subsection{Anycast Gateway}
+\hspace{1.5em}In the classic case of VLAN networks, a default gateway for each VLAN resides in the pair of routers with the help of a First Hop Redundancy Protocol like VRRP and HSRP\cite{VXLAN_Network_with_MP-BGP_EVPN_Control_Plane_Design_Guide}. As a result, the inter-subnet traffic passes through the active gateway before returning to its destination, and hence it follows an inefficient route known as trombone routing, even in cases where both hosts reside on the neighboring leaf switches.
+\\
+With EVPN-VXLAN network, the problem of trombone routing can be mitigated easily by employing a distributed anycast gateway. The leaf nodes that belong to a particular VLAN network have identical gateway IP address and identical virtual MAC address. In case of Cisco Nexus network, NDFC provides a common gateway MAC address, say 0000.2222.3333, among all leaf nodes automatically \cite{Cisco_Nexus_9000_VXLAN_BGP_EVPN_Data_Center_Fabrics_Fundamental_Design_and_Implementation_Guide}. These MAC and IP addresses are locally assigned to all leaf nodes without any distribution over the EVPN routes.
+\begin{figure}[!htbp]
+        \centering
+        \AnycastGateway
+        \caption{Anycast Gateway in EVPN-VXLAN}
+        \label{fig:AnycastGateway}
+\end{figure}\\
+When a VM makes an ARP request to its default gateway, the anycast MAC is sent to it by the corresponding local leaf right away. Then, the VM sends all inter-subnet traffic to its local leaf that conducts VRF routing lookup, the encapsulated packet based on the L3VNI of the tenant, and finally sends it via the underlay network from its ingress VTEP to the egress VTEP.
+\\
+The presented approach works nicely together with the ARP suppression since the MAC address of the default gateway is well-known to all leafs, and no flooding of gateway ARP requests ever takes place.
 \subsection{Multi-Tenancy and VRF Design}
+Multi-tenancy allows multiple clients or applications to use the same physical hardware while keeping their traffic segregated from each other. For EVPN-VXLAN fabric implementations, this can be done using VRF, L3VNIs, Route Distinguishers, and Route Targets \cite{IETFRFC8365,VXLAN_Network_with_MP-BGP_EVPN_Control_Plane_Design_Guide}.\\
+\paragraph{VRF and L3VNI Association}
+Each tenant is allocated an individual VRF with its own routing table, ARP and forwarding table. The VRF is associated with a unique L3VNI, which acts as the transit channel for all inter-subnet communications for that tenant. The leaves carrying tenant workloads must have identical mapping from VRF to L3VNI.
+\paragraph{Route Distinguisher}
+A 64-bit value, called Route Distinguisher, is prefixed to all EVPN routes to ensure global uniqueness within BGP. In the absence of the RD, two tenants using identical IP prefixes will generate indistinguishable routes. Each VRF on each leaf is uniquely identified by a Route Distinguisher that is usually generated based on the loopback address and VNI \cite{IETFRFC7432}.
+\paragraph{Route Targets}
+Route Targets are BGP extended communities that regulate import and export operations between VRFs. When a leaf announces a local route, it includes the export RT associated with the tenant VRF. Remote leaves accept only routes where the RT is equal to their local VRF import policies. As a result, routes belonging to one tenant cannot enter the forwarding table of another tenant. By default, tenants are completely isolated; any communication across tenants demands deliberate route leaking via RTs\cite{VXLAN_Network_with_MP-BGP_EVPN_Control_Plane_Design_Guide}.
+\paragraph{Isolation and Overlapping Addresses}
+Each VRF has its own route table; hence, duplicate IP addresses can coexist within different tenants. Isolation occurs at Layer 2 using separate L2VNIs and at Layer 3 using separate L3VNIs and VRFs
 \subsection{Lexicon}
+\begin{table}[!htbp]
+    \centering
+    \begin{tabularx}{\textwidth}{l X}
+        \toprule
+        \textbf{Term} & \textbf{Definition} \\
+        \midrule
+        EVPN & Ethernet VPN a BGP address family (AFI 25 / SAFI 70) used to distribute MAC, IP, and prefix reachability information across a VXLAN overlay fabric. \\ \midrule
+        BGP EVPN & The implementation of MP-BGP carrying the EVPN address family — the control plane governing MAC/IP advertisement, VTEP discovery, and inter-VRF routing. \\ \midrule
+        L2VNI & Layer-2 VXLAN Network Identifier a VNI mapped to a local VLAN segment used for intra-subnet bridging across the fabric. \\ \midrule
+        L3VNI & Layer-3 VXLAN Network Identifier a VNI bound to a tenant VRF, serving as the transit tunnel identifier for inter-subnet routed traffic. \\ \midrule
+        IRB & Integrated Routing and Bridging the capability of a Leaf VTEP to perform both Layer 2 bridging and Layer 3 routing within the same VXLAN overlay. \\ \midrule
+        Asymmetric IRB & An IRB model where only the ingress VTEP routes, encapsulating into the destination L2VNI; requires all Leaf nodes to maintain all L2VNIs ($O(N^2)$ scale). \\ \midrule
+        Symmetric IRB & An IRB model where both ingress and egress VTEPs route, using L3VNI for transit; scalable ($O(N)$) as leaves only maintain local L2VNIs. \\ \midrule
+        Anycast Gateway & A distributed gateway mechanism where all Leaf nodes share the same IP/MAC for a VNI, enabling local inter-subnet forwarding. \\ \midrule
+        Trombone Routing & A suboptimal traffic path where packets traverse to a centralized gateway and return to a locally reachable destination, wasting bandwidth. \\ \midrule
+        FHRP & First Hop Redundancy Protocol protocols like VRRP/HSRP used in traditional networks for gateway redundancy through active/standby pairs. \\ \midrule
+        VRF & Virtual Routing and Forwarding an independent routing table instance that isolates tenant forwarding states on shared infrastructure. \\ \midrule
+        Route Distinguisher & A 64-bit value prepended to EVPN routes to ensure global uniqueness, allowing overlapping tenant address spaces to coexist. \\ \midrule
+        Route Target & A BGP extended community controlling route import/export between VRFs; the primary mechanism for tenant isolation or route leaking. \\ \midrule
+        MAC Mobility & BGP EVPN mechanism using incrementing sequence numbers to track and resolve VM migration events across VTEPs without flooding. \\ \midrule
+        ARP Suppression & An EVPN feature where VTEPs intercept ARP requests locally and respond using the EVPN ARP cache, eliminating broadcast flooding. \\ \midrule
+        DCI & Data Center Interconnect links and protocols connecting geographically separated sites to enable consistent overlay extension. \\ \midrule
+        BGW & Border Gateway Leaf a node at the site perimeter responsible for inter-site eBGP EVPN peering and VXLAN re-origination. \\ \midrule
+        MSD & Multi-Site Domain an NDFC construct providing a single management plane for multiple member VXLAN fabrics. \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
 \section{Comparative Study and Technology Selection}
 \subsection{Selection Methodology}
+\hspace{1.5em} To ensure the selected technology stack aligns with Tunisie Telecom's operational requirements and academic standards, a weighted selection methodology was applied. The criteria include:
+\begin{itemize}
+    \item \textbf{Interoperability:} Ability to operate in a multi-vendor environment (Cisco/Huawei).
+    \item \textbf{Scalability:} Support for up to 16 million segments and hundreds of nodes.
+    \item \textbf{Operational Complexity:} Ease of management and troubleshooting for the NOC teams.
+    \item \textbf{Standards Compliance:} Adherence to IETF RFCs to avoid proprietary vendor lock-in.
+\end{itemize}
 \subsection{Underlay Alternatives}
+\hspace{1.5em} The underlay provides the reachability for the VTEPs. Three routing models were compared:\\
+\begin{table}[!htbp]
+    \centering
+    \small
+    \begin{tabularx}{\textwidth}{l X X}
+        \toprule
+        \textbf{Model} & \textbf{Advantages} & \textbf{Disadvantages} \\
+        \midrule
+        eBGP & Native loop prevention; highly scalable. & Complex ASN management; requires one ASN per leaf/rack. \\
+        \midrule
+        OSPF/IS-IS & Simple "plug-and-play" reachability. & Lacks policy depth; scaling issues in very large fabrics. \\
+        \midrule
+        iBGP + OSPF & \textbf{Single ASN management; stable; leverages IGP reachability.} & Requires Route Reflectors and an underlying IGP. \\
+        \bottomrule
+    \end{tabularx}
+    \caption{Comparison of Underlay Routing Protocols}
+    \label{tab:underlay_comp}
+\end{table}
+The project retains iBGP over OSPF. This choice simplifies the ASN scheme by using a single AS for the fabric while leveraging OSPF for robust loopback reachability, which is ideal for the operator's current infrastructure scale.
 \subsection{Overlay Alternatives}
+\hspace{1.5em} The overlay carries the tenant traffic. We evaluated VXLAN against older technologies:\\
+\begin{table}[!htbp]
+    \centering
+    \small
+    \begin{tabularx}{\textwidth}{l X X}
+        \toprule
+        \textbf{Protocol} & \textbf{Advantages} & \textbf{Disadvantages} \\
+        \midrule
+        802.1Q (VLAN) & Universally supported; simple. & Limited to 4096 IDs; prone to STP loops. \\
+        \midrule
+        NVGRE / Geneve & Large ID space (24-bit). & Limited hardware ASIC support; complex configuration. \\
+        \midrule
+        \textbf{VXLAN} & \textbf{16M segments; industry standard; hardware-accelerated.} & Adds 50 bytes of overhead; requires MTU adjustment. \\
+        \bottomrule
+    \end{tabularx}
+    \caption{Comparison of Overlay Encapsulation Protocols}
+    \label{tab:overlay_comp}
+\end{table}
+VXLAN is selected as the data plane encapsulation protocol due to its industry-standard status and native hardware acceleration.
 \subsection{Control Plane Alternatives}
-\subsection{Platform Comparison}
-\subsection{Retained — Cisco Nexus 9000}
+\hspace{1.5em} We compared the traditional discovery method against a modern control plane:\\
+\begin{table}[!htbp]
+    \centering
+    \small
+    \begin{tabularx}{\textwidth}{l X X}
+        \toprule
+        \textbf{Mechanism} & \textbf{Advantages} & \textbf{Disadvantages} \\
+        \midrule
+        Flood-and-Learn & No control plane configuration needed. & High BUM traffic; slow convergence; inefficient. \\
+        \midrule
+        LISP / OVSDB & Centralized mapping database. & Often proprietary; complex to integrate multi-vendor. \\
+        \midrule
+        \textbf{BGP EVPN} & \textbf{Standards-based; proactive learning; suppresses flooding.} & Steeper learning curve for BGP configuration. \\
+        \bottomrule
+\end{tabularx}
+\caption{Comparison of Control Plane Mechanisms}
+\label{tab:control_plane_comp}
+\end{table}
+\newpage
+BGP EVPN is retained as the control plane. It transforms the network from a "reactive" flooding model to a "proactive" routing model, significantly reducing overhead and improving stability.
 \section{Conclusion}
+\hspace{1.5em} This chapter has detailed the theoretical foundations of modern data center networking, moving from the limitations of the legacy three-tier model to the flexibility of the Spine-Leaf IP Fabric. By decoupling the underlay (iBGP/OSPF) from the overlay (VXLAN/EVPN), the proposed architecture provides the scalability and multi-tenancy required by Tunisie Telecom. This theoretical framework serves as the basis for the next chapter, which explores the network automation tools and orchestration frameworks necessary to manage and deploy this fabric at scale.

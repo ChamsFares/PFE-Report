@@ -1,46 +1,17 @@
-\chapter{Network Automation and Emulation Platforms}
+\chapter{Fabric Architecture and Automation Framework}
 \section{Introduction}
-\hspace{1.5em}This chapter will discuss the ecosystem in question from two different perspectives. One is network automation, where the progression from manual CLI-based operations towards INT-based networks is discussed, the architectural foundations of network automation are introduced, a comparative analysis of the tools at hand is performed before Cisco NDFC is introduced as the chosen orchestration platform for the purpose of the project. Lastly, virtualization/emulation is discussed, where definitions of both terms are introduced, the need for network emulation is justified as the chosen approach for testing the fabric in question, and why PNETLab is chosen as the testbed where the entire solution is deployed.
-\section{The Road to Network Automation}
-\subsection{CLI Era and Early Monitoring}
-\hspace{1.5em}The development of network automation was not sudden; rather, it is the result of decades of continuous improvement. Network complexity, the need for speed in delivering services, and the adoption of SDNs are key factors that have led to network automation.
-\\
-In the 1990s and early 2000s, most network device management activities were performed using CLI. This meant typing individual commands for individual devices. This approach is error-prone, non-scalable, and manual \cite{Cisco_Catalyst_Programmability_and_Automation}.
-Monitoring activities were initially based on SNMP and MIBs. These approaches provided read-only information on metrics such as interface counters and CPU loading averages but provided no native configuration management or programmatic control \cite{IETFRFC3411}.
-\subsection{APIs and Programmability}
-\hspace{1.5em}This limitation of CLI and SNMP has prompted the advent of programmatic interfaces from the mid-2000s. NETCONF was introduced in RFC 6241, which provided a structured approach to configuration protocols using XML. Later on, RESTCONF was introduced as an alternative to the NETCONF protocol \cite{IETFRFC4741}.
-Scripting environments were introduced in network devices. For example, Cisco introduced the Embedded Event Manager, whereas Python was introduced in IOS XE. Around 2011, the advent of Open Flow and SDN has pushed the concept of the separation of control and data planes in the network. The network can be programmed using northbound APIs \cite{OpenFlow_Paper}.
-\subsection{Configuration Management and IBN}
-\hspace{1.5em}As the API world evolved, the industry began to use existing configuration management tools such as Ansible, Puppet, and Chef, which were originally created to configure servers. These tools were applied to network devices. Ansible was noted for its agentless design and idempotent nature in the form of playbooks\cite{Ansible_Networking_Documentation}.
-Intent-Based Networking was introduced in the world of network automation in about 2017-2018. Instead of defining specific network operations, the network operator declares the network intent, such as “Ensure application X has 100 Mbps of connectivity between sites,” and the network automatically figures out the required operations and ensures the network meets the intent\cite{Intent_Based_Networking}. The network state is constantly compared with the intended state.
-\subsection{The Modern Automation Stack}
-\hspace{1.5em}Nowadays, network automation is part of a complete technology stack consisting of:
-\begin{itemize}
-    \item version control for configurations and automation scripts (Git).
-    \item CI/CD pipelines for safe deployment of code changes (Jenkins, GitLab CI).
-    \item Infrastructure as Code tools for managing network infrastructure (Terraform, Ansible, NSO).
-    \item Observability, including telemetry and streaming analytics instead of traditional SNMP-based polling.
-    \item AIOps, which uses machine learning for anomaly detection and root cause analysis \cite{AIOps_and_Machine_Learning}.
-\end{itemize}
-This technology stack makes it possible to implement continuous delivery, fast rollback, and closed-loop remediation, turning networking into a proactive and software-driven discipline instead of a slow and manual craft.
-\begin{figure}[!htbp]
-    \centering
-    \networkautomation
-    \caption{Network Automation Timeline}
-    \label{fig:network-automation-timeline}
-\end{figure}
+This chapter brings together the two fundamental aspects that need to be addressed to implement the BGP EVPN-VXLAN solution: network automation and network architecture design. First, the choice of Cisco NDFC as the single automation tool will be justified. Second, the chapter introduces the EVE-NG lab environment used for the verification purposes. Finally, the full architecture of the network infrastructure at multi-site level is summarized in a compact manner.
 \section{Automation Architecture}
-\subsection{ Northbound and Southbound APIs}
-\hspace{1.5em}However, before choosing an automation solution, it is necessary to grasp the conceptual structure of every contemporary network automation framework. 
-The API types in controller-based networking are classified based on the direction of their communication flow. 
+\subsection{Northbound and Southbound APIs}
+hspace{1.5em}However, before choosing an automation solution, it is necessary to grasp the conceptual structure of every contemporary network automation framework.
+The API types in controller-based networking are classified based on the direction of their communication flow.
 \begin{itemize}
     \item The northbound API is an interface provided by the network controller for applications and other software above the controller level to communicate with it. third-party software can use these APIs to request network data, deploy policies, and automate processes without the knowledge of the underlying devices or configuration details.
     \item The southbound API is used by the network controller to communicate with the network devices managed by it. The network controller can push configurations, install forwarding tables, get device status, and collect data using southbound APIs.
 \end{itemize}
 \begin{table}[!htbp]
     \centering
-    \small 
-    \renewcommand{\arraystretch}{1.4}
+    \small
     \begin{tabularx}{\textwidth}{|p{2.5cm}|X|X|}
         \hline
         \textbf{Aspect} & \textbf{Northbound API} & \textbf{Southbound API} \\ \hline
@@ -53,9 +24,9 @@ The API types in controller-based networking are classified based on the directi
     \caption{Comparison of northbound and southbound APIs}
     \label{tab:northbound-and-southbound-APIs}
 \end{table}
-In the approach taken by Cisco, the northbound interfaces used by controllers, like APIC for data center fabric and DNA Center for enterprise fabric, use rich REST APIs, whereas the southbound interfaces leverage protocols such as NETCONF, OpenFlow, or proprietary ones.
+\hspace{1.5em}In the approach taken by Cisco, the northbound interfaces used by controllers, like APIC for data center fabric and DNA Center for enterprise fabric, use rich REST APIs, whereas the southbound interfaces leverage protocols such as NETCONF, OpenFlow, or proprietary ones.
 \subsection{Orchestration vs Configuration Management}
-\hspace{1.5em}While being used synonymously, configuration management and orchestration have completely different purposes in the automation architecture.
+hspace{1.5em}While being used synonymously, configuration management and orchestration have completely different purposes in the automation architecture.
 \begin{itemize}
     \item Configuration management automates the process of configuring each individual piece of hardware (servers, routers, switches) to meet the desired state that is defined in code. By employing software such as Ansible or Puppet, it provides idempotence (same output on subsequent runs) and eliminates manual errors for single and homogeneous systems.
     \item Orchestration manages many different automated processes within heterogeneous systems to produce highly available services. Essentially, it automates the automation process through dependency management and workflow management. In other words, provisioning a three-tier application requires orchestration among the configurations of load balancers, firewalls, and virtual machines into one cohesive process.
@@ -63,7 +34,6 @@ In the approach taken by Cisco, the northbound interfaces used by controllers, l
 \begin{table}[!htbp]
     \centering
     \small
-    \renewcommand{\arraystretch}{1.5}
     \begin{tabularx}{\textwidth}{|p{2.6cm}|X|X|}
         \hline
         \textbf{Aspect} & \textbf{Configuration Management} & \textbf{Orchestration} \\ \hline
@@ -77,9 +47,8 @@ In the approach taken by Cisco, the northbound interfaces used by controllers, l
     \caption{Key differences between configuration management and orchestration}
     \label{tab:config_vs_orchestration}
 \end{table}
-
-Configuration management and orchestration are not contradictory. An advanced orchestration engine does not negate configuration management software, but rather uses them. The orchestrator invokes the configuration management software to configure individual nodes, along with other functions such as provisioning the infrastructure, updating the DNS, notifying, and rollback.
-\subsection{ Declarative vs Imperative Models}
+\hspace{1.5em}Configuration management and orchestration are not contradictory. An advanced orchestration engine does not negate configuration management software, but rather uses them. The orchestrator invokes the configuration management software to configure individual nodes, along with other functions such as provisioning the infrastructure, updating the DNS, notifying, and rollback.
+\subsection{Declarative vs Imperative Models}
 \hspace{1.5em}The last architectural characteristic deals with the representation of automation instructions. There are two entirely opposite paradigms.
 \begin{itemize}
     \item Imperative paradigm  The administrator provides detailed instructions on the series of commands or API calls to execute in order to reach the desired state. Every instruction is specific: “execute A, then B, and in case of X execute C.” This is the classic CLI-oriented model. It requires extensive syntactical expertise from the administrator along with an understanding of the particular steps needed to be taken in respect of each individual device. As more components are added, imperative processes become lengthy and complicated and must be repeated for each new process
@@ -88,7 +57,6 @@ Configuration management and orchestration are not contradictory. An advanced or
 \begin{table}[!htbp]
     \centering
     \small
-    \renewcommand{\arraystretch}{1.5}
     \begin{tabularx}{\textwidth}{|p{3cm}|X|X|}
         \hline
         \textbf{Aspect} & \textbf{Imperative Model} & \textbf{Declarative Model} \\ \hline
@@ -101,33 +69,78 @@ Configuration management and orchestration are not contradictory. An advanced or
     \caption{Comparison Between Imperative and Declarative Automation Models}
     \label{tab:imperative_vs_declarative}
 \end{table}
-From imperative modeling to declarative modeling is one of the trends that dominate the current automation in data centers. While NSO is declarative, model-driven in the Cisco environment, Ansible playbooks, on the other hand, use imperative or even hybrid approaches in some cases.
-\section{Automation Tools}
-\subsection{Selection Criteria}
+\hspace{1.5em}From imperative modeling to declarative modeling is one of the trends that dominate the current automation in data centers. While NSO is declarative, model-driven in the Cisco environment, Ansible playbooks, on the other hand, use imperative or even hybrid approaches in some cases.
+\section{Automation Tool Selection}
+\paragraph{Agent‑based vs Agentless}
+Agent-based software requires a software agent to be installed on all managed hosts; agentless solutions rely on standard network protocols (SSH, NETCONF, REST). This project will utilize only agentless solutions.
+\paragraph{Selection Criteria}
+Three criteria guide tool selection:
 \begin{enumerate}
-    \item Ansible
-    \item Terraform
-    \item Cisco NSO
-    \item Cisco NDFC
+    \item \textbf{Fabric awareness} – understanding of Spine‑Leaf topology, VXLAN EVPN, and multi‑site coordination.
+    \item \textbf{Vendor support} – native integration with Cisco Nexus 9000.
+    \item \textbf{Lifecycle management} – Day 0 (provisioning), Day 1 (policies), Day 2 (compliance).
 \end{enumerate}
-\subsection{Comparison Table}
-\subsection{selected Solution Cisco NDFC}
+
+\subsection{Comparison Table \& Tool Overview}
+\begin{table}[!htbp]
+    \centering
+    \small
+    \begin{tabularx}{\textwidth}{@{} >{\raggedright\arraybackslash}p{2.5cm} X X X X @{}}
+        \toprule
+        \textbf{Criteria} & \textbf{Ansible} & \textbf{Terraform} & \textbf{Cisco NSO} & \textbf{Cisco NDFC} \\
+        \midrule
+        Architecture & Agentless & Agentless & Agentless & Agentless \\
+        License & Open Source & Open Source / BSL & Commercial & Commercial \\
+        Fabric capability & General purpose & Provisioning & Service‑level & Purpose‑built \\
+        EVPN automation & Manual playbooks & Not applicable & Custom services & Native templates \\
+        Multi‑site orchestration & Manual & Not applicable & Custom effort & Native MSD \\
+        \bottomrule
+    \end{tabularx}
+    \caption{Comparative analysis of automation platforms}
+    \label{tab:automation-comparison}
+\end{table}
+\begin{itemize}
+    \item \textbf{Ansible} – agentless, YAML playbooks, general‑purpose, but lacks fabric awareness.
+    \item \textbf{Terraform} – declarative IaC, provider‑based, strong for infrastructure provisioning.
+    \item \textbf{Cisco NSO} – model‑driven (YANG), carrier‑grade, multi‑vendor, but requires custom service development for EVPN.
+    \item \textbf{Cisco NDFC} – purpose‑built for Nexus fabrics, intent‑driven, native multi‑site domain (MSD) orchestration.
+\end{itemize}
+\subsection{Retained Solution – Cisco NDFC}
+\hspace{1.5em}Cisco NDFC is the sole automation engine for this project. It provides native fabric awareness, intent‑driven BGP EVPN‑VXLAN configuration, and native Multi‑Site Domain orchestration. All switches (Spine, Leaf, Border Leaf) are Cisco Nexus 9000, eliminating the need for multi‑vendor tooling. NDFC manages the complete fabric lifecycle from Day 0 to Day 2.
 \section{Cisco NDFC}
 \subsection{History, Evolution and Positioning}
+Cisco NDFC is based on DCNM (Data Center Network Manager), a legacy Java application that had reached end-of-life in April 2026. NDFC operates on Nexus Dashboard Container Platform, providing a modern React-based UI along with the \textbf{Easy Fabric} flow in which a single intent declaration produces the underlay and overlay configuration deployment to all switches \cite{NDFC_Product_Documentation}.
 \subsection{Architecture and Key Capabilities}
+\begin{itemize}
+    \item \textbf{Day 0 – Fabric Provisioning}: POAP (PowerOn Auto Provisioning) for zero‑touch onboarding; CDP/LLDP discovery; template‑based underlay/overlay generation.
+    \item \textbf{Day 1 – Policy Configuration}: Guided VRF/VNI creation, pool‑based L2VNI/L3VNI assignment, consistent Route Targets, interface groups.
+    \item \textbf{Day 2 – Operations and Compliance}: Continuous compliance checks (running config vs intent); topology visualisation; coordinated NX‑OS upgrades.
+\end{itemize}
 \subsection{Lexicon}
-\section{Virtualization and Emulation}
-\subsection{Virtualization}
-\hspace{1.5em}Virtualization refers to the process whereby physical resources such as computing, storage, or network resources are mapped into numerous logical resources that operate independently from one another. Server virtualization is the most prevalent form of virtualization in DC networks, where a hypervisor subdivides a physical server into numerous VMs\cite{IBM_Virtualization}.
-
-\subsection{Emulation}
-\hspace{1.5em}Emulation entails the replication of behavior of a complete computer hardware, comprising its instruction set architecture, memory, input/output and networking functionalities, solely by means of software. In contrast to simulation, which represents an abstraction of the behavior, an emulator operates using the firmware or OS image of the binary code for the real network device. The level of accuracy provided is very high, as the same results will be obtained on the virtual switch.
-
+\begin{table}[!htbp]
+    \centering
+    \small
+    \begin{tabularx}{\textwidth}{@{} >{\raggedright\arraybackslash}p{3.2cm} X @{}}
+        \toprule
+        Term & Definition \\
+        \midrule
+        NDFC & Nexus Dashboard Fabric Controller lifecycle management for fabrics. \\
+        Easy Fabric & Template‑driven workflow for provisioning a complete fabric from a single intent. \\
+        POAP & PowerOn Auto Provisioning – zero‑touch bootstrapping using DHCP/TFTP. \\
+        MSD & Multi‑Site Domain – orchestrates consistent VNI/VRF/RT across member fabrics. \\
+        Day 0 / Day 1 / Day 2 & Provisioning / Policy / Operations phases. \\
+        \bottomrule
+    \end{tabularx}
+    \label{tab:ndfc-lexicon}
+\end{table}
+\section{Emulation and Lab Environment}
+\subsection{Virtualization vs Emulation}
+\paragraph{Virtualization} refers to the process whereby physical resources such as computing, storage, or network resources are mapped into numerous logical resources that operate independently from one another. Server virtualization is the most prevalent form of virtualization in DC networks, where a hypervisor subdivides a physical server into numerous VMs\cite{IBM_Virtualization}.
+\paragraph{Emulation} entails the replication of behavior of a complete computer hardware, comprising its instruction set architecture, memory, input/output and networking functionalities, solely by means of software. In contrast to simulation, which represents an abstraction of the behavior, an emulator operates using the firmware or OS image of the binary code for the real network device. The level of accuracy provided is very high, as the same results will be obtained on the virtual switch.
 \subsection{Key Differences Between Virtualization and Emulation}
 \begin{table}[!htbp]
     \centering
     \small
-    \renewcommand{\arraystretch}{1.5}
     \begin{tabularx}{\textwidth}{|p{2.8cm}|X|X|}
         \hline
         \textbf{Aspect} & \textbf{Virtualization} & \textbf{Emulation} \\ \hline
@@ -140,29 +153,24 @@ From imperative modeling to declarative modeling is one of the trends that domin
     \caption{Virtualization vs. Emulation comparison}
     \label{tab:virtualization_vs_emulation}
 \end{table}
-\subsection{Why Emulation for Network Engineering}
-The following are the four reasons why emulation has become necessary for network engineers:
+\paragraph{Why Emulation for Network Engineering}The following are the four reasons why emulation has become necessary for network engineers:
 \begin{itemize}
     \item Testing without risk All changes, such as those in configuration, protocols used for routing, or possible failures, can be tested without impacting the live network.
     \item Repeatability The same exact topology and device configurations can be backed up and recreated by any member of the team.
     \item Scalability One physical machine is capable of emulating many virtual routers, switches, and firewalls, making it possible to test a multi-site network fabric prior to acquiring physical hardware.
     \item CI/CD pipeline support The emulated topology can be deployed, tested, and torn down automatically without manual intervention.
 \end{itemize}
-\subsection{Types of Network Emulators}
-Network emulators can be divided into three types depending on their purpose and architecture:
-\begin{itemize}
-    \item Device emulators emulate a particular device type (such as Cisco vIOS, Nexus 9000v, and Arista vEOS). They are implemented as virtual machines and connected to each other via virtual links.
-    \item Topology emulators allow one to create an environment where multiple device emulators can be interconnected using graphs or an API and operate as nodes that are started/stopped and connected/disconnected through links.
-    \item Full system emulators emulate complete networks on a packet basis for research purposes (such as Mininet, ns-3).
-\end{itemize}
-\section{Comparative Study of Emulation Platforms}
-\subsection{Criteria}
-\begin{enumerate}
-    \item GNS3
-    \item EVE-NG
-    \item Cisco CML
-    \item PNETLab
-\end{enumerate}
-\subsection{Comparison Table}
-\subsection{Selected Platform — EVE-NG}
+\subsection{Emulation Platform Selection}
+\subsection{Software Environment}
+\section{Overall Architecture Overview}
+\subsection{Design Principles}
+\subsection{Component Roles}
+\section{Underlay Design}
+\subsection{Design Principles}
+\subsection{Addressing Tables}
+\section{Overlay Design}
+\subsection{BGP EVPN Peering}
+\subsection{VNI and VRF Assignment}
+\section{Multi‑Site, Security and Automation Design}
 \section{Conclusion}
+

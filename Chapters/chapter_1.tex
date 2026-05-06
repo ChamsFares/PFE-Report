@@ -66,13 +66,12 @@
     \item \textbf{GO Malta:} Strategic subsidiary for European market integration
     \item \textbf{Cisco \& Microsoft:} Key technology providers for Data Center modernization and cloud integration 
 \end{itemize}
-\textbf{add also of the text of the partners their  images and logos}
 \subsection{Solutions and Services Offered by Tunisie Telecom}
 \hspace{1.5em}TT\cite{Tunisie_Telecom} stands as the primary telecommunications service provider in Tunisia. It offers a comprehensive range of telephony, Internet, and television services to its diverse clientele.
 \begin{table}[!htbp]
     \centering
     \small 
-    \renewcommand{\arraystretch}{1.3} 
+    \renewcommand{\arraystretch}{1.3}
     \begin{tabularx}{\textwidth}{|p{3.5cm}|X|}
         \hline
         \textbf{Service Category} & \textbf{Description} \\ \hline
@@ -90,26 +89,67 @@
 \hspace{1.5em}As Tunisie Telecom continues to expand its digital infrastructure to meet growing national demand, the underlying network architecture of its data centers has become a critical point of re-evaluation. This section presents the technical context that motivated this project, beginning with a broad examination of modern data center networking challenges before narrowing to the specific constraints faced by the operator.
 
 \subsection{Data Center Networking Context and Limitations}
-\hspace{1.5em}A data center is essentially built on three pillars of compute, storage, and networking, with networking being the key component that determines the speed of communication and prevents bottlenecks. The importance of networking has become increasingly critical in recent times, especially owing to factors like server virtualization, cloud-native applications, and especially artificial intelligence, which has caused a shift from traditional north-south communication patterns to east-west communication patterns involving huge volumes of data between GPU clusters and storage systems. The traditional three-tier data center architecture, which is commonly used by various data centers around the world, including Tunisie Telecom, is found wanting in this regard. The fact that it utilize Spanning Tree Protocol (STP) and blocks redundant paths by disabling them is causing huge bandwidth wastage, and its hierarchical structure is causing scalability and oversubscription issues. These issues become more complex when data centers are distributed in various geographical locations, as this is not a feature that this data center architecture was designed for, and it is a necessity for data center environments. All of this has caused Tunisie Telecom to rethink its data center networking infrastructure.
+\hspace{1.5em}A data center is essentially built on three pillars of compute, storage, and networking, with networking being the key component that determines the speed of communication and prevents bottlenecks. The importance of networking has become increasingly critical in recent times, especially owing to factors like server virtualization, cloud-native applications, and especially artificial intelligence, which has caused a shift from traditional north-south communication patterns to east-west communication patterns involving huge volumes of data between GPU clusters and storage systems. The traditional three-tier data center architecture, which is commonly used by various data centers around the world, including Tunisie Telecom, is found wanting in this regard. The fact that it utilize Spanning Tree Protocol and blocks redundant paths by disabling them is causing huge bandwidth wastage, and its hierarchical structure is causing scalability and oversubscription issues. These issues become more complex when data centers are distributed in various geographical locations, as this is not a feature that this data center architecture was designed for, and it is a necessity for data center environments. All of this has caused Tunisie Telecom to rethink its data center networking infrastructure.
 \subsection{Critique of the Existing System}
-\hspace{1.5em}Tunisie Telecom currently operates its data center network infrastructure based on the classical three-tier architecture described above. Given the operator's scale, its national reach, and the growing complexity of the workloads it must support, the limitations inherent to this model translate into concrete operational and business constraints that can no longer be deferred. The following points shows the most important issues:
+\hspace{1.5em}Tunisie Telecom is running its DCI network according to the traditional three-tier approach outlined earlier. Considering the operator needs, its geographical scope, and the increasingly complex nature of workloads, the deficiencies of this model impose specific constraints on the operator which cannot be ignored any further. These include:
 \begin{itemize}
-    \item \textbf{STP-induced bandwidth waste:} Redundant physical links between sites remain blocked during normal operation, resulting in underutilized capacity precisely where throughput is most needed.
-    \item \textbf{VM mobility constraints:} Virtual machine migration between geographically separated sites is either severely limited or operationally impractical, directly impacting workload balancing and business continuity capabilities.
-    \item \textbf{L2 extension instability:} Stretching Layer 2 domains across multiple sites introduces broadcast instability, MAC table overflow risks, and expanded failure domains that are difficult to contain at the operator's scale.
-    \item \textbf{Inter-site latency:}  The multi-hop nature of the three-tier model adds forwarding delay between sites, making the infrastructure increasingly inadequate for latency-sensitive and AI-driven distributed workloads a dimension that is central to Tunisie Telecom's ongoing digital transformation strategy.
-    \item \textbf{VLAN Scalability Limit:}  The 4,096 VLAN limit is insufficient for modern multi-tenant environments, failing to provide the granular traffic segregation required by a diverse client base ranging from large enterprises to public institutions that are accessing Tunisie Telecom's infrastructure.
-    \item \textbf{Manual configuration burden:} The lack of a centralized automation system forces network engineers to manually configure every device in the network, which can lead to configuration drift and slow response to changing network infrastructure.
+    \item \textbf{STP-induced wasted bandwidth:} Multiple redundant links are kept blocked in STP operation, leading to an under-utilization of bandwidth at the location where it is needed the most.
+    \item \textbf{VM movement restrictions:} VMs movement between remote locations becomes extremely complicated and practically impossible due to the limitations of the current technology, hindering both workload balancing and disaster recovery efforts.
+    \item \textbf{Broadcast instability:} Extending L2 network domains across different sites creates potential risks for broadcasting storms, overflowing the MAC tables, and causing an increased area affected in case of an equipment failure.
+    \item \textbf{Inter-site latency:} Multi-hop routing through multiple devices increases latency across the sites in question, making it increasingly harder to run applications that require low latency and are based on AI and machine learning technologies, an essential component of Tunisie Telecom’s strategic plans.
+    \item \textbf{Inadequate VLAN support:} The maximum number of VLANs supported by legacy hardware, 4096, is no longer sufficient to offer fine-grained separation and management of various types of traffic from multiple clients, ranging from big companies to public organizations using Tunisie Telecom networks.
+    \item \textbf{Manual configuration burden:} Manual reconfiguration of all devices becomes necessary in case any changes need to be made to the network infrastructure.
 \end{itemize}
-\hspace{1.5em}These constraints create a compelling argument that a radical rethink of Tunisie Telecom's data center network design is warranted. The proposed solution addresses each of these constraints directly.
+In addition to the above mentioned architectural limitations that apply to any DCs, the main data center of Tunisie Telecom has reached both the physical and the logical limits. Hence, the need for the implementation of an additional DC, named Site 2, which would be used as an independent and fully functioning DC rather than as a mere backup. Site 2 needs to provide multi-tenant and highly available services while supporting workload migration from one site to another.
+\\
+These requirements form a powerful justification for Tunisie Telecom requiring a completely new vision for its DC network infrastructure design. The recommended solution satisfies all of these requirements explicitly.
 \subsection{Proposed Solution}
-\hspace{1.5em}Where traditional architectures have reached their limits, modern networking standards offer a fundamentally different approach. The solution proposed in this project is the design and deployment of a BGP EVPN-VXLAN IP Fabric spanning multiple sites — an architecture that does not merely patch the weaknesses of the existing model but replaces its core assumptions entirely. It is based on four tightly integrated building blocks:
+\hspace{1.5em}In contrast to traditional solutions that have been exhausted in terms of development, the new networking standards give an entirely new direction to the problem. The proposal put forward by this project consists of the deployment of a multi-site BGP EVPN-VXLAN IP Fabric that would include both the current DC and a new one being constructed. The suggested solution is not only going to complement the shortcomings of the existing infrastructure but also introduce an absolutely new set of principles, which are the following:
 \begin{itemize}
-    \item BGP EVPN-VXLAN IP Fabric: VXLAN allows the logical network to be decoupled from the physical infrastructure by encapsulating the L2 frames within the UDP packets, thereby removing the geographic extension of the L2 networks and providing seamless VM mobility. BGP EVPN preform as the control plane, distributing MAC and IP reachability proactively across all fabric nodes suppressing broadcast traffic, scaling to tens of thousands of endpoints, and delivering the multi-tenancy granularity that Tunisie Telecom's diverse client base demands through a 24-bit VNI space of over 16 million logical segments.
-    \item Spine-Leaf Topology: Replacing the three-tier hierarchy with a flat two-hop architecture where every Leaf connects to every Spine. This also supports Equal Cost Multi-Path forwarding on all links simultaneously, eliminates bandwidth waste caused by STP, and provides predictable low latency a non-negotiable requirement for AI-driven distributed workloads at the heart of Tunisie Telecom's infrastructure vision.
-    \item Cisco Nexus 9000: The hardware underpinning of the fabric, providing native line-rate BGP EVPN VXLAN forwarding in silicon, ensuring that encapsulation and processing do not introduce latency or performance degradation of a kind that would undermine our latency objectives.
-    \item Cisco NDFC: The centralized automation and orchestration solution for the entire underlay and overlay fabric from a single management plane, directly eliminating manual configuration effort, configuration drift, and policy enforcement inconsistencies.
+    \item BGP EVPN-VXLAN : provides the layer 2 overlay network and offers site extension, virtual machine migration, and multi-tenancy within a single network environment with up to 16 million logical segments;
+    \item Spine-Leaf Topology: eliminates the hierarchical structure replacing it with a flat two-hop design where every leaf node communicates with every spine node, thus removing STP and introducing ECMP everywhere
+    \item Cisco NDFC: centralizes the management processes and allows automation and orchestration of the whole fabric
 \end{itemize}
-\hspace{1.5em}The implementation of this solution is based on a structured and iterative methodology, as described in the methodology section below.
+\hspace{1.5em}This approach rectifies the issues listed previously: The waste of the STP protocol, the ability to move VMs between locations, L2 Extension stability, lower inter-site latencies, the limitation of the VLANs is solved, configuration will be done automatically and finally Site 2 will be a completely autonomous data center.
+\\
+The solution is implemented using the methodology as described in the methodology section below and tested on the EVE-NG lab setup that comprises both the Cisco Nexus 9000v and Huawei switches.
+\section{Working Methodology}
+\subsection{Rationale for Agile Scrum}
+\hspace{1.5em}For such a technically challenging project, however, the successful completion thereof entails not only technical knowledge but also a certain methodology which will enable the management of risk, accommodation of discovery, and production of validated outcomes. The chosen development methodology for this project is the Scrum Agile Methodology\cite{Scrum_Guide}, which is a popular framework for iterative development and used extensively in systems and software engineering. Each development iteration in Scrum results in an outcome which is tangible enough to be tested against requirements.
+\begin{table}[!htbp]
+    \centering
+    \small
+    \begin{tabularx}{\textwidth}{l X}
+        \toprule
+        \textbf{Agile Principle} & \textbf{Implementation of Principle in Project} \\
+        \midrule
+        Incremental Delivery & Construction is done in layers: Underlay $\rightarrow$ Overlay $\rightarrow$ Multi-site DCI. \\ \midrule
+        Continuous Feedback & Bi-weekly reviews with supervisors to validate design choices and lab results. \\ \midrule
+        Risk Reduction & Early identification of interoperability issues between Cisco and Huawei platforms. \\ \midrule
+        Flexibility & Capability to adjust addressing plans or VNI mappings mid-project. \\
+        \bottomrule
+    \end{tabularx}
+    \caption{Mapping of Agile Principles to Project Implementation}
+    \label{tab:agile_implementation}
+\end{table}
+
+\subsection{Sprint Schedule and Deliverables}
+\hspace{1.5em} The project spans four months, structured into six sprints of approximately two to three weeks each. The relationship between project phases and the resulting report chapters is detailed here:
+\begin{enumerate}
+    \item \textbf{Sprint 1 Research:} Weeks 1–3. Focuses on tech study, protocol review, and tool selection.
+    \item \textbf{Sprint 2 Design:} Weeks 4–6. Covers topology, IP/VNI planning, and NDFC modeling.
+    \item \textbf{Sprint 3 Underlay:} Weeks 7–9. Includes EVE-NG setup and BGP underlay convergence.
+    \item \textbf{Sprint 4 Overlay:} Weeks 10–12. Concentrates on EVPN peering, VNI binding, and Anycast Gateway implementation.
+    \item \textbf{Sprint 5 Automation:} Weeks 13–14. Involves NDFC fabric onboarding and Ansible/NETCONF integration.
+    \item \textbf{Sprint 6 Validation:} Weeks 15–16. Finalizes testing, including mobility scenarios and the comprehensive project report.
+\end{enumerate}
+
+\begin{figure}[htbp]
+    \centering
+    \agiletimeline
+    \caption{Project Implementation Timeline}
+    \label{fig:sprint_timeline}
+\end{figure}
+
 \section{Conclusion}
-\hspace{1.5em}This chapter sets the scene for the project, starting off with a brief overview of the company, Tunisie Telecom, and their service provision to over six million subscribers, followed by a discussion of the technological reasons for architectural change. Whilst the three-tier architecture has served its purpose in the past, it is now seriously flawed in its ability to meet current needs such as geographical distribution, VM mobility, $L2$ extension, and scalability in a world of artificial intelligence. This project goals are to overcome these limitations and negate the complexity of configuration by implementing a BGP EVPN-VXLAN IP Fabric solution using Cisco Nexus 9000 switches and NDFC, simulating the environment in EVE-NG. The theoretical basis for this architecture is described in the following chapter.
+\hspace{1.5em}The current opening chapter has laid the groundwork for the entire project through its presentation of the infrastructural problems associated with Tunisie Telecom, and through the proposed strategy of a multisite BGP EVPN-VXLAN fabric. The Agile Scrum method guarantees that there is an adaptable approach to moving from designing the project to validating its physical implementation. As such, having now laid out the entire structure and aims of the project, this next chapter focuses on examining the theoretical protocols and architecture necessary to create the modern DCN.

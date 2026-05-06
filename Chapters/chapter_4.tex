@@ -1,1 +1,152 @@
-\chapter{}
+\chapter{Architecture Design}
+\section{Introduction}
+\hspace{1.5em}Chapter connects the theories presented in Chapter 2 with the tool selections made in Chapter 3 by outlining an architecture. It covers the full range of designing a two-site BGP EVPN-VXLAN IP Fabric from hardware selections to underlying routing configurations, overlays, multi-site connectivity, and even automation integration.
+
+\hspace{1.5em}Each and every architectural decision will be made based on the limitations outlined in Chapter 1 in order to create an architecture that fixes problems in current legacy infrastructure rather than blindly adopting the latest technologies. Finally, this chapter lays out the lab environment that will be used in Chapter 5 for architecture validation purposes.
+\section{Overall Architecture Overview}
+\begin{figure}[h]
+    \centering
+    \caption{}
+    \label{fig:example_image}
+\end{figure}
+\hspace{1.5em}The architecture is guided by four foundational tenets that govern decisions in this chapter.
+\begin{enumerate}
+    \item the separation of underlay and overlay. The IP underlay provides minimal routed connectivity but does not carry any tenant traffic nor maintain knowledge of logical segments. All tenant mobility and connectivity operations occur at the VXLAN overlay layer, separate from the IP underlay network infrastructure.
+    \item symmetry and predictability. Each Leaf node connects to each Spine node, providing symmetric routing with inter-node traffic traversing two hops using ECMP routing. There is no spare link available; the fabric uses its full physical bandwidth capacity for forwarding purposes.
+    \item centralized automation with distributed intelligence. The Cisco NDFC operates as one controller, coordinating the management plane for enforcing consistent configurations. However, control plane intelligence operates distributed across the nodes, with independent instances of BGP EVPN and OSPF running on each node. This allows for operation of the fabric independent of the management plane.
+    \item defense in depth. Layer 2 segmentation occurs through VNIs, while VRFs segment Layer 3 traffic. Firewall nodes provide perimeter segmentation for tenant traffic.
+\end{enumerate}
+\subsection{Component Roles Summary}
+The architecture consists of components arranged in four layers, each having an explicit responsibility within the architecture. Table below gives a complete list of all the components and their responsibilities within the architecture.
+table
+\section{Platform and Hardware Selection}
+\subsection{Hardware Platform Comparison and Selection}
+The evaluation of switching hardware options available for the fabric core included four different platforms capable of providing native BGP EVPN-VXLAN capabilities. This assessment considered criteria pertinent to this project specifically, native VTEP capability, maturity of the NX-OS ecosystem, ability to integrate with NDFC, multi-site DCI capability, and adoption by the telecom industry.
+table
+\hspace{1.5em}As a result, the Cisco Nexus 9000 switch family is chosen for all Spine and Leaf devices because of its native compatibility with Cisco NDFC. Even though alternative devices allow standard BGP EVPN-VXLAN implementation, only the Nexus 9000 family meets all the requirements set forth in Chapter 1. Moreover, it offers ASIC-based VXLAN forwarding that guarantees zero software overhead and, thus, necessary low latency for AI processing.
+
+\hspace{1.5em}The same logic applies to the choice of the Border Leaf devices that remain Huawei CE12800 appliances as they are already present on-site. They are used in the current environment as security and regulatory barriers and are deployed along the site perimeters. The use of such appliances makes a lot of sense since they are able to function as natural Border Gateways for DCI connections thanks to BGP EVPN support.
+
+\hspace{1.5em}Regarding firewalls, there will be two dedicated devices used to ensure the highest level of network security. Thus, Cisco ASAv represents the managed solution responsible for East-West traffic control while being connected directly to the Spine layer. In its turn, FortiGate represents an edge (North-South) unmanaged firewall used for ingress/egress filtering for external communications.
+\subsection{Emulation Platform Selection}
+The verification process of the architecture needs a laboratory that will simulate Cisco NX-OS, Huawei CE-OS, Cisco IOS-XE, Cisco ASAv and FortiGate at once. There were four simulation frameworks analyzed for this purpose.
+table
+EVE-NG is selected for use as the emulator. The web-based interface of EVE-NG enables management of all nodes using only a browser, while avoiding any installation of a client locally; EVE-NG supports multi-vendor images that include all kinds of devices required for this network lab, among them the Huawei CE12800 switch; furthermore, the resource usage fits perfectly well into the ESXi-based host environment found in Tunisie Telecom’s IT infrastructure. Cisco CML was tested as an alternative and then rejected, as Cisco CML is already being utilized by the engineers of Tunisie Telecom, and specifically EVE-NG was chosen here by our professional supervisor.
+\subsection{Software Environment}
+The entire set of software tools that have been used for creating, deploying, and validating the architecture are listed in Table below. Network devices are implemented as virtual appliances within the EVE-NG environment using the VMware ESXi infrastructure provided by Tunisie Telecom.
+table
+The choice of the VMware ESXi hypervisor for our solution was driven by the fact that it forms part of the current virtualization infrastructure deployed at Tunisie Telecom. Oracle VirtualBox was also an option, but it is not supported by EVE-NG.
+\section{Underlay Design}
+The underlay provides reachability through the IP protocol to all VTEP loopbacks. Physical links are routed point-to-point /31 interfaces. An IGP in OSPF Area 0 is used as IGP.
+\begin{table}[!htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}l l l l X X@{}}
+\toprule
+\textbf{Device} & \textbf{Role} & \textbf{Site} & \textbf{Loopback0} & \textbf{Loopback1} & \textbf{Loopback100} \\
+& & & \textbf{(BGP Router ID)} & \textbf{(VTEP Source IP)} & \textbf{(VRF-MGMT)} \\
+\midrule
+\rowcolor[gray]{0.9} \multicolumn{6}{l}{\textbf{Site 1 Switches}} \\
+Spine 1-2 & Spine & 1 & 10.1.0.1-2/32 & N/A & 192.168.100.11-12/32 \\
+\midrule
+Leaf 1-7 & Leaf & 1 & 10.1.1.1-7/32 & 10.2.1.1-7/32 & 192.168.100.21-27/32 \\
+\midrule
+Border 1-2 & Border & 1 & 10.1.9.1-2/32 & 10.2.9.1-2/32 & 192.168.100.31-32/32 \\
+\midrule
+\rowcolor[gray]{0.9} \multicolumn{6}{l}{\textbf{Site 2 Switches}} \\
+Spine 1-2 & Spine & 2 & 10.3.0.1-2/32 & N/A & 192.168.100.111-112/32 \\
+\midrule
+Leaf 1-3 & Leaf & 2 & 10.3.1.1-3/32 & 10.4.1.1-3/32 & 192.168.100.121-123/32 \\
+\midrule
+Border 1-2 & Border & 2 & 10.3.9.1-2/32 & 10.4.9.1-2/32 & 192.168.100.131-132/32 \\
+\bottomrule
+\end{tabularx}
+\caption{Loopback Addressing}
+\label{tab:addressing}
+\end{table}
+\begin{table}[!htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}l X c c@{}}
+\toprule
+\textbf{Connection} & \textbf{Subnet} & \textbf{Spine IP} & \textbf{Leaf / BL IP} \\ \midrule
+\rowcolor[gray]{0.9} \multicolumn{4}{l}{\textbf{Site 1: Spine 1 Interfaces}} \\
+Spine 1 $\leftrightarrow$ Leaf 1-7 & 10.1.11-17.0/31 & 10.1.11-17.0 & 10.1.11-17.1-7 \\
+Spine 1 $\leftrightarrow$ BL 1-2 & 10.1.83.0/31 & 10.1.83.0 & 10.1.83.1-2 \\
+\midrule
+\rowcolor[gray]{0.9} \multicolumn{4}{l}{\textbf{Site 1: Spine 2 Interfaces}} \\
+Spine 2 $\leftrightarrow$ Leaf 1-7 & 10.1.21-27.0/31 & 10.1.21-27.0 & 10.1.21-27.1-7 \\
+Spine 2 $\leftrightarrow$ BL 1-2 & 10.1.84.0/31 & 10.1.84.0 & 10.1.84.1-2 \\ \midrule
+\rowcolor[gray]{0.9} \multicolumn{4}{l}{\textbf{Site 2: Spine 1 Interfaces}} \\
+Spine 1 $\leftrightarrow$ Leaf 1-3 & 10.3.11-13.0/31 & 10.3.11-13.0 & 10.3.11-13.1-3 \\
+Spine 1 $\leftrightarrow$ BL 1-2 & 10.3.83.0/31 & 10.3.83.0 & 10.3.83.1-2 \\ \midrule
+\rowcolor[gray]{0.9} \multicolumn{4}{l}{\textbf{Site 2: Spine 2 Interfaces}} \\
+Spine 2 $\leftrightarrow$ Leaf 1-3 & 10.3.21-23.0/31 & 10.3.12.0 & 10.3.21-23.1-3 \\
+Spine 2 $\leftrightarrow$ BL 1-2 & 10.3.84.0/31 & 10.3.12.0 & 10.3.84.1-2 \\ \bottomrule
+\end{tabularx}
+\caption{Fabric P2P Link Addressing}
+\label{tab:p2p-addressing}
+\end{table}\\
+BFD operates on all OSPF sessions with interval 300 ms, multiplier 3 detection 900 ms in order to obtain fast convergence and low probability of false positives during the emulated lab testing. All loopback IPs are advertised in OSPF.
+\section{Overlay Design}
+In the overlay, VXLAN encapsulation is employed with BGP EVPN being the control plane protocol. A iBGP EVPN setup is utilized where spines operate as Route Reflector. Leafs and border leafs are Route Reflector clients, thereby no full iBGP mesh is required and distribution of control plane is still achieved. Ingress replication is applied for BUM traffic forwarding. No underlay multicast protocols such as PIM and IGMP are needed because of ingress replication which keeps the underlay OSPF only.
+\begin{itemize}
+    \item[]\textbf{Tenant and VNI Assignment}\\
+    L2VNI stretch across the two data centers allows live VM migration without IP addressing change as the core requirement from Chapter 1. Anycast gateway is necessary in order for the migrated VM to be able to find its default gateway locally.
+    \begin{table}[!htbp]
+    \centering
+    \small
+    \begin{tabularx}{\textwidth}{@{}l l c c c l l@{}}
+    \toprule
+    \textbf{Tenant} & \textbf{VRF Name} & \textbf{L3VNI} & \textbf{L2VNI} & \textbf{VLAN} & \textbf{Subnet} & \textbf{Gateway} \\ \midrule
+    Telecom Core & VRF-TELECOM & 50010 & 10010 & 10 & 192.168.10.0/24 & 192.168.10.1 \\ \addlinespace
+    Web Hosting & VRF-WEBHOST & 50020 & 10020 & 20 & 192.168.20.0/24 & 192.168.20.1 \\ \addlinespace
+    Enterprise Client & VRF-CLIENT & 50030 & 10030 & 30 & 192.168.30.0/24 & 192.168.30.1 \\ \addlinespace
+    Management & VRF-MGMT & 50100 & 10100 & 100 & 192.168.100.0/24 & 192.168.100.1 \\ \bottomrule
+    \end{tabularx}
+    \caption{VNI and VRF Assignment Mapping}
+    \label{tab:vni-vrf-assignment}
+    \end{table}
+    \item[]\textbf{Route Targets for tenant isolation}\\
+    The Route Target for each VRF is matched between the import and export policies and takes the format of :. The use of this RT model ensures that the routes of each tenant will be isolated, with only VRFs importing the same RT exchanging routes with one another. Unlike the use of the fabric AS number, this approach to the RT model does not change in the case of a change in the fabric ASN, such as in the event of a merger or redesign project.
+    \begin{table}[!htbp]
+    \centering
+    \small
+    \setlength{\tabcolsep}{2em}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{@{}l l l l@{}}
+    \toprule
+    \textbf{Tenant} & \textbf{VRF} & \textbf{Export RT} & \textbf{Import RT} \\ \midrule
+    Telecom Core & VRF-TELECOM & 10010:50010 & 10010:50010 \\
+    Web Hosting & VRF-WEBHOST & 10020:50020 & 10020:50020 \\
+    Enterprise Client & VRF-CLIENT & 10030:50030 & 10030:50030 \\
+    Management & VRF-MGMT & 10100:50100 & 10100:50100 \\ \bottomrule
+    \end{tabular}
+    \caption{Route Target Assignment}
+    \label{tab:rt-mapping}
+    \end{table}
+    \item[]\textbf{Anycast Gateway \& ARP Suppression}\\
+    All leaves and border leaves are provisioned to use the same gateway IP address and virtual MAC address for each VLAN. All NVE interfaces will be configured for ARP suppression. Symmetric IRB will be used for inter-subnet routing.
+\end{itemize}
+
+\section{Multi-Site Design}
+Two sites are connected through a transit AS acting as a simple IP router. Both border leafs at one site connect to their counterparts at another site using the eBGP EVPN configuration with the WAN facing interface IP addresses. Transit AS is responsible for forwarding IP packets (port 179 for BGP TCP connections and UDP 4789 for VXLAN) but is not involved in any EVPN control plane. This architecture makes the WAN layer extremely simple because the transit AS acts only as an IP router; all EVPN smarts reside within the data center fabrics. Direct eBGP connection between border leafs guarantees scalability of both control and data planes and allows operating two EVPN domains independently but consistently.
+Border Leafs function as Border Gateways in the NDFC MSD. They republish EVPN routes between different sites – deencapsulating the routes from the fabric and publishing them with site-specific Route Distinguishers. Type-5 IP prefix routes are primarily used for inter-site prefix distribution, which makes tenant subnets available at the other side of the DCI link.
+The process of advertising VTEP loopback and the EVPN Type-3 membership route of the on-boarded Leaf happens automatically once the Leaf joins the NDFC POAP workflow. This route is reflected by the local Spine RRs across all existing Leafs. Border Gateways advertise the Type-3 route across the DCI link to the remote site, where it gets reflected across all remote Leafs.
+
+\section{Security Design}
+
+Edge Firewall (FortiGate)  transparent deployment on the border Leafs to filter North-South traffic. Unmanaged Static ACLs.
+DC Firewall (Cisco ASAv)  deployed as a service node attached to the two spines. East-West traffic is forced to the ASAv through BGP route leaking. Each tenant VRF has a static default route toward the ASAv’s inside interface. There are also return routes in ASAv back to tenant subnets via spines.
+VRF Segmentation  Isolation takes place at Layer 2 and Layer 3 levels, meaning tenants are segmented at Layer 2 and at Layer 3. Cross-VRF communication does not take place unless explicit route leaking is established via matched Route Target import policies. The double-layer isolation approach makes sure that the segmentation persists even if a configuration mistake happens at any layer individually. For instance, VRF-TELECOM is invisible to VRF-WEBHOST unless route-target import/export is intentionally set up.
+Management Plane Isolation  Management traffic, including NDFC, SSH, SNMP, syslog, is handled in-band using the dedicated VRF-MGMT, which is a stretched Layer 2 network spanning across both locations by using VLAN 99, L2VNI 10099, and an anycast gateway with the address of 192.168.100.254. This VRF is entirely different from other tenant VRFs. On the physical side, mgmt0 interfaces on switches serve only for emergency out-of-band communication (console recovery).
+\section{Automation and Management}
+
+NDFC is the main tool that orchestrates all operations in Cisco Nexus 9000 infrastructure (spines and leaves). It is responsible for lifecycle management of the fabric which includes POAP bootstrapping, Easy Fabric underlay/overlay provisioning, creation of VRF/VNI, compliance verification, and Multi-Site Domain orchestrations. The NDFC tool interacts with Cisco gear in-band VRF-MGMT.
+
+Ansible is responsible for managing border leaf Huawei CE12800 configuration. Ansible playbooks written with huawei.cloudengine collection and NETCONF connections cover all border leafs settings including setting up OSPF neighborships towards Cisco spines, BGP EVPN Border Gateway, interface configuration, and firewall ACLs. Ansible playbooks are put under revision control for traceability.
+
+Day 0 / Day 1 / Day 2 Operations Flow – Day 0: NDFC performs POAP for Cisco underlay/overlay provisioning; Ansible configures border leafs. Day 1: NDFC-guided processes provision VRFs/VNIs, Ansible makes sure that VRF and RT settings on the border leafs match those from NDFC. Day 2: NDFC Compliance Engine validates Cisco nodes' state; Ansible execution might be triggered to bring border leafs back to proper state.
+
+\section{Conclusion}
+This chapter offered the overall design for the BGP EVPN-VXLAN solution fabric design, explaining the justification of each decision based on constraints described in Chapter 1. In Chapter 5, we will test this solution by deploying it in our lab and assessing underlay convergence, L2 stretch, vMotion, firewall insertion, and robustness.
