@@ -1,182 +1,398 @@
 \chapter{Fabric Architecture and Automation Framework}
 \section{Introduction}
-This chapter brings together the two fundamental aspects that need to be addressed to implement the BGP EVPN-VXLAN solution: network automation and network architecture design. First, the choice of Cisco NDFC as the single automation tool will be justified. Second, the chapter introduces the EVE-NG lab environment used for the verification purposes. Finally, the full architecture of the network infrastructure at multi-site level is summarized in a compact manner.
+This chapter brings together the two fundamental aspects that need to be addressed to implement the BGP EVPN‑VXLAN solution: network automation and network architecture design. First, the choice of Cisco NDFC as the single automation tool is justified. Second, the chapter introduces the EVE‑NG lab environment used for verification. Finally, the full architecture of the multi‑site network infrastructure is summarised.
+
 \section{Automation Architecture}
-\subsection{Northbound and Southbound APIs}
-hspace{1.5em}However, before choosing an automation solution, it is necessary to grasp the conceptual structure of every contemporary network automation framework.
-The API types in controller-based networking are classified based on the direction of their communication flow.
+
+\subsection*{\mbox{•}~Northbound and Southbound APIs}
+Before choosing an automation solution, it is necessary to understand the conceptual structure of every contemporary network automation framework. The API types in controller‑based networking are classified by the direction of communication flow:
 \begin{itemize}
-    \item The northbound API is an interface provided by the network controller for applications and other software above the controller level to communicate with it. third-party software can use these APIs to request network data, deploy policies, and automate processes without the knowledge of the underlying devices or configuration details.
-    \item The southbound API is used by the network controller to communicate with the network devices managed by it. The network controller can push configurations, install forwarding tables, get device status, and collect data using southbound APIs.
+    \item The \textbf{northbound API} is provided by the network controller for applications and software above it. Third‑party software uses these APIs to request network data, deploy policies, and automate processes without knowing underlying device details.
+    \item The \textbf{southbound API} is used by the controller to communicate with managed network devices. It pushes configurations, installs forwarding tables, retrieves device status, and collects telemetry.
 \end{itemize}
+Table~\ref{tab:northbound-southbound} compares the two API types.
+
 \begin{table}[!htbp]
-    \centering
-    \small
-    \begin{tabularx}{\textwidth}{|p{2.5cm}|X|X|}
-        \hline
-        \textbf{Aspect} & \textbf{Northbound API} & \textbf{Southbound API} \\ \hline
-        \textbf{Direction} & Controller $\leftrightarrow$ Applications / Orchestration & Controller $\leftrightarrow$ Network Devices \\ \hline
-        \textbf{Exposed by} & The SDN controller & The SDN controller \\ \hline
-        \textbf{Consumed by} & Custom apps, OSS/BSS, CI/CD, Python scripts & The controller itself, to program devices \\ \hline
-        \textbf{Protocols} & REST (HTTP/HTTPS), RESTCONF, GraphQL & NETCONF, OpenFlow, gNMI, SNMP, CLI \\ \hline
-        \textbf{Operations} & GET, POST, PUT, PATCH, DELETE & Push config, install flow rules, stream telemetry \\ \hline
-    \end{tabularx}
-    \caption{Comparison of northbound and southbound APIs}
-    \label{tab:northbound-and-southbound-APIs}
+\centering
+\small
+\begin{tabularx}{\textwidth}{|p{2.5cm}|X|X|}
+\hline
+\textbf{Aspect} & \textbf{Northbound API} & \textbf{Southbound API} \\ \hline
+\textbf{Direction} & Controller $\leftrightarrow$ Applications / Orchestration & Controller $\leftrightarrow$ Network Devices \\ \hline
+\textbf{Exposed by} & The SDN controller & The SDN controller \\ \hline
+\textbf{Consumed by} & Custom apps, OSS/BSS, CI/CD, Python scripts & The controller itself, to program devices \\ \hline
+\textbf{Protocols} & REST (HTTP/HTTPS), RESTCONF, GraphQL & NETCONF, OpenFlow, gNMI, SNMP, CLI \\ \hline
+\textbf{Operations} & GET, POST, PUT, PATCH, DELETE & Push config, install flow rules, stream telemetry \\ \hline
+\end{tabularx}
+\caption{Comparison of northbound and southbound APIs}
+\label{tab:northbound-southbound}
 \end{table}
-\hspace{1.5em}In the approach taken by Cisco, the northbound interfaces used by controllers, like APIC for data center fabric and DNA Center for enterprise fabric, use rich REST APIs, whereas the southbound interfaces leverage protocols such as NETCONF, OpenFlow, or proprietary ones.
-\subsection{Orchestration vs Configuration Management}
-hspace{1.5em}While being used synonymously, configuration management and orchestration have completely different purposes in the automation architecture.
+
+In Cisco controllers (APIC, DNA Center), northbound interfaces use rich REST APIs, while southbound interfaces leverage NETCONF, OpenFlow, or proprietary protocols.
+
+\subsection*{\mbox{•}~Orchestration vs Configuration Management}
+Although often used synonymously, configuration management and orchestration serve different purposes in automation architecture.
 \begin{itemize}
-    \item Configuration management automates the process of configuring each individual piece of hardware (servers, routers, switches) to meet the desired state that is defined in code. By employing software such as Ansible or Puppet, it provides idempotence (same output on subsequent runs) and eliminates manual errors for single and homogeneous systems.
-    \item Orchestration manages many different automated processes within heterogeneous systems to produce highly available services. Essentially, it automates the automation process through dependency management and workflow management. In other words, provisioning a three-tier application requires orchestration among the configurations of load balancers, firewalls, and virtual machines into one cohesive process.
+    \item \textbf{Configuration management} automates configuring individual devices (servers, routers, switches) to a desired state defined in code. Tools like Ansible or Puppet provide idempotence and eliminate manual errors for homogeneous systems.
+    \item \textbf{Orchestration} manages multiple automated processes across heterogeneous systems to deliver a service. It coordinates dependencies and workflows – for example, provisioning a three‑tier application requires orchestrating load balancers, firewalls, and virtual machines.
 \end{itemize}
+Table~\ref{tab:config-orchestration} highlights the key differences.
+
 \begin{table}[!htbp]
-    \centering
-    \small
-    \begin{tabularx}{\textwidth}{|p{2.6cm}|X|X|}
-        \hline
-        \textbf{Aspect} & \textbf{Configuration Management} & \textbf{Orchestration} \\ \hline
-        \textbf{Scope} & Individual devices or homogeneous groups & Multiple systems, services, and domains \\ \hline
-        \textbf{Focus} & Ensuring consistent state & Coordinating sequences and dependencies \\ \hline
-        \textbf{Abstraction} & Device-centric & Service-centric \\ \hline
-        \textbf{Usage} & Day-0 and Day-2& Integrating multiple tools and workflows \\ \hline
-        \textbf{Outcome} & Consistent device-level settings & Fully deployed multi-site network service \\ \hline
-        \textbf{Relationship} & A building block & The conductor that assembles the blocks \\ \hline
-    \end{tabularx}
-    \caption{Key differences between configuration management and orchestration}
-    \label{tab:config_vs_orchestration}
+\centering
+\small
+\begin{tabularx}{\textwidth}{|p{2.6cm}|X|X|}
+\hline
+\textbf{Aspect} & \textbf{Configuration Management} & \textbf{Orchestration} \\ \hline
+\textbf{Scope} & Individual devices or homogeneous groups & Multiple systems, services, and domains \\ \hline
+\textbf{Focus} & Ensuring consistent state & Coordinating sequences and dependencies \\ \hline
+\textbf{Abstraction} & Device-centric & Service-centric \\ \hline
+\textbf{Usage} & Day-0 and Day-2 & Integrating multiple tools and workflows \\ \hline
+\textbf{Outcome} & Consistent device-level settings & Fully deployed multi-site network service \\ \hline
+\textbf{Relationship} & A building block & The conductor that assembles the blocks \\ \hline
+\end{tabularx}
+\caption{Key differences between configuration management and orchestration}
+\label{tab:config-orchestration}
 \end{table}
-\hspace{1.5em}Configuration management and orchestration are not contradictory. An advanced orchestration engine does not negate configuration management software, but rather uses them. The orchestrator invokes the configuration management software to configure individual nodes, along with other functions such as provisioning the infrastructure, updating the DNS, notifying, and rollback.
-\subsection{Declarative vs Imperative Models}
-\hspace{1.5em}The last architectural characteristic deals with the representation of automation instructions. There are two entirely opposite paradigms.
+
+An advanced orchestration engine does not replace configuration management; it invokes configuration management tools to configure individual nodes, alongside DNS updates, notifications, and rollback.
+
+\subsection*{\mbox{•}~Declarative vs Imperative Models}
+Automation instructions follow one of two paradigms.
 \begin{itemize}
-    \item Imperative paradigm  The administrator provides detailed instructions on the series of commands or API calls to execute in order to reach the desired state. Every instruction is specific: “execute A, then B, and in case of X execute C.” This is the classic CLI-oriented model. It requires extensive syntactical expertise from the administrator along with an understanding of the particular steps needed to be taken in respect of each individual device. As more components are added, imperative processes become lengthy and complicated and must be repeated for each new process
-    \item Declarative paradigm  The administrator states the intended outcome without going into details about the sequence of actions. The system is tasked with interpreting the intention and transforming it into appropriate device-specific commands and their execution. For instance, an engineer specifies “VLAN 100 should be configured in all access switches,” and the system figures out what commands will be needed for each component and in what order.
+    \item \textbf{Imperative paradigm:} The administrator provides detailed step‑by‑step commands or API calls (“execute A, then B, if X then C”). This requires deep knowledge of each device and grows complex with scale.
+    \item \textbf{Declarative paradigm:} The administrator states the intended outcome (“VLAN 100 must be configured on all access switches”) without specifying the sequence. The system translates the intent into device‑specific commands and orders them correctly.
 \end{itemize}
+Table~\ref{tab:imperative-declarative} contrasts the two models.
+
 \begin{table}[!htbp]
-    \centering
-    \small
-    \begin{tabularx}{\textwidth}{|p{3cm}|X|X|}
-        \hline
-        \textbf{Aspect} & \textbf{Imperative Model} & \textbf{Declarative Model} \\ \hline
-        \textbf{Focus} & \textbf{How} to achieve the state & \textbf{What} the final state should be \\ \hline
-        \textbf{Operator Knowledge} & Requires deep syntax and context knowledge for each device & Focuses on describing the desired outcome \\ \hline
-        \textbf{Complexity} & Workflow grows with each new component & Intent remains stable; system handles complexity \\ \hline
-        \textbf{Idempotency} & Not guaranteed rerunning may cause errors & Built-in; system checks current state before acting \\ \hline
-        \textbf{Typical Use} & Day-0 provisioning, troubleshooting, one-off changes & Day-2 operations, large-scale consistent deployment \\ \hline
-    \end{tabularx}
-    \caption{Comparison Between Imperative and Declarative Automation Models}
-    \label{tab:imperative_vs_declarative}
+\centering
+\small
+\begin{tabularx}{\textwidth}{|p{3cm}|X|X|}
+\hline
+\textbf{Aspect} & \textbf{Imperative Model} & \textbf{Declarative Model} \\ \hline
+\textbf{Focus} & \textbf{How} to achieve the state & \textbf{What} the final state should be \\ \hline
+\textbf{Operator Knowledge} & Requires deep syntax and context knowledge for each device & Focuses on describing the desired outcome \\ \hline
+\textbf{Complexity} & Workflow grows with each new component & Intent remains stable; system handles complexity \\ \hline
+\textbf{Idempotency} & Not guaranteed (rerunning may cause errors) & Built‑in (system checks current state before acting) \\ \hline
+\textbf{Typical Use} & Day‑0 provisioning, troubleshooting, one‑off changes & Day‑2 operations, large‑scale consistent deployment \\ \hline
+\end{tabularx}
+\caption{Comparison between imperative and declarative automation models}
+\label{tab:imperative-declarative}
 \end{table}
-\hspace{1.5em}From imperative modeling to declarative modeling is one of the trends that dominate the current automation in data centers. While NSO is declarative, model-driven in the Cisco environment, Ansible playbooks, on the other hand, use imperative or even hybrid approaches in some cases.
+
+The trend in data centre automation is moving from imperative to declarative models. Cisco NSO is declarative and model‑driven; Ansible playbooks often use imperative or hybrid approaches.
+
 \section{Automation Tool Selection}
 \paragraph{Agent‑based vs Agentless}
-Agent-based software requires a software agent to be installed on all managed hosts; agentless solutions rely on standard network protocols (SSH, NETCONF, REST). This project will utilize only agentless solutions.
+Agent‑based software requires an agent on every managed host; agentless solutions rely on standard network protocols (SSH, NETCONF, REST). This project uses only agentless tools.
+
 \paragraph{Selection Criteria}
 Three criteria guide tool selection:
 \begin{enumerate}
-    \item \textbf{Fabric awareness} – understanding of Spine‑Leaf topology, VXLAN EVPN, and multi‑site coordination.
-    \item \textbf{Vendor support} – native integration with Cisco Nexus 9000.
-    \item \textbf{Lifecycle management} – Day 0 (provisioning), Day 1 (policies), Day 2 (compliance).
+    \item \textbf{Fabric awareness} -- understanding of Spine-Leaf topology, VXLAN EVPN, and multi-site coordination.
+    \item \textbf{Vendor support} -- native integration with Cisco Nexus 9000.
+    \item \textbf{Lifecycle management} -- Day 0 (provisioning), Day 1 (policies), Day 2 (compliance).
 \end{enumerate}
 
-\subsection{Comparison Table \& Tool Overview}
+\subsection*{\mbox{•}~Comparison Table \& Tool Overview}
+Table~\ref{tab:automation-comparison} compares the candidate automation platforms.
+
 \begin{table}[!htbp]
-    \centering
-    \small
-    \begin{tabularx}{\textwidth}{@{} >{\raggedright\arraybackslash}p{2.5cm} X X X X @{}}
-        \toprule
-        \textbf{Criteria} & \textbf{Ansible} & \textbf{Terraform} & \textbf{Cisco NSO} & \textbf{Cisco NDFC} \\
-        \midrule
-        Architecture & Agentless & Agentless & Agentless & Agentless \\
-        License & Open Source & Open Source / BSL & Commercial & Commercial \\
-        Fabric capability & General purpose & Provisioning & Service‑level & Purpose‑built \\
-        EVPN automation & Manual playbooks & Not applicable & Custom services & Native templates \\
-        Multi‑site orchestration & Manual & Not applicable & Custom effort & Native MSD \\
-        \bottomrule
-    \end{tabularx}
-    \caption{Comparative analysis of automation platforms}
-    \label{tab:automation-comparison}
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{} >{\raggedright\arraybackslash}p{2.5cm} X X X X @{}}
+\toprule
+\textbf{Criteria} & \textbf{Ansible} & \textbf{Terraform} & \textbf{Cisco NSO} & \textbf{Cisco NDFC} \\
+\midrule
+Architecture & Agentless & Agentless & Agentless & Agentless \\
+License & Open Source & Open Source / BSL & Commercial & Commercial \\
+Fabric capability & General purpose & Provisioning & Service‑level & Purpose‑built \\
+EVPN automation & Manual playbooks & Not applicable & Custom services & Native templates \\
+Multi‑site orchestration & Manual & Not applicable & Custom effort & Native MSD \\
+\bottomrule
+\end{tabularx}
+\caption{Comparative analysis of automation platforms}
+\label{tab:automation-comparison}
 \end{table}
+
 \begin{itemize}
     \item \textbf{Ansible} – agentless, YAML playbooks, general‑purpose, but lacks fabric awareness.
     \item \textbf{Terraform} – declarative IaC, provider‑based, strong for infrastructure provisioning.
     \item \textbf{Cisco NSO} – model‑driven (YANG), carrier‑grade, multi‑vendor, but requires custom service development for EVPN.
     \item \textbf{Cisco NDFC} – purpose‑built for Nexus fabrics, intent‑driven, native multi‑site domain (MSD) orchestration.
 \end{itemize}
-\subsection{Retained Solution – Cisco NDFC}
-\hspace{1.5em}Cisco NDFC is the sole automation engine for this project. It provides native fabric awareness, intent‑driven BGP EVPN‑VXLAN configuration, and native Multi‑Site Domain orchestration. All switches (Spine, Leaf, Border Leaf) are Cisco Nexus 9000, eliminating the need for multi‑vendor tooling. NDFC manages the complete fabric lifecycle from Day 0 to Day 2.
-\section{Cisco NDFC}
-\subsection{History, Evolution and Positioning}
-Cisco NDFC is based on DCNM (Data Center Network Manager), a legacy Java application that had reached end-of-life in April 2026. NDFC operates on Nexus Dashboard Container Platform, providing a modern React-based UI along with the \textbf{Easy Fabric} flow in which a single intent declaration produces the underlay and overlay configuration deployment to all switches \cite{NDFC_Product_Documentation}.
-\subsection{Architecture and Key Capabilities}
-\begin{itemize}
-    \item \textbf{Day 0 – Fabric Provisioning}: POAP (PowerOn Auto Provisioning) for zero‑touch onboarding; CDP/LLDP discovery; template‑based underlay/overlay generation.
-    \item \textbf{Day 1 – Policy Configuration}: Guided VRF/VNI creation, pool‑based L2VNI/L3VNI assignment, consistent Route Targets, interface groups.
-    \item \textbf{Day 2 – Operations and Compliance}: Continuous compliance checks (running config vs intent); topology visualisation; coordinated NX‑OS upgrades.
-\end{itemize}
-\subsection{Lexicon}
-\begin{table}[!htbp]
-    \centering
-    \small
-    \begin{tabularx}{\textwidth}{@{} >{\raggedright\arraybackslash}p{3.2cm} X @{}}
-        \toprule
-        Term & Definition \\
-        \midrule
-        NDFC & Nexus Dashboard Fabric Controller lifecycle management for fabrics. \\
-        Easy Fabric & Template‑driven workflow for provisioning a complete fabric from a single intent. \\
-        POAP & PowerOn Auto Provisioning – zero‑touch bootstrapping using DHCP/TFTP. \\
-        MSD & Multi‑Site Domain – orchestrates consistent VNI/VRF/RT across member fabrics. \\
-        Day 0 / Day 1 / Day 2 & Provisioning / Policy / Operations phases. \\
-        \bottomrule
-    \end{tabularx}
-    \label{tab:ndfc-lexicon}
-\end{table}
-\section{Emulation and Lab Environment}
-\subsection{Virtualization vs Emulation}
-\paragraph{Virtualization} refers to the process whereby physical resources such as computing, storage, or network resources are mapped into numerous logical resources that operate independently from one another. Server virtualization is the most prevalent form of virtualization in DC networks, where a hypervisor subdivides a physical server into numerous VMs\cite{IBM_Virtualization}.
-\paragraph{Emulation} entails the replication of behavior of a complete computer hardware, comprising its instruction set architecture, memory, input/output and networking functionalities, solely by means of software. In contrast to simulation, which represents an abstraction of the behavior, an emulator operates using the firmware or OS image of the binary code for the real network device. The level of accuracy provided is very high, as the same results will be obtained on the virtual switch.
-\subsection{Key Differences Between Virtualization and Emulation}
-\begin{table}[!htbp]
-    \centering
-    \small
-    \begin{tabularx}{\textwidth}{|p{2.8cm}|X|X|}
-        \hline
-        \textbf{Aspect} & \textbf{Virtualization} & \textbf{Emulation} \\ \hline
-        \textbf{Abstraction} & Physical hardware into isolated VMs & The complete hardware platform of a device \\ \hline
-        \textbf{Guest Software} & Unmodified guest OS runs on hypervisor & Device firmware runs inside a hardware mimic \\ \hline
-        \textbf{Performance} & Near-native & Slower, as instructions must be translated or interpreted \\ \hline
-        \textbf{Fidelity} & High for general-purpose compute; lower for specialized ASICs & Very high for device-specific behavior; identical CLI/protocols \\ \hline
-        \textbf{Typical Use} & Running servers, applications, and production services & Testing network topologies and protocol changes \\ \hline
-    \end{tabularx}
-    \caption{Virtualization vs. Emulation comparison}
-    \label{tab:virtualization_vs_emulation}
-\end{table}
-\paragraph{Why Emulation for Network Engineering}The following are the four reasons why emulation has become necessary for network engineers:
-\begin{itemize}
-    \item Testing without risk All changes, such as those in configuration, protocols used for routing, or possible failures, can be tested without impacting the live network.
-    \item Repeatability The same exact topology and device configurations can be backed up and recreated by any member of the team.
-    \item Scalability One physical machine is capable of emulating many virtual routers, switches, and firewalls, making it possible to test a multi-site network fabric prior to acquiring physical hardware.
-    \item CI/CD pipeline support The emulated topology can be deployed, tested, and torn down automatically without manual intervention.
-\end{itemize}
-\subsection{Emulation Platform Selection}
-The verification process of the architecture needs a laboratory that will simulate Cisco NX-OS, Cisco IOS-XE, Cisco ASAv and FortiGate at once. There were four simulation frameworks analyzed for this purpose.
-table
-EVE-NG is selected for use as the emulator. The web-based interface of EVE-NG enables management of all nodes using only a browser, while avoiding any installation of a client locally; EVE-NG supports images that include all kinds of devices required for this network lab. furthermore, the resource usage fits perfectly well into the ESXi-based host environment found in Tunisie Telecom’s IT infrastructure. Cisco CML was tested as an alternative and then rejected, as Cisco CML is already being utilized by the engineers of Tunisie Telecom, and specifically EVE-NG was chosen here by our professional supervisor.
-\subsection{Software Environment}
-The entire set of software tools that have been used for creating, deploying, and validating the architecture are listed in Table below. Network devices are implemented as virtual appliances within the EVE-NG environment using the VMware ESXi infrastructure provided by Tunisie Telecom.
-table
-The choice of the VMware ESXi hypervisor for our solution was driven by the fact that it forms part of the current virtualization infrastructure deployed at Tunisie Telecom. Oracle VirtualBox was also an option, but it is not supported by EVE-NG.
-\section{Overall Architecture Overview}
-\subsection{Design Principles}
-\subsection{Component Roles}
-\section{Underlay Design}
-\subsection{Design Principles}
-\subsection{Addressing Tables}
-\section{Overlay Design}
-\subsection{BGP EVPN Peering}
-\subsection{VNI and VRF Assignment}
-\section{Multi‑Site, Security and Automation Design}
-\section{Conclusion}
 
+\subsection*{\mbox{•}~Retained Solution – Cisco NDFC}
+Cisco NDFC is the sole automation engine for this project. It provides native fabric awareness, intent‑driven BGP EVPN‑VXLAN configuration, and native Multi‑Site Domain orchestration. All switches (Spine, Leaf, Border Leaf) are Cisco Nexus 9000, eliminating the need for multi‑vendor tooling. NDFC manages the complete fabric lifecycle from Day 0 to Day 2.
+
+\section{Cisco NDFC}
+
+\subsection*{\mbox{•}~History, Evolution and Positioning}
+Cisco NDFC evolved from DCNM (Data Center Network Manager), a legacy Java application that reached end‑of‑life in April 2026. NDFC runs on the Nexus Dashboard Container Platform, offering a modern React‑based UI and the \textbf{Easy Fabric} workflow: a single intent declaration produces underlay and overlay configurations deployed to all switches~\cite{NDFC_Product_Documentation}.
+
+\subsection*{\mbox{•}~Architecture and Key Capabilities}
+\begin{itemize}
+    \item \textbf{Day 0 – Fabric Provisioning:} POAP for zero‑touch onboarding; CDP/LLDP discovery; template‑based underlay/overlay generation.
+    \item \textbf{Day 1 – Policy Configuration:} Guided VRF/VNI creation, pool‑based L2VNI/L3VNI assignment, consistent Route Targets, interface groups.
+    \item \textbf{Day 2 – Operations and Compliance:} Continuous compliance checks (running config vs intent); topology visualisation; coordinated NX‑OS upgrades.
+\end{itemize}
+
+\subsection*{\mbox{•}~Lexicon}
+Table~\ref{tab:ndfc-lexicon} defines the key NDFC terms used throughout this report.
+
+\begin{table}[!htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{} >{\raggedright\arraybackslash}p{3.2cm} X @{}}
+\toprule
+Term & Definition \\
+\midrule
+NDFC & Nexus Dashboard Fabric Controller – lifecycle management for fabrics. \\
+Easy Fabric & Template‑driven workflow to provision a complete fabric from a single intent. \\
+POAP & PowerOn Auto Provisioning – zero‑touch bootstrapping using DHCP/TFTP. \\
+MSD & Multi‑Site Domain – orchestrates consistent VNI/VRF/RT across member fabrics. \\
+Day 0 / Day 1 / Day 2 & Provisioning / Policy / Operations phases. \\
+\bottomrule
+\end{tabularx}
+\caption{Cisco NDFC terminology}
+\label{tab:ndfc-lexicon}
+\end{table}
+
+\section{Emulation and Lab Environment}
+
+\subsection*{\mbox{•}~Virtualization vs Emulation}
+\textbf{Virtualization} maps physical resources (compute, storage, network) into multiple logical resources that run independently. Server virtualization is the most common form in data centres – a hypervisor subdivides a physical server into many VMs~\cite{IBM_Virtualization}.
+
+\textbf{Emulation} replicates the behaviour of complete computer hardware (instruction set, memory, I/O, networking) purely in software. Unlike simulation, an emulator runs the real device’s firmware or OS binary, providing very high fidelity – identical CLI and protocol behaviour.
+
+\subsection*{\mbox{•}~Key Differences Between Virtualization and Emulation}
+Table~\ref{tab:virtualization-emulation} summarises the differences.
+
+\begin{table}[!htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{|p{2.8cm}|X|X|}
+\hline
+\textbf{Aspect} & \textbf{Virtualization} & \textbf{Emulation} \\ \hline
+\textbf{Abstraction} & Physical hardware into isolated VMs & The complete hardware platform of a device \\ \hline
+\textbf{Software} & Unmodified guest OS runs on hypervisor & Device firmware runs inside a hardware mimic \\ \hline
+\textbf{Performance} & Near‑native & Slower, because instructions are translated or interpreted \\ \hline
+\textbf{Fidelity} & High for general‑purpose compute; lower for specialised ASICs & Very high for device‑specific behaviour (identical CLI/protocols) \\ \hline
+\textbf{Typical Use} & Running servers, applications, and production services & Testing network topologies and protocol changes \\ \hline
+\end{tabularx}
+\caption{Virtualization vs emulation comparison}
+\label{tab:virtualization-emulation}
+\end{table}
+
+\textbf{Why emulation for network engineering?}
+\begin{itemize}
+    \item Testing without risk – configuration, routing, failure scenarios can be tested without impacting the live network.
+    \item Repeatability – the exact topology and device configurations can be backed up and recreated by any team member.
+    \item Scalability – one physical machine can emulate many routers, switches, and firewalls, enabling multi‑site testing before hardware acquisition.
+    \item CI/CD pipeline support – emulated topologies can be deployed, tested, and torn down automatically.
+\end{itemize}
+
+\subsection*{\mbox{•}~Emulation Platform Selection}
+The verification environment must simulate Cisco NX‑OS, IOS‑XE, ASAv, and FortiGate simultaneously. Table~\ref{tab:emulation-comparison} compares the available platforms.
+
+\begin{table}[!htbp]
+\centering
+\small
+\renewcommand{\arraystretch}{1}
+\setlength{\tabcolsep}{0.45em}
+\rowcolors{2}{white}{gray!50}
+\begin{tabularx}{\textwidth}{@{}X l l l l@{}}
+\toprule
+\textbf{Criteria} & \textbf{EVE-NG} & \textbf{GNS3} & \textbf{Cisco CML} & \textbf{PNETLab} \\ \midrule
+NX-OS Image Support & Full & Full & Full & Full \\
+Web‑based Interface & Yes & No & Yes & Yes \\
+Multi‑vendor Topology & Full & Full & Cisco‑focused & Full \\
+Resource Consumption & Medium & High & High & Low \\
+Collaborative Access & Yes & No & Limited & Yes \\
+Academic Accessibility & High & High & Low (Licensed) & High \\ \bottomrule
+\end{tabularx}
+\caption{Emulation platform comparison}
+\label{tab:emulation-comparison}
+\end{table}
+
+EVE‑NG is selected as the emulator. Its web‑based interface allows management of all nodes from a browser without local client installation. It supports all required device images, and its resource usage fits well within the ESXi‑based host environment used by Tunisie Telecom.
+
+\subsection*{\mbox{•}~Software Environment}
+Table~\ref{tab:software-environment} lists all software tools used to create, deploy, and validate the architecture. Network devices run as virtual appliances inside EVE‑NG on VMware ESXi (already deployed at Tunisie Telecom). Oracle VirtualBox was considered but is not supported by EVE‑NG.
+
+\begin{table}[!htbp]
+\centering
+\small
+\renewcommand{\arraystretch}{1}
+\setlength{\tabcolsep}{0.45em}
+\rowcolors{2}{white}{gray!50}
+\begin{tabularx}{\textwidth}{@{}l l l X@{}}
+\toprule
+\textbf{Software} & \textbf{Version} & \textbf{Category} & \textbf{Role in Project} \\ \midrule
+EVE-NG & 6.2.0 & Emulation & Network topology emulation platform \\
+VMware ESXi & 6.5 & Virtualization & Hypervisor hosting EVE-NG and MGMT VMs \\
+Cisco NX-OS & 10.6.3 & Network Image & Nexus 9000v Spine and Leaf nodes \\
+Cisco IOS-XE & 9.16 & Network Image & CSR1000v SD‑WAN router \\
+Cisco ASAv & 9.18 & Network Image & Managed East‑West firewall \\
+FortiOS & 6.0.3 & Network Image & Edge North‑South perimeter firewall \\
+Cisco NDFC & 3.2.2 & Automation & Fabric lifecycle and MSD management \\
+WinSCP & — & File Transfer & Image/config transfer to EVE‑NG \\
+\LaTeX & — & Documentation & Report preparation and typesetting \\ \bottomrule
+\end{tabularx}
+\caption{Project software environment and tooling}
+\label{tab:software-environment}
+\end{table}
+
+\section{Overall Architecture Overview}
+Figure~\ref{fig:overall-architecture} presents the complete multi‑site architecture, including both data centres, the DCI link, management hosts, and security appliances.
+
+\begin{figure}[h]
+    \centering
+    \ArchitectureTopology
+    \caption{multi‑site architecture overview}
+    \label{fig:overall-architecture}
+\end{figure}
+
+The architecture follows four foundational tenets:
+\begin{enumerate}
+    \item \textbf{Separation of underlay and overlay.} The IP underlay provides only routed connectivity; tenant traffic and logical segments exist only in the VXLAN overlay.
+    \item \textbf{Symmetry and predictability.} Every leaf connects to every spine, giving symmetric two‑hop paths with ECMP. No link is blocked – the fabric uses full physical bandwidth.
+    \item \textbf{Centralised automation with distributed intelligence.} Cisco NDFC acts as the single controller for management plane consistency, while data and control planes remain distributed.
+    \item \textbf{Defence in depth.} Layer 2 segmentation via VNIs, Layer 3 segmentation via VRFs, and firewall nodes provide perimeter and internal traffic inspection.
+\end{enumerate}
+
+\subsection*{\mbox{•}~Component Roles Summary}
+The architecture consists of components arranged in four layers. Table~\ref{tab:component-roles} lists every component and its responsibility.
+
+\begin{table}[!htbp]
+\small
+\centering
+\begin{tabularx}{\textwidth}{|p{5cm}|c|c|X|}
+\hline
+\textbf{Component} & \textbf{Qty} & \textbf{Site} & \textbf{Role} \\ \hline
+Cisco Nexus 9000 Spine & 4 & Site 1/2 & Fabric backbone, OSPF ABR, iBGP Route Reflector \\ \hline
+Cisco Nexus 9000 Border Leaf & 4 & Site 1/2 & Border Gateway, DCI peering, North‑South transit \\ \hline
+Cisco Nexus 9000 Leaf & 10 & Site 1/2 & Access layer, hardware VTEP, server connectivity \\ \hline
+Cisco ASAv & 2 & Site 1/2 & Managed East‑West firewall, service node on Spine \\ \hline
+FortiGate & 2 & Site 1/2 & Unmanaged edge firewall, North‑South perimeter \\ \hline
+Cisco CSR1000v & 1 & WAN & SD‑WAN router representing inter‑site WAN transport \\ \hline
+NDFC Server & 1 & Site 1 & Fabric automation, compliance, MSD orchestration \\ \hline
+\end{tabularx}
+\caption{Multi‑site data centre network components}
+\label{tab:component-roles}
+\end{table}
+
+\section{Underlay Design}
+The underlay provides IP reachability to all VTEP loopbacks. Physical links are routed point‑to‑point /31 interfaces. OSPF Area 0 is used as the IGP. Table~\ref{tab:loopback-addressing} defines the loopback addresses for every device at both sites, and Table~\ref{tab:p2p-addressing} lists the point‑to‑point link subnets.
+
+\begin{table}[!htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}l l l l X X@{}}
+\toprule
+\textbf{Device} & \textbf{Role} & \textbf{Site} & \textbf{Loopback0} & \textbf{Loopback1} & \textbf{Loopback100} \\
+\midrule
+\rowcolor[gray]{0.9} \multicolumn{6}{l}{\textbf{Site 1 Switches}} \\
+Spine 1-2 & Spine & 1 & 10.1.0.1-2/32 & N/A & 10.255.100.11-12/32 \\
+Leaf 1-7 & Leaf & 1 & 10.1.1.1-7/32 & 10.2.1.1-7/32 & 10.255.100.21-27/32 \\
+Border 1-2 & Border & 1 & 10.1.9.1-2/32 & 10.2.9.1-2/32 & 192.168.100.31-32/32 \\
+\rowcolor[gray]{0.9} \multicolumn{6}{l}{\textbf{Site 2 Switches}} \\
+Spine 1-2 & Spine & 2 & 10.3.0.1-2/32 & N/A & 10.255.100.111-112/32 \\
+Leaf 1-3 & Leaf & 2 & 10.3.1.1-3/32 & 10.4.1.1-3/32 & 10.255.100.121-123/32 \\
+Border 1-2 & Border & 2 & 10.3.9.1-2/32 & 10.4.9.1-2/32 & 10.255.100.131-132/32 \\
+\bottomrule
+\end{tabularx}
+\caption{Loopback addressing}
+\label{tab:loopback-addressing}
+\end{table}
+
+\begin{table}[!htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}l X c c@{}}
+\toprule
+\textbf{Connection} & \textbf{Subnet} & \textbf{Spine IP} & \textbf{Leaf / BL IP} \\ \midrule
+\rowcolor[gray]{0.9} \multicolumn{4}{l}{\textbf{Site 1: Spine 1 Interfaces}} \\
+Spine 1 $\leftrightarrow$ Leaf 1-7 & 10.1.11-17.0/31 & 10.1.11-17.0 & 10.1.11-17.1-7 \\
+Spine 1 $\leftrightarrow$ BL 1-2 & 10.1.83.0/31 & 10.1.83.0 & 10.1.83.1-2 \\
+\rowcolor[gray]{0.9} \multicolumn{4}{l}{\textbf{Site 1: Spine 2 Interfaces}} \\
+Spine 2 $\leftrightarrow$ Leaf 1-7 & 10.1.21-27.0/31 & 10.1.21-27.0 & 10.1.21-27.1-7 \\
+Spine 2 $\leftrightarrow$ BL 1-2 & 10.1.84.0/31 & 10.1.84.0 & 10.1.84.1-2 \\ \midrule
+\rowcolor[gray]{0.9} \multicolumn{4}{l}{\textbf{Site 2: Spine 1 Interfaces}} \\
+Spine 1 $\leftrightarrow$ Leaf 1-3 & 10.3.11-13.0/31 & 10.3.11-13.0 & 10.3.11-13.1-3 \\
+Spine 1 $\leftrightarrow$ BL 1-2 & 10.3.83.0/31 & 10.3.83.0 & 10.3.83.1-2 \\ \midrule
+\rowcolor[gray]{0.9} \multicolumn{4}{l}{\textbf{Site 2: Spine 2 Interfaces}} \\
+Spine 2 $\leftrightarrow$ Leaf 1-3 & 10.3.21-23.0/31 & 10.3.21-23.0 & 10.3.21-23.1-3 \\
+Spine 2 $\leftrightarrow$ BL 1-2 & 10.3.84.0/31 & 10.3.84.0 & 10.3.84.1-2 \\ \bottomrule
+\end{tabularx}
+\caption{Fabric point‑to‑point link addressing}
+\label{tab:p2p-addressing}
+\end{table}
+
+BFD runs on all OSPF sessions with an interval of 300ms and a multiplier of 3 (detection time 900ms) to achieve fast convergence while keeping false positives low in the emulated lab. All loopback IPs are advertised via OSPF.
+
+\section{Overlay Design}
+The overlay uses VXLAN encapsulation with BGP EVPN as the control plane. iBGP EVPN is deployed, with the Spine switches acting as Route Reflectors and all Leaf/Border Leaf switches as RR clients this avoids a full iBGP mesh. Ingress replication handles BUM traffic, so no underlay multicast (PIM/IGMP) is required.
+
+\subsection*{\mbox{•}~Tenant and VNI Assignment}
+L2VNIs are stretched across both data centres to allow live VM migration without IP address changes  a core requirement from Chapter 1. Anycast gateway is configured so that a migrated VM always finds its default gateway locally. Table~\ref{tab:vni-vrf-assignment} maps tenants, VRFs, L3VNIs, L2VNIs, VLANs, subnets, and anycast gateway addresses.
+
+\begin{table}[!htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}l l c c c l l@{}}
+\toprule
+\textbf{Tenant} & \textbf{VRF Name} & \textbf{L3VNI} & \textbf{L2VNI} & \textbf{VLAN} & \textbf{Subnet} & \textbf{Gateway} \\ \midrule
+Telecom Core & VRF-TELECOM & 50010 & 10010 & 10 & 192.168.10.0/24 & 192.168.10.1 \\
+Web Hosting & VRF-WEBHOST & 50020 & 10020 & 20 & 192.168.20.0/24 & 192.168.20.1 \\
+Enterprise Client & VRF-CLIENT & 50030 & 10030 & 30 & 192.168.30.0/24 & 192.168.30.1 \\
+Management & VRF-MGMT & 50099 & N/A & 99 & 192.168.100.0/24 & 192.168.100.1 \\ \bottomrule
+\end{tabularx}
+\caption{VNI and VRF assignment mapping}
+\label{tab:vni-vrf-assignment}
+\end{table}
+
+\subsection*{\mbox{•}~Route Targets for Tenant Isolation}
+Each VRF is assigned export and import Route Targets in the format `L2VNI:L3VNI`, as shown in Table~\ref{tab:rt-mapping}. This ensures routes from different tenants never mix unless deliberate route leaking is configured. The RT scheme does not depend on the fabric AS number, so it remains stable even if the ASN changes.
+
+\begin{table}[!htbp]
+\centering
+\small
+\setlength{\tabcolsep}{2em}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}l l l l@{}}
+\toprule
+\textbf{Tenant} & \textbf{VRF} & \textbf{Export RT} & \textbf{Import RT} \\ \midrule
+Telecom Core & VRF-TELECOM & 10010:50010 & 10010:50010 \\
+Web Hosting & VRF-WEBHOST & 10020:50020 & 10020:50020 \\
+Enterprise Client & VRF-CLIENT & 10030:50030 & 10030:50030 \\
+Management & VRF-MGMT & 10099:50099 & 10099:50099 \\ \bottomrule
+\end{tabular}
+\caption{Route Target assignment}
+\label{tab:rt-mapping}
+\end{table}
+
+\subsection*{\mbox{•}~Anycast Gateway \& ARP Suppression}
+All leaves and border leaves share the same gateway IP address and virtual MAC address for each VLAN. ARP suppression is enabled on all NVE interfaces, and symmetric IRB is used for inter‑subnet routing.
+
+\subsection*{\mbox{•}~BGP EVPN Peering}
+The overlay control plane uses the BGP EVPN address‑family (AFI 25 / SAFI 70) over iBGP to proactively distribute MAC and IP reachability, completely eliminating data‑plane flooding. The two Spine switches operate as Route Reflectors (RRs), establishing iBGP sessions only with Leaf and Border Leaf switches (RR clients). For BUM traffic, ingress VTEPs learn remote VTEPs via EVPN Type 3 routes and build dynamic replication lists, converting BUM frames into unicast VXLAN tunnels – no underlay multicast is required.
+
+\section{Multi‑Site, Security and Automation Design}
+\paragraph{Multi‑Site DCI}
+The two data centre fabrics interconnect via a transit Autonomous System using a CSR1000v router. Border Leafs establish eBGP EVPN sessions across the WAN to stretch Layer 2 and Layer 3 overlays. Cisco NDFC Multi‑Site Domain (MSD) orchestrates uniform VNI, VRF, and Route Target assignments across both sites. Type 5 IP Prefix routes advertise tenant subnets over the DCI, enabling live VM migration (vMotion) because L2VNIs and anycast gateways are stretched.
+
+\paragraph{Security Design}
+Security is enforced at multiple levels:
+\begin{itemize}
+    \item \textbf{Edge firewall:} Transparent inline firewalls at the Border Leafs filter North‑South traffic with static ACLs.
+    \item \textbf{East‑West inspection:} An ASAv firewall attached to the Spine switches inspects East‑West traffic. Tenant VRFs point static default routes to the ASAv; return routes are injected via controlled BGP route leaking.
+    \item \textbf{VRF segmentation:} Tenants are fully isolated at Layer 2 and Layer 3. No cross‑VRF communication is possible without explicit Route Target import/export.
+\end{itemize}
+
+\paragraph{Automation and Management}
+A logically isolated in-band management plane runs over VLAN 99 and VRF-MGMT. Each switch has a Loopback 100 address (10.255.100.0/24) and a VLAN 99 SVI (192.168.100.0/24), both advertised via OSPF. The NDFC server is hosted as a VM on a Site 1 Leaf access port. It manages all devices using SSH (configuration), NETCONF (state), and SNMP (telemetry). Management connectivity extends to Site 2 across the DCI: Border Gateway nodes advertise the management subnets via BGP EVPN Type 5 routes bound to L3VNI 50099. This eliminates out-of-band cabling costs while keeping management traffic separate from tenant data.
+
+\section{Conclusion}
+This chapter has consolidated the automation framework and the multi-site architecture into a coherent design. The selection of Cisco NDFC as the sole automation platform and EVE-NG as the emulation environment was justified. The architecture sections defined the underlay, overlay, multi-site DCI, security zones, and the NDFC-driven management model. The next chapter implements this design in the EVE-NG lab and validates it against the requirements from Chapter 1.

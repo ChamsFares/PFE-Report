@@ -1,23 +1,30 @@
 \begingroup
-    % Paragraph indentation and spacing
-    \setlength{\parindent}{1.5em}
-    \setlength{\parskip}{0.8\baselineskip}
-    % Custom star bullet (slightly larger)
-    \renewcommand{\labelitemi}{\large $*$}
-\hspace{1.5em} The exponential rise of cloud computing, hyperscale operations, and AI has completely revolutionized what infrastructure looks like today. AI platform, from distributed training to real-time inference, drive network requirements that are an order of magnitude beyond traditional enterprise applications. Data centers have moved from simple storage repositories to becoming the engines of the digital economy, where network scalability is now the determining factor of infrastructure success and failure.
+\setlength{\parindent}{1.5em}
+\setlength{\parskip}{0.8\baselineskip}
+\renewcommand{\labelitemi}{\large $\ast$}
 
-The traditional three-tier architecture is rapidly becoming obsolete, unable to effectively address East-West traffic and mobility requirements of AI-based applications and services. Inefficiencies such as Spanning Tree's bandwidth waste, unstable Layer 2 domains, and site boundaries are becoming major bottlenecks for virtual machine mobility and multi-tenancy. For a national operator such as Tunisie Telecom, these are not just conceptual limitations, but real-world inhibitors of network scalability and reliability in critical telecommunications infrastructure.
+\hspace{1.5em} Cloud computing, hyperscale facilities, and AI have revolutionized our modern-day infrastructures. AI requires tremendous amounts of bandwidth along with extremely low latency and flexibility, which are impossible to achieve through traditional designs. Data Centers have become the backbone of today’s digital economy, with the network fabric dictating the success or failure of such an undertaking.
 
-This project is designed to deploy a BGP EVPN-VXLAN IP Fabric across various data centers using Cisco Nexus 9000 switches and the Nexus Dashboard Fabric Controller (NDFC) product. This new approach to the legacy architecture is designed to overcome the limitations of VM mobility, Layer 2 extension, and tenancy for Tunisie Telecom. In the end, it provides a fabric that is suitable for future AI-driven applications without the need for further fundamental changes.
+The three-tier architecture that has been used widely since time immemorial was designed keeping north-south traffic and isolated single-site facilities in mind. It suffers from several weaknesses today, which include wasted bandwidth due to Spanning Trees, instability when extending Layer 2 across multiple locations, VM mobility across site boundaries is hindered, and manual management is difficult to sustain. Such problems pose very real limits to the network performance of a national company such as Tunisie Telecom and thus represent an important reason for the initiation of this project.
 
-This report is assembled into five chapters:
+The proposal for this project entails the implementation of a BGP EVPN-VXLAN IP fabric at multiple locations using the Cisco Nexus 9000 family of devices and its management through NDFC.
+
+This report is organized into four chapters:
+
 \begin{itemize}
-    \item \textbf{Chapter 1:} Presents Tunisie Telecom and the operational context of the project.
-    \item \textbf{Chapter 2:} Covers the theoretical foundations, core protocols, and a comparative study of technology alternatives.
-    \item \textbf{Chapter 3:} Addresses network automation and emulation platform selection.
-    \item \textbf{Chapter 4:} Details the multi-site architecture design, platform selection, and lab environment.
-    \item \textbf{Chapter 5:} Implements and validates the solution through scenario-based testing.
+\item \textbf{Chapter 1 Project Framework:}
+Host organization, existing limitations, project scope and methodology.
+\item \textbf{Chapter 2 Technological Foundations:}
+Evolution from classical networking to IP Fabrics, Spine-Leaf, VXLAN, and BGP EVPN.
+\item \textbf{Chapter 3 Automation and Architecture Design:}
+NDFC orchestration, multi-site fabric design, underlay/overlay provisioning, security.
+\item \textbf{Chapter 4 Implementation and Validation:}
+EVE-NG deployment, eight test scenarios validating VM mobility, automation, and resilience.
 \end{itemize}
 
-The work presented here is not an academic exercise but a concrete response to the infrastructure challenges facing one of Tunisia's most critical telecommunications operators.
+Together, they constitute a comprehensive engineering
+experience, from an actual practical challenge to a
+solution that adheres to industry standards. This work
+is a direct result of the needs of one of the most
+important telecoms in Tunisia.
 \endgroup

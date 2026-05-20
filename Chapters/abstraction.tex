@@ -1,0 +1,14 @@
+\begingroup
+\renewcommand{\abstractname}{Abstract} % Ensures the title is "Abstract"
+\setlength{\parindent}{0pt} % Remove paragraph indentation for the abstract body
+\setlength{\parskip}{1em} % Add space between the body and keywords
+
+\begin{abstract}
+\noindent The rapid evolution of cloud computing and Artificial Intelligence has rendered traditional three-tier network architectures increasingly inefficient, primarily due to the limitations of Spanning Tree Protocol , unreliable Layer 2 extensions, and constrained Virtual Machine mobility. This project presents the design and implementation of a multi-site BGP EVPN-VXLAN IP Fabric for Tunisie Telecom, utilizing Cisco Nexus 9000 platforms orchestrated via Cisco Nexus Dashboard Fabric Controller.
+
+The proposed architecture leverages OSPF for underlay connectivity and BGP EVPN as the overlay control plane, utilizing VXLAN encapsulation to achieve seamless Layer 2 extension over a routed Layer 3 infrastructure. By adopting a Spine-Leaf topology with Equal-Cost Multi-Path routing, the fabric eliminates oversubscription and bandwidth wastage, while Bidirectional Forwarding Detection ensures sub-second convergence. The solution was validated within an EVE-NG environment through eight rigorous test scenarios, confirming the efficacy of ARP suppression, MAC mobility across sites, inter-VRF routing, and automated policy enforcement. The results demonstrate a significant reduction in operational overhead and a resilient, high-performance infrastructure capable of supporting modern telecommunications workloads.
+
+\vspace{1.5em}
+\noindent \textbf{Keywords:} BGP EVPN, VXLAN, IP Fabric, Spine-Leaf, OSPF, NDFC, Data Center Automation, Multi-Site Connectivity, VM Mobility.
+\end{abstract}
+\endgroup

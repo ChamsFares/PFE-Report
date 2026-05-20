@@ -133,16 +133,6 @@
       \field{howpublished}{\url{https://www.cisco.com/c/en/us/solutions/design-zone/data-center-design-guides/data-center-design-guides-all.html}}
       \field{title}{Cisco Data Center Design Guides}
     \endentry
-    \entry{Networking_as_the_Third_Pillar}{misc}{}{}
-      \list{organization}{1}{%
-        {TechTarget}%
-      }
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://www.techtarget.com/searchnetworking/feature/Pillars-to-enhance-networks-for-agentic-AI-infrastructure}}
-      \field{title}{Pillars to Enhance Networks for Agentic AI Infrastructure}
-    \endentry
     \entry{Campus_Network_Design_Guide}{misc}{}{}
       \list{organization}{1}{%
         {Cisco}%
@@ -152,23 +142,6 @@
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-campus-lan-wlan-design-guide.html}}
       \field{title}{Campus Network Design Guide}
-    \endentry
-    \entry{SDN_New_Norm}{misc}{}{}
-      \list{organization}{1}{%
-        {Open Networking Foundation}%
-      }
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://opennetworking.org/wp-content/uploads/2011/09/wp-sdn-newnorm.pdf}}
-      \field{title}{SDN: The New Norm for Networks}
-    \endentry
-    \entry{OpenFlow_Paper}{misc}{}{}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{http://ccr.sigcomm.org/online/files/p69-v38n2n-mckeown.pdf}}
-      \field{title}{OpenFlow: Enabling Innovation in Campus Networks}
     \endentry
     \entry{SDN_Architecture}{misc}{}{}
       \list{organization}{1}{%
@@ -180,52 +153,12 @@
       \field{howpublished}{\url{https://opennetworking.org/wp-content/uploads/2013/02/TR_SDN_ARCH_1.0_06062014.pdf}}
       \field{title}{SDN Architecture}
     \endentry
-    \entry{Evolution_Beyond_OpenFlow}{misc}{}{}
-      \list{organization}{1}{%
-        {Cisco}%
-      }
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://www.cisco.com/c/dam/global/en_ca/assets/ciscoconnect/2013/assets/docs/evolving-dc-past-present-future-dhanson.pdf}}
-      \field{title}{Evolution Beyond OpenFlow}
-    \endentry
-    \entry{ACI_Architecture_White_Paper}{misc}{}{}
-      \list{organization}{1}{%
-        {Cisco}%
-      }
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://www.cisco.com/c/en/us/solutions/data-center-virtualization/application-centric-infrastructure/white-paper-listing.html}}
-      \field{title}{ACI Architecture White Paper}
-    \endentry
-    \entry{IP_Fabric_for_Media_Design_Guide}{misc}{}{}
-      \list{organization}{1}{%
-        {Cisco}%
-      }
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://www.cisco.com/c/en/us/td/docs/dcn/whitepapers/cisco-ipfm-design-guide.html}}
-      \field{title}{IP Fabric for Media Design Guide}
-    \endentry
-    \entry{IETFRFC7938}{misc}{}{}
-      \list{organization}{1}{%
-        {IETF}%
-      }
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://datatracker.ietf.org/doc/html/rfc7938}}
-      \field{title}{IETF RFC 7938}
-    \endentry
     \entry{ISO_IEC_7498_1_1994}{misc}{}{}
       \list{organization}{1}{%
         {ISO/IEC}%
       }
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://www.iso.org/standard/20269.html}}
       \field{title}{ISO/IEC 7498-1:1994}
@@ -234,8 +167,8 @@
       \list{organization}{1}{%
         {IETF}%
       }
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://datatracker.ietf.org/doc/html/rfc1122}}
       \field{title}{IETF RFC 1122}
@@ -244,8 +177,8 @@
       \list{organization}{1}{%
         {Cisco}%
       }
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13769-5.html}}
       \field{title}{Data Center TCP/IP Networking Guide}
@@ -254,8 +187,8 @@
       \list{organization}{1}{%
         {Cisco}%
       }
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://community.cisco.com/t5/networking-knowledge-base/understanding-cisco-express-forwarding-cef-architecture/ta-p/5276856}}
       \field{title}{ASIC-Based Forwarding Architecture}
@@ -291,8 +224,8 @@
       \list{organization}{1}{%
         {Facebook}%
       }
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://engineering.fb.com/2014/11/14/production-engineering/introducing-data-center-fabric-the-next-generation-facebook-data-center-network/}}
       \field{title}{Introducing Data Center Fabric}
@@ -301,22 +234,22 @@
       \list{organization}{1}{%
         {Cisco}%
       }
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://www.cisco.com/c/en/us/products/collateral/switches/nexus-9000-series-switches/white-paper-c11-743245.html}}
       \field{title}{Cisco Massively Scalable Data Center Network Fabric Design and Operation White Paper}
     \endentry
     \entry{Oversubscription_in_Networking}{misc}{}{}
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://www.noction.com/blog/oversubscription-in-networking}}
       \field{title}{Oversubscription in Networking}
     \endentry
     \entry{Non_Blocking_Data_Center_Fabric_Design}{misc}{}{}
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://www.arista.com/assets/data/pdf/SwitchingArchitecture_wp.pdf}}
       \field{title}{Non-Blocking Data Center Fabric Design}
@@ -325,8 +258,8 @@
       \list{organization}{1}{%
         {IETF}%
       }
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://datatracker.ietf.org/doc/html/rfc2992}}
       \field{title}{IETF RFC 2992}
@@ -335,8 +268,8 @@
       \list{organization}{1}{%
         {Cisco}%
       }
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/manage-ecmp-scale-aci-wp.html}}
       \field{title}{Understand and Manage ECMP Scale in Cisco ACI White Paper}
@@ -350,6 +283,16 @@
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://www.juniper.net/documentation/us/en/software/junos/interfaces-ethernet-switches/topics/topic-map/hashing-algoriths-lag-bundle-ecmp.html}}
       \field{title}{Hashing Algorithms for LAG and ECMP}
+    \endentry
+    \entry{IP_Fabric_for_Media_Design_Guide}{misc}{}{}
+      \list{organization}{1}{%
+        {Cisco}%
+      }
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.cisco.com/c/en/us/td/docs/dcn/whitepapers/cisco-ipfm-design-guide.html}}
+      \field{title}{IP Fabric for Media Design Guide}
     \endentry
     \entry{Facebook_Data_Center_Network_Architecture}{misc}{}{}
       \list{organization}{1}{%
@@ -365,8 +308,8 @@
       \list{organization}{1}{%
         {IETF}%
       }
-      \field{sortinit}{5}
-      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://datatracker.ietf.org/doc/html/rfc8365}}
       \field{title}{IETF RFC 8365}
@@ -375,8 +318,8 @@
       \list{organization}{1}{%
         {Cisco}%
       }
-      \field{sortinit}{5}
-      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://www.cisco.com/c/en/us/products/collateral/switches/nexus-9000-series-switches/guide-c07-734107.html}}
       \field{title}{VXLAN Network with MP-BGP EVPN Control Plane Design Guide}
@@ -385,8 +328,8 @@
       \list{organization}{1}{%
         {IETF}%
       }
-      \field{sortinit}{5}
-      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://datatracker.ietf.org/doc/html/rfc7365}}
       \field{title}{IETF RFC 7365}
@@ -395,8 +338,8 @@
       \list{organization}{1}{%
         {IETF}%
       }
-      \field{sortinit}{5}
-      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://datatracker.ietf.org/doc/html/rfc5082}}
       \field{title}{IETF RFC 5082 --- The Generalized TTL Security Mechanism (GTSM)}
@@ -405,8 +348,8 @@
       \list{organization}{1}{%
         {Cisco}%
       }
-      \field{sortinit}{5}
-      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://www.cisco.com/c/en/us/td/docs/dcn/nx-os/nexus9000/106x/configuration/unicast-routing-configuration/cisco-nexus-9000-series-nx-os-unicast-routing-configuration-guide/configuring-bgp.html}}
       \field{title}{Cisco Nexus 9000 Series NX-OS Unicast Routing Configuration Guide --- Configuring BGP}
@@ -415,8 +358,8 @@
       \list{organization}{1}{%
         {IETF}%
       }
-      \field{sortinit}{5}
-      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://datatracker.ietf.org/doc/rfc7348/}}
       \field{title}{IETF RFC 7348}
@@ -441,32 +384,32 @@
       \field{howpublished}{\url{https://www.cisco.com/c/en/us/td/docs/solutions/Enterprise/Data_Center/DC_Infra2_5/DCInfra_1.html}}
       \field{title}{Cisco Massively Scalable Data Center Network Fabric Design and Operation White Paper}
     \endentry
+    \entry{IETFRFC7938}{misc}{}{}
+      \list{organization}{1}{%
+        {IETF}%
+      }
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://datatracker.ietf.org/doc/html/rfc7938}}
+      \field{title}{IETF RFC 7938}
+    \endentry
     \entry{IETFRFC4456}{misc}{}{}
       \list{organization}{1}{%
         {IETF}%
       }
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://datatracker.ietf.org/doc/html/rfc4456}}
       \field{title}{IETF RFC 4456 --- BGP Route Reflection: An Alternative to Full Mesh Internal BGP (IBGP)}
-    \endentry
-    \entry{IETFRFC5065}{misc}{}{}
-      \list{organization}{1}{%
-        {IETF}%
-      }
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://datatracker.ietf.org/doc/rfc5065/}}
-      \field{title}{IETF RFC 5065 --- Autonomous System Confederations for BGP}
     \endentry
     \entry{IETFRF5880}{misc}{}{}
       \list{organization}{1}{%
         {IETF}%
       }
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://datatracker.ietf.org/doc/html/rfc5880}}
       \field{title}{IETF RFC 5880 — Bidirectional Forwarding Detection}
@@ -475,8 +418,8 @@
       \list{organization}{1}{%
         {Cisco}%
       }
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://www.cisco.com/c/en/us/td/docs/switches/datacenter/nexus9000/sw/6-x/interfaces/configuration/guide/b_Cisco_Nexus_9000_Series_NX-OS_Interfaces_Configuration_Guide.html}}
       \field{title}{Cisco — BFD Configuration Guide for Nexus 9000}
@@ -485,8 +428,8 @@
       \list{organization}{1}{%
         {IETF}%
       }
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://datatracker.ietf.org/doc/rfc7432/}}
       \field{title}{IETF RFC 7432 --- BGP MPLS-Based IP VPNs}
@@ -495,28 +438,18 @@
       \list{organization}{1}{%
         {IETF}%
       }
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://datatracker.ietf.org/doc/html/draft-ietf-bess-evpn-prefix-advertisement-05}}
       \field{title}{IETF draft-ietf-bess-evpn-prefix-advertisement — EVPN Type 5}
-    \endentry
-    \entry{Cisco_Nexus_9000_VXLAN_BGP_EVPN_Data_Center_Fabrics_Fundamental_Design_and_Implementation_Guide}{misc}{}{}
-      \list{organization}{1}{%
-        {Cisco}%
-      }
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://www.cisco.com/c/en/us/td/docs/dcn/whitepapers/cisco-vxlan-bgp-evpn-design-and-implementation-guide.html}}
-      \field{title}{Cisco Nexus 9000 VXLAN BGP EVPN Data Center Fabrics Fundamental Design and Implementation Guide}
     \endentry
     \entry{IBM_Virtualization}{misc}{}{}
       \list{organization}{1}{%
         {IBM}%
       }
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://www.ibm.com/think/topics/virtualization}}
       \field{title}{What Is Virtualization?}

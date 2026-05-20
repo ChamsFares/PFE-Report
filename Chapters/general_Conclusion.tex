@@ -1,0 +1,41 @@
+\chapter*{General Conclusion}
+\addcontentsline{toc}{chapter}{General Conclusion}
+
+\begingroup
+\setlength{\parindent}{1.5em}
+\setlength{\parskip}{0.8\baselineskip}
+
+\hspace{1.5em}The problem this project tackled was the
+incapacity of Tunisie Telecom to run modern virtualized,
+multi-site, and AI-based workloads using a traditional
+three-tier data center network. The solution is a BGP
+EVPN-VXLAN IP Fabric deployed across two sites,
+consisting of Cisco Nexus 9000 and automation using
+NDFC.
+
+Chapter 2 explained how OSPF underlay, BGP EVPN
+control plane, and VXLAN encapsulation solve all the
+problems in the legacy architecture. Chapter 3 described
+how to implement this into a multi-site Spine-Leaf
+fabric with Border Gateway Leaf and WAN links using
+NDFC. Finally, Chapter 4 tested eight cases: ECMP solved
+STP inefficiency, EVPN mitigated broadcast storms,
+ARP suppression addressed unnecessary broadcasting, MAC
+Mobility facilitated cross-site VM migration, Type-5
+routes optimized inter-site L3 traffic, VRF isolation
+outperformed VLAN limitations, NDFC obviated manual
+configuration, and BFD ensured spine node failure
+restoration under one second.
+
+Technical achievements aside, this project offers a
+flexible infrastructure for Tunisie Telecom's digital
+transformation. Leaf devices get provisioned using NDFC
+POAP, segment tenants in seconds via MSD, and new sites
+can join without redesign.
+
+Next steps for future projects include NSX-T
+integration for micro-segmentation, an end-to-end
+SD-WAN fabric for application-aware path selection,
+IDS/IPS service nodes for improved east-west security,
+and automated remediation within NDFC compliance rules.
+\endgroup

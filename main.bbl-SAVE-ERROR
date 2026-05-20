@@ -117,8 +117,8 @@
       \list{organization}{1}{%
         {Uptime Institute}%
       }
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://uptimeinstitute.com/tiers}}
       \field{title}{Uptime Institute Tier Standard}
@@ -194,8 +194,8 @@
       \list{organization}{1}{%
         {Cisco}%
       }
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://www.cisco.com/c/en/us/solutions/data-center-virtualization/application-centric-infrastructure/white-paper-listing.html}}
       \field{title}{ACI Architecture White Paper}
@@ -281,8 +281,8 @@
       \field{title}{Cisco NDFC Product Documentation}
     \endentry
     \entry{A_Study_of_Non-Blocking_Switching_Networks}{misc}{}{}
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://ia801901.us.archive.org/8/items/bstj32-2-406/bstj32-2-406_text.pdf}}
       \field{title}{A Study of Non-Blocking Switching Networks}
@@ -355,8 +355,8 @@
       \list{organization}{1}{%
         {Facebook}%
       }
-      \field{sortinit}{5}
-      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://nathanfarrington.com/papers/facebook-oic13.pdf}}
       \field{title}{Facebook's Data Center Network Architecture}
@@ -435,8 +435,8 @@
       \list{organization}{1}{%
         {Cisco}%
       }
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://www.cisco.com/c/en/us/td/docs/solutions/Enterprise/Data_Center/DC_Infra2_5/DCInfra_1.html}}
       \field{title}{Cisco Massively Scalable Data Center Network Fabric Design and Operation White Paper}
@@ -511,152 +511,17 @@
       \field{howpublished}{\url{https://www.cisco.com/c/en/us/td/docs/dcn/whitepapers/cisco-vxlan-bgp-evpn-design-and-implementation-guide.html}}
       \field{title}{Cisco Nexus 9000 VXLAN BGP EVPN Data Center Fabrics Fundamental Design and Implementation Guide}
     \endentry
-    \entry{Cisco_Catalyst_Programmability_and_Automation}{misc}{}{}
-      \list{organization}{1}{%
-        {Cisco}%
-      }
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://www.cisco.com/c/en/us/products/collateral/switches/catalyst-9300-series-switches/catalyst-programmability-automation-wp.html}}
-      \field{title}{Catalyst Programmability and Automation}
-    \endentry
-    \entry{IETFRFC3411}{misc}{}{}
-      \list{organization}{1}{%
-        {IETF}%
-      }
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://datatracker.ietf.org/doc/html/rfc3411}}
-      \field{title}{IETF RFC 3411}
-    \endentry
-    \entry{IETFRFC4741}{misc}{}{}
-      \list{organization}{1}{%
-        {IETF}%
-      }
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://datatracker.ietf.org/doc/html/rfc4741}}
-      \field{title}{IETF RFC 4741}
-    \endentry
-    \entry{Ansible_Networking_Documentation}{misc}{}{}
-      \list{organization}{1}{%
-        {Ansible}%
-      }
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://docs.ansible.com/projects/ansible/latest/network/index.html}}
-      \field{title}{Ansible Networking Documentation}
-    \endentry
-    \entry{Intent_Based_Networking}{misc}{}{}
-      \list{organization}{1}{%
-        {Cisco}%
-      }
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://www.cisco.com/c/en/us/solutions/collateral/internet-of-things/nb-09-intent-based-iot-wp-cte-en.html}}
-      \field{title}{Intent-Based Networking}
-    \endentry
-    \entry{AIOps_and_Machine_Learning}{misc}{}{}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://www.researchgate.net/publication/384344908_Automating_Troubleshooting_Network_Issues_with_AIOps_and_Machine_Learning}}
-      \field{title}{Automating Troubleshooting Network Issues with AIOps and Machine Learning}
-    \endentry
-    \entry{Stallings2015}{misc}{}{}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://ptgmedia.pearsoncmg.com/images/9780134175393/samplepages/9780134175393.pdf}}
-      \field{title}{Stallings W. — Foundations of Modern Networking, 2015}
-    \endentry
-    \entry{IETFRFC6241}{misc}{}{}
-      \list{organization}{1}{%
-        {IETF}%
-      }
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://datatracker.ietf.org/doc/html/rfc6241}}
-      \field{title}{IETF RFC 6241 --- Network Configuration Protocol (NETCONF)}
-    \endentry
-    \entry{Ansible_Documentation}{misc}{}{}
-      \list{organization}{1}{%
-        {redhat}%
-      }
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6}}
-      \field{title}{Red Hat — Ansible Documentation, 2024}
-    \endentry
-    \entry{Terraform_Documentation}{misc}{}{}
-      \list{organization}{1}{%
-        {HashiCorp}%
-      }
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://developer.hashicorp.com/terraform/docs}}
-      \field{title}{HashiCorp — Terraform Documentation, 2024}
-    \endentry
-    \entry{NSO_Documentation}{misc}{}{}
-      \list{organization}{1}{%
-        {Cisco}%
-      }
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://nso-docs.cisco.com/}}
-      \field{title}{Cisco — NSO Product Documentation}
-    \endentry
-    \entry{DCNM_EOL_Announcement}{misc}{}{}
-      \list{organization}{1}{%
-        {Cisco}%
-      }
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://www.cisco.com/c/en/us/products/collateral/cloud-systems-management/prime-data-center-network-manager/data-center-network-11-5-x-eol.html}}
-      \field{title}{Cisco — DCNM End-of-Support Announcement}
-    \endentry
-    \entry{Managing_and_Monitoring_VXLAN_EVPN_Fabrics_Using_NDFC}{misc}{}{}
-      \list{organization}{1}{%
-        {Cisco}%
-      }
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://www.cisco.com/c/en/us/td/docs/dcn/whitepapers/NDFC-12-1-3b-deployment.html}}
-      \field{title}{Cisco — Managing and Monitoring VXLAN EVPN Fabrics Using NDFC}
-    \endentry
-    \entry{Huawei_CloudEngine_Ansible_Collection_Documentation}{misc}{}{}
-      \list{organization}{1}{%
-        {Huawei}%
-      }
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://ansible-collection-for-huaweicloud.readthedocs.io/en/latest/}}
-      \field{title}{Huawei — CloudEngine Ansible Collection Documentation}
-    \endentry
     \entry{IBM_Virtualization}{misc}{}{}
       \list{organization}{1}{%
         {IBM}%
       }
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://www.ibm.com/think/topics/virtualization}}
       \field{title}{What Is Virtualization?}
     \endentry
   \enddatalist
-  \missing{NDFCDeployemt}
 \endrefsection
 \endinput
 

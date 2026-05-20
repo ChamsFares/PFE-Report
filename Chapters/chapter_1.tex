@@ -1,64 +1,75 @@
 \chapter{Presentation of the Project Framework}
 \section{Introduction}
-\hspace{1.5em}This opening chapter establishes the foundational context for the project. It begins by introducing the host organization, Tunisie Telecom, detailing its historical evolution, organizational mission, and its current standing in the telecommunications market. Furthermore, this chapter outlines the specific project environment, the technical challenges faced by the operator, and the strategic objectives that the proposed Data Center Fabric aims to achieve.
+This opening chapter establishes the foundational context for the project. It begins by introducing the host organization, Tunisie Telecom, detailing its historical evolution, organizational mission, and its current standing in the telecommunications market. Furthermore, this chapter outlines the specific project environment, the technical challenges faced by the operator, and the strategic objectives that the proposed Data Center Fabric aims to achieve.
+
 \section{Presentation of the Company}
 
-\subsection{Tunisie Telecom}
-\hspace{1.5em}Tunisie Telecom \cite{Tunisie_Telecom} is a leading and historic telecommunication company in the country. It is a public limited company with a large customer base of over six million subscribers in the fixed network, mobile phone, and high-speed internet services, both locally and globally. The company is currently operating as a joint venture with the Tunisian state holding a 65\% majority stake and Dubai Holding \cite{Dubai_Holding_site} holding the remaining 35\%.
+\subsection*{\mbox{•}~Tunisie Telecom}
+Tunisie Telecom \cite{Tunisie_Telecom} is a leading and historic telecommunication company in the country. It is a public limited company with a large customer base of over six million subscribers in the fixed network, mobile phone, and high-speed internet services, both locally and globally. The company is currently operating as a joint venture with the Tunisian state holding a 65\% majority stake and Dubai Holding \cite{Dubai_Holding_site} holding the remaining 35\%. As illustrated in Figure~\ref{fig:headquarters}, the company's headquarters are located in Tunis.
+
 \begin{figure}[htbp]
     \centering
     \Telecom
     \caption{Headquarters of Tunisie Telecom \cite{Tunisie_Telecom}}
-    \label{Headquarters of Tunisie Telecom}
+    \label{fig:headquarters}
 \end{figure}
-\subsection{History of Tunisie Telecom}
-\hspace{1.5em}TT\cite{Tunisie_Telecom} was officially formed on April 17, 1995, as a strategic move of the Tunisian state to bring its communication services under a public limited company. This period has seen a move to digital exchanges as well as a huge expansion of the fixed-line network.
-\subsection{Corporate Missions \& Organizational Chart of the Company}
-\begin{enumerate}
-    \item \textbf{Corporate Missions}\\
-    \hspace{1.5em}TT\cite{Tunisie_Telecom} operates under a mandate to secure and advance the national digital landscape. Its core missions include:
-    \begin{itemize}
-        \item Network Deployment: Developing and installing advanced telephony and data transmission networks.
-        \item Security \& Reliability: Ensuring the homogeneity, confidentiality, and high availability of information systems nationwide.
-        \item Data Management: Implementing and managing complex databases for a customer base exceeding 6 million subscribers.
-        \item Consultancy: Providing expert telecommunications advice to public and private entities, both nationally and internationally.
-    \end{itemize}
-    \item \textbf{Organizational Chart}\\
-    \hspace{1.5em}The organizational structure of Tunisie Telecom is designed to support its mission as a national technological leader while ensuring operational agility
-    \begin{figure}[htbp]
-        \centering
-        \OrgTelecom
-        \caption{Organizational Chart}
-        \label{fig:Organizational Chart}
-    \end{figure}
-    \begin{itemize}
-        \item CEO (PDG): Ensures the overall strategic direction of the company, defines the long-term vision, and oversees the execution of national telecommunications policies
-        \item Deputy CEO (DGA): Assists the CEO in daily management and acts as a substitute in operational coordination functions.
-        \item Office of the President: Manages the strategic agenda and institutional relations for senior management.
-        \item Corporate Strategy Central Directorate: Responsible for strategic planning, competitive intelligence, and the evolution of the operator's business model.
-        \item General Audit Central Directorate: Guarantees internal auditing, process transparency, and risk management.
-        \item General Secretariat: Ensures administrative coordination and monitors the decisions made by the Board of Directors.
-        \item Legal Affairs Directorate: Ensures compliance with the telecommunications regulatory framework and manages litigation.
-        \item Corporate Communication Directorate: Drives brand image and institutional communication with the public and partners.
-        \item Procurement Directorate: Centralizes supply management and relations with technology providers.
-        \item Wholesale and International Central Directorate: Manages international transit infrastructure (such as submarine cables) and relations with foreign operators.
-        \item Commercial and Marketing Central Directorate: Develops offerings for residential and business segments and defines pricing policies.
-        \item Finance Central Directorate: Ensures budget management, accounting, and the financial viability of technological investments.
-        \item Planning, Engineering, and Deployment Central Directorate: Responsible for network architecture design and national coverage expansion.
-        \item Network Operations \& Maintenance Central Directorate: Guarantees 24/7 infrastructure availability and the resolution of technical incidents.
-        \item Human Resources Central Directorate: Manages skills development and training for the employees.
-        \item Information Systems Central Directorate (ISD / DSI): it manages the IT infrastructure, servers, and data security for the subscribers.
-        \item Regional Directorates: Provide a local presence for Tunisie Telecom across the country's 24 governorates, ensuring quality of service at the local level.
-    \end{itemize}
-\end{enumerate}
-\subsection{Partners of Tunisie Telecom}
-\hspace{1.5em}To maintain its technological edge, TT\cite{Tunisie_Telecom} collaborates with a diverse group of global and local leaders:
+
+
+\subsection*{\mbox{•}~History of Tunisie Telecom}
+TT\cite{Tunisie_Telecom} was officially formed on April 17, 1995, as a strategic move of the Tunisian state to bring its communication services under a public limited company. This period has seen a move to digital exchanges as well as a huge expansion of the fixed-line network.
+
+\subsection*{\mbox{•}~Corporate Missions \& Organizational Chart of the Company}
+
+\paragraph*{Corporate Missions}
+TT\cite{Tunisie_Telecom} operates under a mandate to secure and advance the national digital landscape. Its core missions include:
+\begin{itemize}
+    \item Network Deployment: Developing and installing advanced telephony and data transmission networks.
+    \item Security \& Reliability: Ensuring the homogeneity, confidentiality, and high availability of information systems nationwide.
+    \item Data Management: Implementing and managing complex databases for a customer base exceeding 6 million subscribers.
+    \item Consultancy: Providing expert telecommunications advice to public and private entities, both nationally and internationally.
+\end{itemize}
+
+\paragraph*{Organizational Chart}
+The organizational structure of TT is designed to support its mission as a national technological leader while ensuring operational agility. Figure~\ref{fig:orgchart} presents the complete organizational hierarchy.
+
+\begin{figure}[htbp]
+    \centering
+    \OrgTelecom
+    \caption{Organizational Chart of Tunisie Telecom}
+    \label{fig:orgchart}
+\end{figure}
+
+The key roles within this structure include:
+\begin{itemize}
+    \item CEO (PDG): Ensures the overall strategic direction of the company, defines the long-term vision, and oversees the execution of national telecommunications policies
+    \item Deputy CEO (DGA): Assists the CEO in daily management and acts as a substitute in operational coordination functions.
+    \item Office of the President: Manages the strategic agenda and institutional relations for senior management.
+    \item Corporate Strategy Central Directorate: Responsible for strategic planning, competitive intelligence, and the evolution of the operator's business model.
+    \item General Audit Central Directorate: Guarantees internal auditing, process transparency, and risk management.
+    \item General Secretariat: Ensures administrative coordination and monitors the decisions made by the Board of Directors.
+    \item Legal Affairs Directorate: Ensures compliance with the telecommunications regulatory framework and manages litigation.
+    \item Corporate Communication Directorate: Drives brand image and institutional communication with the public and partners.
+    \item Procurement Directorate: Centralizes supply management and relations with technology providers.
+    \item Wholesale and International Central Directorate: Manages international transit infrastructure (such as submarine cables) and relations with foreign operators.
+    \item Commercial and Marketing Central Directorate: Develops offerings for residential and business segments and defines pricing policies.
+    \item Finance Central Directorate: Ensures budget management, accounting, and the financial viability of technological investments.
+    \item Planning, Engineering, and Deployment Central Directorate: Responsible for network architecture design and national coverage expansion.
+    \item Network Operations \& Maintenance Central Directorate: Guarantees 24/7 infrastructure availability and the resolution of technical incidents.
+    \item Human Resources Central Directorate: Manages skills development and training for the employees.
+    \item Information Systems Central Directorate (ISD / DSI): it manages the IT infrastructure, servers, and data security for the subscribers.
+    \item Regional Directorates: Provide a local presence for TT across the country's 24 governorates, ensuring quality of service at the local level.
+\end{itemize}
+
+\subsection*{\mbox{•}~Partners of Tunisie Telecom}
+To maintain its technological edge, TT\cite{Tunisie_Telecom} collaborates with a diverse group of global and local leaders. Figure~\ref{fig:partners} shows the main strategic partners.
+
 \begin{figure}[htbp]
     \centering
     \PratnerGrid
-    \caption{Partners}
-    \label{fig:Partners}
+    \caption{Strategic Partners of Tunisie Telecom}
+    \label{fig:partners}
 \end{figure}
+
 \begin{itemize}
     \item \textbf{Dubai Holding:} Strategic international investor holding a 35\% stake in the company.
     \item \textbf{Huawei Marine:} Technical partner for international submarine fiber-optic infrastructure
@@ -66,8 +77,10 @@
     \item \textbf{GO Malta:} Strategic subsidiary for European market integration
     \item \textbf{Cisco \& Microsoft:} Key technology providers for Data Center modernization and cloud integration 
 \end{itemize}
-\subsection{Solutions and Services Offered by Tunisie Telecom}
-\hspace{1.5em}TT\cite{Tunisie_Telecom} stands as the primary telecommunications service provider in Tunisia. It offers a comprehensive range of telephony, Internet, and television services to its diverse clientele.
+
+\subsection*{\mbox{•}~Solutions and Services Offered by Tunisie Telecom}
+TT\cite{Tunisie_Telecom} stands as the primary telecommunications service provider in Tunisia. It offers a comprehensive range of telephony, Internet, and television services to its diverse clientele. Table~\ref{tab:tt_services} summarizes the full portfolio.
+
 \begin{table}[!htbp]
     \centering
     \small 
@@ -76,7 +89,7 @@
         \hline
         \textbf{Service Category} & \textbf{Description} \\ \hline
         Fixed Telephony & Provision of landline services to both residential and professional customers across Tunisia. \\ \hline
-        Mobile Telephony & Mobile services under the "Tunisie Telecom Mobile" brand, encompassing voice calls, SMS, and data services. \\ \hline
+        Mobile Telephony & Mobile services under the "TT Mobile" brand, encompassing voice calls, SMS, and data services. \\ \hline
         Internet Services & High-speed broadband connectivity via ADSL, Wi-Fi, and fiber optics, as well as Voice over IP (VoIP) solutions. \\ \hline
         Television Services & A diverse suite of television offerings, including IPTV, Direct-to-Home (DTH), Video on Demand (VOD), and online streaming. \\ \hline
         Enterprise Solutions & Specialized telecommunications for businesses, featuring call center services, private network management, video conferencing, and high-bandwidth connectivity. \\ \hline
@@ -85,37 +98,42 @@
     \caption{Portfolio of Solutions and Services provided by Tunisie Telecom}
     \label{tab:tt_services}
 \end{table}
+
 \section{Presentation of the Project}
-\hspace{1.5em}As Tunisie Telecom continues to expand its digital infrastructure to meet growing national demand, the underlying network architecture of its data centers has become a critical point of re-evaluation. This section presents the technical context that motivated this project, beginning with a broad examination of modern data center networking challenges before narrowing to the specific constraints faced by the operator.
+As TT continues to expand its digital infrastructure to meet growing national demand, the underlying network architecture of its DCs has become a critical point of re-evaluation. This section presents the technical context that motivated this project, beginning with a broad examination of modern DC networking challenges before narrowing to the specific constraints faced by the operator.
 
 \subsection{Data Center Networking Context and Limitations}
-\hspace{1.5em}A data center is essentially built on three pillars of compute, storage, and networking, with networking being the key component that determines the speed of communication and prevents bottlenecks. The importance of networking has become increasingly critical in recent times, especially owing to factors like server virtualization, cloud-native applications, and especially artificial intelligence, which has caused a shift from traditional north-south communication patterns to east-west communication patterns involving huge volumes of data between GPU clusters and storage systems. The traditional three-tier data center architecture, which is commonly used by various data centers around the world, including Tunisie Telecom, is found wanting in this regard. The fact that it utilize Spanning Tree Protocol and blocks redundant paths by disabling them is causing huge bandwidth wastage, and its hierarchical structure is causing scalability and oversubscription issues. These issues become more complex when data centers are distributed in various geographical locations, as this is not a feature that this data center architecture was designed for, and it is a necessity for data center environments. All of this has caused Tunisie Telecom to rethink its data center networking infrastructure.
+A DC is essentially built on three pillars of compute, storage, and networking, with networking being the key component that determines the speed of communication and prevents bottlenecks. The importance of networking has become increasingly critical in recent times, especially owing to factors like server virtualization, cloud-native applications, and especially artificial intelligence, which has caused a shift from traditional north-south communication patterns to east-west communication patterns involving huge volumes of data between GPU clusters and storage systems. The traditional three-tier DC architecture, which is commonly used by various DCs around the world, including TT, is found wanting in this regard. The fact that it utilize Spanning Tree Protocol and blocks redundant paths by disabling them is causing huge bandwidth wastage, and its hierarchical structure is causing scalability and oversubscription issues. These issues become more complex when DCs are distributed in various geographical locations, as this is not a feature that this DC architecture was designed for, and it is a necessity for DC environments. All of this has caused TT to rethink its DC networking infrastructure.
+
 \subsection{Critique of the Existing System}
-\hspace{1.5em}Tunisie Telecom is running its DCI network according to the traditional three-tier approach outlined earlier. Considering the operator needs, its geographical scope, and the increasingly complex nature of workloads, the deficiencies of this model impose specific constraints on the operator which cannot be ignored any further. These include:
+TT is running its DCI network according to the traditional three-tier approach outlined earlier. Considering the operator needs, its geographical scope, and the increasingly complex nature of workloads, the deficiencies of this model impose specific constraints on the operator which cannot be ignored any further. These include:
 \begin{itemize}
     \item \textbf{STP-induced wasted bandwidth:} Multiple redundant links are kept blocked in STP operation, leading to an under-utilization of bandwidth at the location where it is needed the most.
     \item \textbf{VM movement restrictions:} VMs movement between remote locations becomes extremely complicated and practically impossible due to the limitations of the current technology, hindering both workload balancing and disaster recovery efforts.
     \item \textbf{Broadcast instability:} Extending L2 network domains across different sites creates potential risks for broadcasting storms, overflowing the MAC tables, and causing an increased area affected in case of an equipment failure.
-    \item \textbf{Inter-site latency:} Multi-hop routing through multiple devices increases latency across the sites in question, making it increasingly harder to run applications that require low latency and are based on AI and machine learning technologies, an essential component of Tunisie Telecom’s strategic plans.
-    \item \textbf{Inadequate VLAN support:} The maximum number of VLANs supported by legacy hardware, 4096, is no longer sufficient to offer fine-grained separation and management of various types of traffic from multiple clients, ranging from big companies to public organizations using Tunisie Telecom networks.
+    \item \textbf{Inter-site latency:} Multi-hop routing through multiple devices increases latency across the sites in question, making it increasingly harder to run applications that require low latency and are based on AI and machine learning technologies, an essential component of TT’s strategic plans.
+    \item \textbf{Inadequate VLAN support:} The maximum number of VLANs supported by legacy hardware, 4096, is no longer sufficient to offer fine-grained separation and management of various types of traffic from multiple clients, ranging from big companies to public organizations using TT networks.
     \item \textbf{Manual configuration burden:} Manual reconfiguration of all devices becomes necessary in case any changes need to be made to the network infrastructure.
 \end{itemize}
-In addition to the above mentioned architectural limitations that apply to any DCs, the main data center of Tunisie Telecom has reached both the physical and the logical limits. Hence, the need for the implementation of an additional DC, named Site 2, which would be used as an independent and fully functioning DC rather than as a mere backup. Site 2 needs to provide multi-tenant and highly available services while supporting workload migration from one site to another.
-\\
-These requirements form a powerful justification for Tunisie Telecom requiring a completely new vision for its DC network infrastructure design. The recommended solution satisfies all of these requirements explicitly.
+In addition to the above mentioned architectural limitations that apply to any DCs, the main DC of TT has reached both the physical and the logical limits. Hence, the need for the implementation of an additional DC, named Site 2, which would be used as an independent and fully functioning DC rather than as a mere backup. Site 2 needs to provide multi-tenant and highly available services while supporting workload migration from one site to another.
+
+These requirements form a powerful justification for TT requiring a completely new vision for its DC network infrastructure design. The recommended solution satisfies all of these requirements explicitly.
+
 \subsection{Proposed Solution}
-\hspace{1.5em}In contrast to traditional solutions that have been exhausted in terms of development, the new networking standards give an entirely new direction to the problem. The proposal put forward by this project consists of the deployment of a multi-site BGP EVPN-VXLAN IP Fabric that would include both the current DC and a new one being constructed. The suggested solution is not only going to complement the shortcomings of the existing infrastructure but also introduce an absolutely new set of principles, which are the following:
+In contrast to traditional solutions that have been exhausted in terms of development, the new networking standards give an entirely new direction to the problem. The proposal put forward by this project consists of the deployment of a multi-site BGP EVPN-VXLAN IP Fabric that would include both the current DC and a new one being constructed. The suggested solution is not only going to complement the shortcomings of the existing infrastructure but also introduce an absolutely new set of principles, which are the following:
 \begin{itemize}
     \item BGP EVPN-VXLAN : provides the layer 2 overlay network and offers site extension, virtual machine migration, and multi-tenancy within a single network environment with up to 16 million logical segments;
     \item Spine-Leaf Topology: eliminates the hierarchical structure replacing it with a flat two-hop design where every leaf node communicates with every spine node, thus removing STP and introducing ECMP everywhere
     \item Cisco NDFC: centralizes the management processes and allows automation and orchestration of the whole fabric
 \end{itemize}
-\hspace{1.5em}This approach rectifies the issues listed previously: The waste of the STP protocol, the ability to move VMs between locations, L2 Extension stability, lower inter-site latencies, the limitation of the VLANs is solved, configuration will be done automatically and finally Site 2 will be a completely autonomous data center.
-\\
-The solution is implemented using the methodology as described in the methodology section below and tested on the EVE-NG lab setup that comprises both the Cisco Nexus 9000v and Huawei switches.
+This approach rectifies the issues listed previously: The waste of the STP protocol, the ability to move VMs between locations, L2 Extension stability, lower inter-site latencies, the limitation of the VLANs is solved, configuration will be done automatically and finally Site 2 will be a completely autonomous DC.
+
+The solution is implemented using the methodology as described in the methodology section below and tested on the EVE-NG lab setup that comprises Cisco Nexus 9000v switches.
+
 \section{Working Methodology}
 \subsection{Rationale for Agile Scrum}
-\hspace{1.5em}For such a technically challenging project, however, the successful completion thereof entails not only technical knowledge but also a certain methodology which will enable the management of risk, accommodation of discovery, and production of validated outcomes. The chosen development methodology for this project is the Scrum Agile Methodology\cite{Scrum_Guide}, which is a popular framework for iterative development and used extensively in systems and software engineering. Each development iteration in Scrum results in an outcome which is tangible enough to be tested against requirements.
+For such a technically challenging project, however, the successful completion thereof entails not only technical knowledge but also a certain methodology which will enable the management of risk, accommodation of discovery, and production of validated outcomes. The chosen development methodology for this project is the Scrum Agile Methodology\cite{Scrum_Guide}, which is a popular framework for iterative development and used extensively in systems and software engineering. Each development iteration in Scrum results in an outcome which is tangible enough to be tested against requirements. Table~\ref{tab:agile_implementation} maps the agile principles to the specific project implementation.
+
 \begin{table}[!htbp]
     \centering
     \small
@@ -125,7 +143,7 @@ The solution is implemented using the methodology as described in the methodolog
         \midrule
         Incremental Delivery & Construction is done in layers: Underlay $\rightarrow$ Overlay $\rightarrow$ Multi-site DCI. \\ \midrule
         Continuous Feedback & Bi-weekly reviews with supervisors to validate design choices and lab results. \\ \midrule
-        Risk Reduction & Early identification of interoperability issues between Cisco and Huawei platforms. \\ \midrule
+        Risk Reduction & Early identification of interoperability issues between different platforms. \\ \midrule
         Flexibility & Capability to adjust addressing plans or VNI mappings mid-project. \\
         \bottomrule
     \end{tabularx}
@@ -134,7 +152,7 @@ The solution is implemented using the methodology as described in the methodolog
 \end{table}
 
 \subsection{Sprint Schedule and Deliverables}
-\hspace{1.5em} The project spans four months, structured into six sprints of approximately two to three weeks each. The relationship between project phases and the resulting report chapters is detailed here:
+The project spans four months, structured into six sprints of approximately two to three weeks each, as visualized in Figure~\ref{fig:sprint_timeline}. The relationship between project phases and the resulting report chapters is detailed here:
 \begin{enumerate}
     \item \textbf{Sprint 1 Research:} Weeks 1–3. Focuses on tech study, protocol review, and tool selection.
     \item \textbf{Sprint 2 Design:} Weeks 4–6. Covers topology, IP/VNI planning, and NDFC modeling.
@@ -152,4 +170,4 @@ The solution is implemented using the methodology as described in the methodolog
 \end{figure}
 
 \section{Conclusion}
-\hspace{1.5em}The current opening chapter has laid the groundwork for the entire project through its presentation of the infrastructural problems associated with Tunisie Telecom, and through the proposed strategy of a multisite BGP EVPN-VXLAN fabric. The Agile Scrum method guarantees that there is an adaptable approach to moving from designing the project to validating its physical implementation. As such, having now laid out the entire structure and aims of the project, this next chapter focuses on examining the theoretical protocols and architecture necessary to create the modern DCN.
+The current opening chapter has laid the groundwork for the entire project through its presentation of the infrastructural problems associated with TT, and through the proposed strategy of a multi-site BGP EVPN-VXLAN fabric. The Agile Scrum method guarantees that there is an adaptable approach to moving from designing the project to validating its physical implementation. As such, having now laid out the entire structure and aims of the project, this next chapter focuses on examining the theoretical protocols and architecture necessary to create the modern DCN.
